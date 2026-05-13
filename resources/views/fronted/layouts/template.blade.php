@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="{{asset('css/sites/header.css')}}">
 
     
-    <link rel="stylesheet" href="{{ asset('storage/assets/css/footer.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/footer.css') }}">
 
 </head>
 <body>
