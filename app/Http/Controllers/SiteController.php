@@ -8,7 +8,7 @@ class SiteController extends Controller
 {
     public function front(){
 
-    return view ('admin.layouts.app');
+    return view ('fronted.layouts.template');
     }
 
     

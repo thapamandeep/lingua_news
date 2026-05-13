@@ -9,9 +9,14 @@
 
     <link rel="stylesheet" href="{{asset('css/sites/header.css')}}">
 
+    
+    <link rel="stylesheet" href="{{ asset('storage/assets/css/footer.css') }}">
+
 </head>
 <body>
     
 @include('fronted.partials.header')
+@include('fronted.partials.footer')
+
 </body>
 </html>
