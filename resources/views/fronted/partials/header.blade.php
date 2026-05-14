@@ -32,7 +32,13 @@
     <section class="banner">
 
     <div class="news-category">
+<<<<<<< HEAD
         <p>{{__('Sports')}}</p>
+=======
+       <a href="{{ route('sports.index') }}">
+         <p>Sports</p>
+       </a>
+>>>>>>> 0856d36c6545bb08104a9669af23deeb235a2e13
         <p>Politics</p>
         <p>Entertainment</p>
         <p>Technology</p>

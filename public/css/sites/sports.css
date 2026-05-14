@@ -1,0 +1,45 @@
+
+
+.sports-page{
+    padding: 70px 0;
+    background: #ffffff;
+}
+
+/* Container */
+
+.sports-container{
+    width: 90%;
+    max-width: 1300px;
+    margin: auto;
+}
+
+
+
+.sports-categories{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+
+    margin-bottom: 60px;
+}
+
+.sports-categories a{
+    padding: 12px 24px;
+
+    border: 2px solid #111827;
+    border-radius: 50px;
+
+    text-decoration: none;
+    color: #111827;
+
+    font-size: 15px;
+    font-weight: 600;
+
+    transition: 0.3s;
+}
+
+.sports-categories a:hover{
+    background: #111827;
+    color: white;
+}
+
