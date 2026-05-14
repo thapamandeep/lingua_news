@@ -5,7 +5,7 @@ use App\Http\Controllers\SiteController;
 use App\Http\Controllers\SportsController;
 
 <<<<<<< HEAD
-Route::get('/',[SiteController::class,'home']);
+
 =======
 Route::get('/',[SiteController::class,'front']);
 
