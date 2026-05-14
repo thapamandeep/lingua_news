@@ -32,7 +32,7 @@
     <section class="banner">
 
     <div class="news-category">
-        <p>Sports</p>
+        <p>{{__('Sports')}}</p>
         <p>Politics</p>
         <p>Entertainment</p>
         <p>Technology</p>

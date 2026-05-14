@@ -3,4 +3,4 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SiteController;
 
-Route::get('/',[SiteController::class,'front']);
+Route::get('/',[SiteController::class,'home']);
