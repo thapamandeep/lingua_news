@@ -21,13 +21,36 @@
      </div>
 
      <div class="signin">
-        <input type="text" placeholder="sign in">
+    <button>Sign In</button>
            <i class="fa fa-user user-icon"></i>
      </div>
 
     </div>
-
     </div>
     <hr>
+
+    <section class="banner">
+
+    <div class="news-category">
+        <p>Sports</p>
+        <p>Politics</p>
+        <p>Entertainment</p>
+        <p>Technology</p>
+        <p>Business</p>
+        <p>Education</p>
+    </div>
+
+    <div class="select-language">
+        <select name="language" id="choose-language">
+            <option value="">Choose language</option>
+            <option value="malasayan">Malasayan</option>
+            <option value="chinese">Chinese</option>
+            <option value="tamil">Tamil</option>
+            <option value="nepali">Nepali</option>
+        </select>
+    </div>
+    </section>
+
+
 
 </header>

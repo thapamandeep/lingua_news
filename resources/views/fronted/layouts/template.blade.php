@@ -16,6 +16,7 @@
 <body>
     
 @include('fronted.partials.header')
+@yield('content')
 @include('fronted.partials.footer')
 
 </body>

@@ -62,12 +62,62 @@
 .signin{
     position: relative;
     right: 30px;
-    top: 15px;
+    top: 1px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
-.signin input{
-    height: 20px;
-    width: 70px;
+
+.signin button{
+    height: 27px;
+    width: 90px;
     border: none;
+    border-radius: 20px;
+    background: #000;
+    color: white;
+    cursor: pointer;
+    font-size: 14px;
 }
+
+.user-icon{
+    font-size: 20px;
+    color: #000;
+    cursor: pointer;
+}
+.banner{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 40px;
+}
+
+.news-category{
+    display: flex;
+    gap: 25px;
+}
+
+.news-category p{
+    margin: 0;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.select-language{
+    display: flex;
+    align-items: center;
+}
+
+#choose-language{
+    height: 35px;
+    width: 160px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    padding: 5px 10px;
+    font-size: 14px;
+    cursor: pointer;
+    outline: none;
+}
+
+
 
 
