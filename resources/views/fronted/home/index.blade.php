@@ -5,40 +5,27 @@
 
     <div class="heroes-section">
 
-        <!-- MAIN IMAGE -->
-        <div class="main-img img-box">
-            <img src="{{ asset('img/balen.webp') }}" alt="">
-            <button class="view-btn">View</button>
+       <div class="main-img">
+    <img src="{{ asset('img/balen.webp') }}" alt="">
+    <button class="main-btn">View</button>
+</div>
+    <div class="side-img">
+
+    <div class="side-item">
+        <img src="{{ asset('img/sudan.webp') }}" alt="">
+        <div class="news-text">
+            <h4>Sudan Crisis Update</h4>
         </div>
+    </div>
 
-        <!-- SIDE NEWS LIST -->
-        <div class="side-img">
-
-            <!-- ITEM 1 -->
-            <div class="side-item">
-                <div class="img-box">
-                    <img src="{{ asset('img/sudan.webp') }}" alt="">
-                    <button class="view-btn">View</button>
-                </div>
-
-                <div class="news-text">
-                    <h4>Sudan Crisis Update</h4>
-                </div>
-            </div>
-
-            <!-- ITEM 2 -->
-            <div class="side-item">
-                <div class="img-box">
-                    <img src="{{ asset('img/sudan.webp') }}" alt="">
-                    <button class="view-btn">View</button>
-                </div>
-
-                <div class="news-text">
-                    <h4>Economic News Today</h4>
-                </div>
-            </div>
-
+    <div class="side-item">
+        <img src="{{ asset('img/sudan.webp') }}" alt="">
+        <div class="news-text">
+            <h4>Economic News Today</h4>
         </div>
+    </div>
+
+</div>
 
     </div>
 

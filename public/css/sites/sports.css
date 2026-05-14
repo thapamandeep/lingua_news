@@ -1,45 +1,47 @@
-
-
 .sports-page{
-    padding: 70px 0;
-    background: #ffffff;
+    padding: 50px 0;
+    background: #fff;
 }
-
-/* Container */
 
 .sports-container{
     width: 90%;
-    max-width: 1300px;
+    max-width: 1200px;
     margin: auto;
 }
 
-
-
+/* NAV WRAPPER */
 .sports-categories{
+    margin-bottom: 30px;
+}
+
+/* NAV STYLE */
+.main-nav{
     display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
-
-    margin-bottom: 60px;
+    gap: 25px;
+    align-items: center;
 }
 
-.sports-categories a{
-    padding: 12px 24px;
-
-    border: 2px solid #111827;
-    border-radius: 50px;
-
+/* LINKS STYLE (FoodMart clean look) */
+.nav-link{
     text-decoration: none;
-    color: #111827;
-
-    font-size: 15px;
+    color: #111;
+    font-size: 16px;
     font-weight: 600;
-
-    transition: 0.3s;
+    transition: 0.3s ease;
+    padding: 6px 10px;
+    border-radius: 5px;
 }
 
-.sports-categories a:hover{
-    background: #111827;
-    color: white;
+/* HOVER EFFECT */
+.nav-link:hover{
+    color: #000;
+    background: #f2f2f2;
 }
 
+/* REMOVE BLUE/UNDERLINE COMPLETELY (SAFE RESET) */
+.nav-link,
+.nav-link:visited,
+.nav-link:active{
+    text-decoration: none;
+    color: #111;
+}

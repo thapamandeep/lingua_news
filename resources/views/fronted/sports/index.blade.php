@@ -10,10 +10,11 @@
         <!-- Category Buttons -->
         <div class="sports-categories">
 
-            <a href="#">Cricket</a>
-            <a href="#">Football</a>
-            <a href="#">Basketball         
-                 </a>
+        <nav class="main-nav">
+    <a href="#" class="nav-link">Cricket</a>
+    <a href="#" class="nav-link">Football</a>
+    <a href="#" class="nav-link">Basketball</a>
+</nav>
 
         </div>
 

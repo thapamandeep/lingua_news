@@ -8,7 +8,7 @@ class SiteController extends Controller
 {
     public function home(){
 
-    return view ('fronted.layouts.template');
+    return view ('fronted.home.index');
     }
 
 

@@ -9,10 +9,10 @@
 
     <link rel="stylesheet" href="{{asset('css/sites/header.css')}}">
     <link rel="stylesheet" href="{{asset('css/sites/home.css')}}">
-    <link rel="stylesheet" href="{{asset('css/sites/main.css')}}">
-    
+    <link rel="stylesheet" href="{{asset('css/sites/main.css')}}">  
     <link rel="stylesheet" href="{{ asset('css/sites/footer.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/sites/spoerts.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/sites/nav.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/sites/sports.css') }}">
 
 </head>
 <body>
