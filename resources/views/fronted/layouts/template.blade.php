@@ -11,6 +11,7 @@
 
     
     <link rel="stylesheet" href="{{ asset('css/sites/footer.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/sites/spoerts.css') }}">
 
 </head>
 <body>

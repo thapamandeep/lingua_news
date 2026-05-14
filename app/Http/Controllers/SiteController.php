@@ -11,6 +11,8 @@ class SiteController extends Controller
     return view ('fronted.layouts.template');
     }
 
+   
+
     
 }
 
