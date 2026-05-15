@@ -37,7 +37,7 @@
   <nav class="main-nav">
     <a href="{{ route('sports.index') }}" class="nav-link">Sports</a>
     <a href="{{ route('politics.index') }}" class="nav-link">Politics</a>
-    <a href="#" class="nav-link">Entertainment</a>
+    <a href="{{route('entertainments.index')}}" class="nav-link">Entertainment</a>
     <a href="#" class="nav-link">Education</a>
 </nav>
     </div>

@@ -10,7 +10,7 @@
         <div class="sports-categories">
 
             <nav class="main-nav">
-                <a href="{{ route('sports.index') }}" class="nav-link active">Home</a>
+                <a href="{{ route('home.index') }}" class="nav-link active">Home</a>
                 <a href="#" class="nav-link">Actor/Actress</a>
                 <a href="#" class="nav-link">Relationship/Marrigae</a>
                 <a href="#" class="nav-link">Interview</a>
