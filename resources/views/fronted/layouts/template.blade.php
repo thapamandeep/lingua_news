@@ -13,6 +13,8 @@
     <link rel="stylesheet" href="{{ asset('css/sites/footer.css') }}">
     <link rel="stylesheet" href="{{ asset('css/sites/nav.css') }}">
     <link rel="stylesheet" href="{{ asset('css/sites/sports.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/sites/leatest-news.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/sites/previous-news.css') }}">
 
 </head>
 <body>
@@ -21,5 +23,6 @@
 @yield('content')
 @include('fronted.partials.footer')
 
+<script src="{{asset('js/sites/leatest-news.js')}}"></script>
 </body>
 </html>

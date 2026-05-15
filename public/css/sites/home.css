@@ -1,80 +1,100 @@
 .heroes-section{
     display: grid;
     grid-template-columns: 3fr 1fr;
-    gap: 10px;   /* 👈 reduced from 10px */
+    gap: 60px;   /* 👈 reduced from 10px */
     width: 90%;
     height: 450px;
     margin-top: 60px;
     margin-left: 20px;
 }
 
+/* MAIN IMAGE CONTAINER */
 .main-img{
-    position: relative;  /* 👈 IMPORTANT */
-    overflow: hidden;
+    position:relative;
+    overflow:hidden;
+    border-radius:15px;
 }
 
+/* IMAGE */
 .main-img img{
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
+    width:100%;
+    height:465px;
+    object-fit:cover;
+    display:block;
+    border-radius:15px;
 }
 
-/* BUTTON */
-.main-btn{
-    position: absolute;
-    top: 15px;
-    left: 15px;
-    width: 120px;
-    background: rgba(0,0,0,0.6);
-    color: #fff;
-    border: none;
-    padding: 8px 14px;
-    font-size: 13px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: 0.3s;
+/* OVERLAY TEXT */
+.main-news-text{
+    position:absolute;
+    bottom:0;
+    left:0;
+    width:100%;
+    background:rgba(0,0,0,0.5);
+    padding:25px;
+    box-sizing:border-box;
+}
+
+/* HEADING */
+.main-news-text h2{
+    color:white;
+    font-size:42px;
+    margin:0;
+    font-weight:700;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.main-news-text h2:hover{
+    color:red;
 }
 
 /* HOVER EFFECT */
-.main-btn:hover{
-    background: #000;
-    transform: scale(1.1);
-}
+
 
 .side-img{
-  
-    display: flex;
-    flex-direction: column;
+    display:flex;
+    flex-direction:column;
     gap:25px;
 }
 
-/* CARD BACKGROUND */
+/* CARD */
 .side-item{
-    display: flex;
-    gap: 10px;
-    align-items: center;
-    padding: 10px;
-    border-radius: 12px;
+    position:relative;
+    overflow:hidden;
+    border-radius:12px;
 }
 
-/* IMAGE - KEEP ORIGINAL SIZE */
+/* IMAGE */
 .side-item img{
-    width: 400px;   /* increased */
-    height: 220px;  /* increased */
-    object-fit: cover;
-    border-radius: 10px;
-    flex-shrink: 0;
+    width:400px;
+    height:220px;
+    object-fit:cover;
+    border-radius:12px;
+    display:block;
+}
+
+/* TEXT OVER IMAGE */
+.news-text{
+    position:absolute;
+    bottom:0;
+    left:0;
+    width:100%;
+    background:rgba(0,0,0,0.5); /* low opacity black */
+    padding:15px;
+    box-sizing:border-box;
 }
 
 /* TITLE */
 .news-text h4{
-    font-size: 40px;
-    margin: 0;
-    font-weight: 600;
-    color: #222;
-    cursor: pointer;
+    font-size:28px;
+    margin:0;
+    font-weight:600;
+    color:white;
+    cursor:pointer;
+    transition:0.3s;
 }
+
 .news-text h4:hover{
-    color: red;
+    color:red;
 }
