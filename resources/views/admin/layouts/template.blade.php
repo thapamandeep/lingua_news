@@ -9,8 +9,9 @@
     <link rel="stylesheet" href="{{asset('css/admin/footer.css')}}">
 </head>
 <body>
+     @include('admin.partials.sidebar')
     @include('admin.partials.header')
-    @include('admin.partials.sidebar')
+   
     @yield('content')
     @include('admin.partials.footer')
 </body>
