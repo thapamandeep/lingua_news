@@ -10,11 +10,11 @@
         <div class="sports-categories">
 
             <nav class="main-nav">
-                <a href="{{ route('home') }}" class="nav-link active">All Sports</a>
-                <a href="#" class="nav-link">Cricket</a>
-                <a href="#" class="nav-link">Football</a>
-                <a href="#" class="nav-link">Basketball</a>
-                <a href="#" class="nav-link">Tennis</a>
+                <a href="{{ route('home') }}" class="nav-link active">Breaking political News</a>
+                <a href="#" class="nav-link">Government Updates</a>
+                <a href="#" class="nav-link">Parliament News</a>
+                <a href="#" class="nav-link">International Politics</a>
+                <a href="#" class="nav-link">Trending Headlines</a>
             </nav>
 
         </div>
