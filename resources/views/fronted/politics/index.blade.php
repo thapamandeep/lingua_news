@@ -10,7 +10,7 @@
         <div class="sports-categories">
 
             <nav class="main-nav">
-                <a href="{{ route('home') }}" class="nav-link active">Breaking political News</a>
+                <a href="{{ route('home.index') }}" class="nav-link active">Breaking political News</a>
                 <a href="#" class="nav-link">Government Updates</a>
                 <a href="#" class="nav-link">Parliament News</a>
                 <a href="#" class="nav-link">International Politics</a>
