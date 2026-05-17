@@ -15,3 +15,7 @@ Route::get('/entertainments',[EntertainmentsController::class,'index'])->name('e
 
 // ----------------------------Admin----------------------------------//
 Route::get('/admin-dashboard',[AdminController::class,'index'])->name('admin.dashboard');
+Route::get('/users-form',[AdminController::class,'usersForm'])->name('get.usersForm');
+Route::get('/roles-form',[AdminController::class,'rolesForm'])->name('get.rolesForm');
+Route::post('/users-store',[AdminController::class,'usersStore'])->name('post.users');
+Route::post('/roles-store',[AdminController::class,'rolesStore'])->name('post.roles');

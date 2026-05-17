@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <link rel="stylesheet" href="{{ asset('css/admin/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/admin/form.css') }}">
 </head>
 <body>
 
@@ -31,6 +32,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="{{ asset('admin/js/app.js') }}"></script>
+<script src="{{ asset('js/admin/downdrop.js') }}"></script>
 
 </body>
 </html>
