@@ -1,36 +1,18 @@
-<div class="header">
+<div class="navbar">
 
-    <div class="header-left">
-
-        <div class="menu-toggle">
-            <i class="fa-solid fa-bars"></i>
-        </div>
-
+    <div class="left-navbar">
+        <i class="fa-solid fa-bars menu-toggle"></i>
         <h2>Dashboard</h2>
-
     </div>
 
-    <div class="header-right">
+    <div class="right-navbar">
 
-        <div class="header-icon">
-            <i class="fa-solid fa-magnifying-glass"></i>
-        </div>
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <i class="fa-regular fa-bell"></i>
 
-        <div class="header-icon notification">
-            <i class="fa-regular fa-bell"></i>
-            <span>5</span>
-        </div>
-
-        <div class="admin-info">
-
-            <img src="{{ asset('img/man-avatar.png') }}" alt="admin">
-
-            <div class="admin-name">
-                <h4>Admin</h4>
-            </div>
-
-            <i class="fa-solid fa-chevron-down"></i>
-
+        <div class="admin-profile">
+            <img src="https://i.pravatar.cc/40" alt="admin">
+            <span>Admin</span>
         </div>
 
     </div>

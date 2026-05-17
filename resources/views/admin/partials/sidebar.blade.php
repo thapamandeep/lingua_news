@@ -1,127 +1,59 @@
 <div class="sidebar">
 
-    <!-- LOGO -->
-
-    <div class="sidebar-logo">
-
-        <div class="logo-icon">
-            <span>N</span>
-        </div>
-
-        <div class="logo-content">
-            <h2>NEWS PORTAL</h2>
-            <p>ADMIN PANEL</p>
-        </div>
-
+    <div class="logo">
+        <h2>Lingua News</h2>
+        <span>Admin Panel</span>
     </div>
 
-    <!-- MENU -->
-
-    <ul class="sidebar-menu">
-
+    <ul>
         <li class="active">
             <a href="#">
                 <i class="fa-solid fa-house"></i>
-                <span>Dashboard</span>
+                Dashboard
             </a>
         </li>
 
         <li>
             <a href="#">
                 <i class="fa-solid fa-layer-group"></i>
-                <span>Categories</span>
+                Categories
             </a>
         </li>
 
         <li>
             <a href="#">
-                <i class="fa-regular fa-newspaper"></i>
-                <span>News</span>
+                <i class="fa-solid fa-newspaper"></i>
+                News
             </a>
         </li>
 
         <li>
             <a href="#">
-                <i class="fa-regular fa-image"></i>
-                <span>Media</span>
+                <i class="fa-solid fa-image"></i>
+                Media
             </a>
         </li>
 
         <li>
             <a href="#">
-                <i class="fa-regular fa-file-lines"></i>
-                <span>Pages</span>
-            </a>
-        </li>
-
-        <li class="comment-item">
-
-            <a href="#">
-
-                <div class="menu-item">
-
-                    <i class="fa-regular fa-comment"></i>
-                    <span>Comments</span>
-
-                </div>
-
-                <div class="badge">
-                    12
-                </div>
-
-            </a>
-
-        </li>
-
-        <li>
-            <a href="#">
-                <i class="fa-regular fa-user"></i>
-                <span>Users</span>
-            </a>
-        </li>
-
-        <li>
-            <a href="#">
-                <i class="fa-solid fa-user-pen"></i>
-                <span>Authors</span>
-            </a>
-        </li>
-
-        <li>
-            <a href="#">
-                <i class="fa-regular fa-envelope"></i>
-                <span>Subscribers</span>
-            </a>
-        </li>
-
-        <li>
-            <a href="#">
-                <i class="fa-solid fa-rectangle-ad"></i>
-                <span>Ads</span>
+                <i class="fa-solid fa-users"></i>
+                Users
             </a>
         </li>
 
         <li>
             <a href="#">
                 <i class="fa-solid fa-gear"></i>
-                <span>Settings</span>
+                Settings
             </a>
         </li>
 
         <li>
             <a href="#">
-                <i class="fa-regular fa-user"></i>
-                <span>Profile</span>
+                <i class="fa-solid fa-right-from-bracket"></i>
+                Logout
             </a>
         </li>
-
-        <li>
-            <a href="#">
-                <i class="fa-solid fa-arrow-right-from-bracket"></i>
-                <span>Logout</span>
-            </a>
-        </li>
-
     </ul>
 
 </div>

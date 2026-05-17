@@ -3,16 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lingua news/Admin</title>
-    <link rel="stylesheet" href="{{asset('css/admin/header.css')}}">
-    <link rel="stylesheet" href="{{asset('css/admin/sidebar.css')}}">
-    <link rel="stylesheet" href="{{asset('css/admin/footer.css')}}">
+    <title>Lingua News Admin</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <link rel="stylesheet" href="{{ asset('css/admin/style.css') }}">
 </head>
 <body>
-     @include('admin.partials.sidebar')
-    @include('admin.partials.header')
-   
-    @yield('content')
-    @include('admin.partials.footer')
+
+<div class="admin-container">
+
+    @include('admin.partials.sidebar')
+
+    <div class="main-content">
+
+        @include('admin.partials.header')
+
+        <div class="content-area">
+            @yield('content')
+        </div>
+
+        @include('admin.partials.footer')
+
+    </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="{{ asset('admin/js/app.js') }}"></script>
+
 </body>
 </html>

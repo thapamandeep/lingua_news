@@ -1,5 +1,3 @@
 <div class="footer">
-
-    <p>© 2024 News Portal Admin Panel. All rights reserved.</p>
-
+    <p>© 2026 Lingua News Admin Panel</p>
 </div>
