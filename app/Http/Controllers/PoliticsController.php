@@ -8,6 +8,6 @@ class PoliticsController extends Controller
 {
         public function index()
     {
-        return view('fronted.sports.index');
+        return view('fronted.politics.index');
     }
 }
