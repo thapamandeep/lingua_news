@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use App\Models\Role;
+use App\Models\Category;
 
 class AdminController extends Controller
 {
@@ -69,4 +70,33 @@ class AdminController extends Controller
         Session::flash('success','roles has been saved');
         return redirect()->back();
     }
+
+    // --------------------------------------category-----------------------------//
+
+    public function categoryForm(){
+
+    return view('admin.pages.categories.form');
+    }
+
+    public function categoryStore(Request $request){
+        $data = $request->validate([
+            'name'=>'required|string|max:200',
+            'slug'=>'required|string|max:200|unique:categories,slug',
+            'status'=>'required|in:active,inactive',
+            'description'=>'nullable|string',
+        ]);
+
+        $categories = new Category();
+        $categories->name = $data['name'];
+        $categories->slug = $data['slug'];
+        $categories->status = $data['status'];
+        $categories->description = $data['description'];
+
+        $categories->save();
+
+        Session::flash('success','category has been saved');
+        return redirect()->back();
+    }
+
+    
 }

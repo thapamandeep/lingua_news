@@ -31,16 +31,21 @@
 
     <section class="banner">
 
-    <div class="news-category">
+  <div class="news-category">
 
-    
-  <nav class="main-nav">
-    <a href="{{ route('sports.index') }}" class="nav-link">Sports</a>
-    <a href="{{ route('politics.index') }}" class="nav-link">Politics</a>
-    <a href="{{route('entertainments.index')}}" class="nav-link">Entertainment</a>
-    <a href="#" class="nav-link">Education</a>
-</nav>
-    </div>
+    <nav class="main-nav">
+
+      @foreach($categories as $category)
+
+    <a href="{{route('category.page',$category->slug) }}" class="nav-link">
+        {{ $category->name }}
+    </a>
+
+@endforeach
+
+    </nav>
+
+</div>
 
     <div class="select-language">
         <select name="language" id="choose-language">

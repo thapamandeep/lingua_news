@@ -30,9 +30,9 @@
             <ul class="dropdown-menu">
 
                 <li>
-                    <a href="#">
+                    <a href="{{route('get.categoryForm')}}">
                         <i class="fa-solid fa-plus"></i>
-                        Category Index
+                        Category Form
                     </a>
                 </li>
 
@@ -62,9 +62,9 @@
             <ul class="dropdown-menu">
 
                 <li>
-                    <a href="#">
+                    <a href="{{route('get.addnews')}}">
                         <i class="fa-solid fa-plus"></i>
-                        News Index
+                        News Add
                     </a>
                 </li>
 
