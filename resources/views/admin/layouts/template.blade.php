@@ -9,6 +9,7 @@
 
     <link rel="stylesheet" href="{{ asset('css/admin/style.css') }}">
     <link rel="stylesheet" href="{{ asset('css/admin/form.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/admin/table.css') }}">
 </head>
 <body>
 

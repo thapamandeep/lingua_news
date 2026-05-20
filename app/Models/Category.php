@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Models\News;
+use App\Models\Subcategory;
 
 class Category extends Model
 {
@@ -18,4 +19,9 @@ class Category extends Model
 {
     return $this->hasMany(News::class);
 } 
+
+public function subcategories()
+{
+    return $this->hasMany(Subcategory::class);
+}
 }

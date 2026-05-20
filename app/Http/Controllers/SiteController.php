@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\News;
+use App\Models\Subcategory;
 
 class SiteController extends Controller
 {
@@ -29,8 +30,29 @@ class SiteController extends Controller
 
     // optional: for navbar
     $categories = Category::where('status', 'active')->get();
+  $subcategories = Subcategory::where('category_id', $category->id)->get();
 
-    return view('fronted.categories.index', compact('category', 'news', 'categories'));
+    return view('fronted.news.index', compact('category', 'news', 'categories','subcategories'));
+}
+
+public function subcategoryPage($slug)
+{
+    $subcategory = Subcategory::where('slug', $slug)->firstOrFail();
+
+    $news = News::where('subcategory_id', $subcategory->id)
+                ->where('status', 'published')
+                ->latest()
+                ->get();
+
+    $subcategories = Subcategory::where('category_id', $subcategory->category_id)
+                ->where('status', 1)
+                ->get();
+
+    return view('fronted.news.subcategoryNews.index', compact(
+        'subcategory',
+        'news',
+        'subcategories'
+    ));
 }
 
   

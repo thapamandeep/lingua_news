@@ -11,27 +11,35 @@
 
             <nav class="main-nav">
 
-                <a href="{{ route('home.index') }}" class="nav-link active">Home</a>
+                <a href="{{ route('home.index') }}" class="nav-link active">
+                    Home
+                </a>
 
-                @foreach($categories as $cat)
-                    <a href="{{ route('category.page', $cat->slug) }}" class="nav-link">
-                        {{ $cat->name }}
+                @foreach($subcategories as $subcat)
+                    <a href="{{ route('subcategory.page', $subcat->slug) }}" class="nav-link">
+                        {{ $subcat->name }}
                     </a>
                 @endforeach
 
             </nav>
 
         </div>
+        
 
         <!-- HEADER -->
         <div class="sports-header">
-            <h1>{{ $category->name ?? 'News' }}</h1>
+            
+     
+            
             <p>Breaking news, live updates, and latest stories.</p>
         </div>
 
-        @if($news->count())
+        <!-- NEWS CHECK -->
+        @if($news->isNotEmpty())
 
-            @php $first = $news->first(); @endphp
+            @php
+                $first = $news->first();
+            @endphp
 
             <!-- FEATURED NEWS -->
             <div class="featured-news">
@@ -59,7 +67,7 @@
             <!-- NEWS GRID -->
             <div class="sports-news-grid">
 
-                @foreach($news->skip(1) as $item)
+                @foreach($news->slice(1) as $item)
 
                     <div class="sports-card">
 

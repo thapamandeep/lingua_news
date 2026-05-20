@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\News;
+use App\Models\Role;
+use App\Models\Subcategory;
 use Illuminate\Support\Str;
 
 class NewsController extends Controller
@@ -12,8 +14,10 @@ class NewsController extends Controller
     public function newsAdd(){
 
     $categories = Category::all();
+    $subcategories = Subcategory::all();
+    $roles = Role::all();
 
-    return view('admin.pages.news.add', compact('categories'));
+    return view('admin.pages.news.add', compact('categories','subcategories','roles'));
     }
 
 public function store(Request $request)
@@ -23,8 +27,10 @@ public function store(Request $request)
         'title' => 'required|string|max:255',
         'slug' => 'required|string|max:255|unique:news,slug',
         'category_id' => 'required|exists:categories,id',
+        'subcategory_id' => 'nullable|exists:subcategories,id',
         'description' => 'required|string',
         'content' => 'nullable|string',
+        'role_id'=>  'required|exists:roles,id',
         'image' => 'required|image|mimes:jpg,jpeg,png,webp|max:2048',
         'status' => 'required|in:draft,published',
     ]);
@@ -50,6 +56,8 @@ public function store(Request $request)
     $news->slug = Str::slug($data['slug']);
 
     $news->category_id = $data['category_id'];
+    $news->subcategory_id = $data['subcategory_id'];
+    $news->role_id = $data['role_id'];
     $news->description = $data['description'];
     $news->content = $data['content'] ?? null;
     $news->status = $data['status'];

@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use App\Models\Role;
 use App\Models\Category;
+use App\Models\Subcategory;
 
 class AdminController extends Controller
 {
@@ -71,6 +72,13 @@ class AdminController extends Controller
         return redirect()->back();
     }
 
+    public function rolesIndex(){
+
+    $roles = Role::all();
+    
+    return view('admin.pages.roles.rolesTable',compact('roles'));
+    } 
+
     // --------------------------------------category-----------------------------//
 
     public function categoryForm(){
@@ -96,6 +104,50 @@ class AdminController extends Controller
 
         Session::flash('success','category has been saved');
         return redirect()->back();
+    }
+
+    public function categoryIndex(){
+
+    return view('admin.pages.categories.catTable');
+    }
+
+    // ------------------------------------------subcategories------------------------------------//
+
+    public function subcategory(){
+
+    $categories = Category::all();
+    $subcategories = Subcategory::all();
+
+    return view('admin.pages.subcategories.form',compact('categories','subcategories'));
+    }
+
+    public function subcategoryStore(Request $request){
+
+    $data = $request->validate([
+       'category_id' => 'required|exists:categories,id',
+        'name' => 'required|string|max:255',
+        'slug' => 'nullable|string|unique:subcategories,slug',
+        'status' => 'required|boolean',
+    ]);
+
+    $subcategories = new Subcategory();
+    $subcategories->name = $data['name'];
+    $subcategories->category_id = $data['category_id'];
+    $subcategories->status = $data['status'];
+    $subcategories->slug =  (bool) $data['slug']
+          ? \Str::slug($data['slug'])
+        : \Str::slug($data['name']);;
+
+    $subcategories->save();
+
+    return redirect()->back()->with('success','subcategories has been added on category');
+    }
+
+    public function subcategoryIndex(){
+
+    $subcategories = Subcategory::all();
+
+    return view('admin.pages.subcategories.subcatTable',compact('subcategories'));
     }
 
     

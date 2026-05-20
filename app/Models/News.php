@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Category;
+use App\Models\Role;
 
 class News extends Model
 {
@@ -21,5 +22,10 @@ class News extends Model
     public function category()
 {
     return $this->belongsTo(Category::class);
+}
+
+public function role()
+{
+    return $this->belongsTo(Role::class);
 }
 }

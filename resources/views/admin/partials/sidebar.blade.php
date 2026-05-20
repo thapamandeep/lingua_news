@@ -37,7 +37,7 @@
                 </li>
 
                 <li>
-                    <a href="#">
+                    <a href="{{route('get.categoryIndex')}}">
                         <i class="fa-solid fa-table"></i>
                         Category Table
                     </a>
@@ -47,6 +47,39 @@
 
         </li>
 
+          <li class="dropdown">
+
+            <a href="javascript:void(0);" class="dropdown-btn">
+                <div>
+                    <i class="fa-solid fa-layer-group"></i>
+                   Sub Categories
+                </div>
+
+                <i class="fa-solid fa-chevron-down arrow"></i>
+            </a>
+
+            <ul class="dropdown-menu">
+
+                <li>
+                    <a href="{{route('get.subcategory')}}">
+                        <i class="fa-solid fa-plus"></i>
+                        Sub category Form
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{{route('get.subcategory.index')}}">
+                        <i class="fa-solid fa-table"></i>
+                        Sub category Table
+                    </a>
+                </li>
+
+            </ul>
+
+        </li>
+
+
+        
         <!-- News Dropdown -->
         <li class="dropdown">
 
@@ -165,7 +198,7 @@
         </li>
 
         <li>
-            <a href="#">
+            <a href="{{route('get.rolesIndex')}}">
                 <i class="fa-solid fa-table"></i>
                 Role Table
             </a>

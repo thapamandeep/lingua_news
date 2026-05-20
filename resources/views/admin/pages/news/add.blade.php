@@ -61,6 +61,42 @@
                 </select>
             </div>
 
+               <!-- SUBCATEGORY INPUT (NEW) -->
+              <div class="form-group">
+                <label>Subcategory</label>
+
+                <select name="subcategory_id">
+                    <option value="">Select Subcategory</option>
+
+                    @foreach($subcategories as $subcategory)
+                        <option value="{{ $subcategory->id }}"
+                            {{ old('subcategory_id') == $subcategory->id ? 'selected' : '' }}>
+                            {{ $subcategory->name }}
+                        </option>
+                    @endforeach
+
+                </select>
+            </div>
+
+            <!-- Role -->
+<div class="form-group">
+    <label>Select Role</label>
+
+    <select name="role_id">
+
+        <option value="">Select Role</option>
+
+        @foreach($roles as $role)
+            <option value="{{ $role->id }}"
+                {{ old('role_id') == $role->id ? 'selected' : '' }}>
+                {{ $role->name }}
+            </option>
+        @endforeach
+
+    </select>
+</div>
+
+
             <!-- Description -->
             <div class="form-group">
                 <label>Description</label>
