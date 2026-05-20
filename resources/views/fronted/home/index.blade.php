@@ -4,16 +4,19 @@
 <section class="leatest-news">
 
     <div class="heroes-section">
+  <div class="main-img">
 
-     <div class="main-img">
+        <img id="heroImage"
+             src="{{ asset('storage/gallery/' . $heroNews[0]->image) }}"
+             alt="">
 
-    <img src="{{ asset('img/multigual.jpg') }}" alt="">
+        <div class="main-news-text">
+            <h2 id="heroTitle">{{ $heroNews[0]->title }}</h2>
+        </div>
 
-    <div class="main-news-text">
-        <h2>Main News Heading Here</h2>
     </div>
 
-</div>
+
     <div class="side-img">
 
     <div class="side-item">

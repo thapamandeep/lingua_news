@@ -12,9 +12,15 @@ class SiteController extends Controller
     public function home(){
 
        $categories = Category::all();
+      
+       $heroNews = News::where('status', 'published')
+                ->latest()
+                ->take(5)
+                ->get();
+
 
     
-    return view ('fronted.home.index',compact('categories'));
+    return view ('fronted.home.index',compact('categories','heroNews'));
     }
 
     public function categoryPage($slug)

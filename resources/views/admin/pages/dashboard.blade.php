@@ -7,7 +7,7 @@
     <div class="card blue">
         <div>
             <h3>Total News</h3>
-            <h1>1,245</h1>
+          <h1>{{ $totalNews }}</h1>
             <p>+12% this month</p>
         </div>
 
@@ -17,7 +17,7 @@
     <div class="card green">
         <div>
             <h3>Categories</h3>
-            <h1>18</h1>
+           <h1>{{ $totalCategories }}</h1>
             <p>+5% this month</p>
         </div>
 
@@ -27,7 +27,7 @@
     <div class="card orange">
         <div>
             <h3>Users</h3>
-            <h1>456</h1>
+           <h1>{{ $totalUsers }}</h1>
             <p>+8% this month</p>
         </div>
 

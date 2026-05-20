@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use App\Models\Role;
+use App\Models\News;
 use App\Models\Category;
 use App\Models\Subcategory;
 
@@ -14,7 +15,10 @@ class AdminController extends Controller
 {
     public function index(){
 
-    return view('admin.pages.dashboard');
+    $totalNews = News::count();
+    $totalUsers = Role::count();
+    $totalCategories = Category::count();
+    return view('admin.pages.dashboard', compact('totalNews','totalUsers','totalCategories'));
     }
 
     // ---------------------------------------users---------------------------------//
