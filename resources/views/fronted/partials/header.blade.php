@@ -50,6 +50,7 @@
     <div class="select-language">
         <select name="language" id="choose-language">
             <option value="">Choose language</option>
+            <option value="english">English</option>
             <option value="malasayan">Malasayan</option>
             <option value="chinese">Chinese</option>
             <option value="tamil">Tamil</option>
