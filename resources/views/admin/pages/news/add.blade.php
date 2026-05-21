@@ -115,6 +115,8 @@
                 <input type="file" name="image">
             </div>
 
+            
+
             <!-- Status -->
             <div class="form-group">
                 <label>Status</label>

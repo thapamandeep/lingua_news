@@ -10,6 +10,12 @@
              src="{{ asset('storage/gallery/' . $heroNews[0]->image) }}"
              alt="">
 
+
+    <!-- TIMESTAMP -->
+    <div class="news-time">
+        {{ $heroNews[0]->created_at->format('d M Y') }}
+    </div>
+
         <div class="main-news-text">
             <h2 id="heroTitle">{{ $heroNews[0]->title }}</h2>
         </div>
@@ -21,6 +27,12 @@
 
     <div class="side-item">
         <img src="{{ asset('img/sudan.webp') }}" alt="">
+
+          <!-- TIMESTAMP -->
+    <div class="news-time">
+        {{ $heroNews[0]->created_at->format('d M Y') }}
+    </div>
+
         <div class="news-text">
             <h4>Sudan Crisis Update</h4>
         </div>
@@ -28,6 +40,12 @@
 
     <div class="side-item">
         <img src="{{ asset('img/economics-news.jpg') }}" alt="">
+
+          <!-- TIMESTAMP -->
+    <div class="news-time">
+        {{ $heroNews[0]->created_at->format('d M Y') }}
+    </div>
+    
         <div class="news-text">
             <h4>Economic News Today</h4>
         </div>

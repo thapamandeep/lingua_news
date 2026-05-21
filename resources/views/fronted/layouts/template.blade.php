@@ -22,9 +22,12 @@
 @include('fronted.partials.header')
 @yield('content')
 @include('fronted.partials.footer')
+
+@if(isset($heroNews))
 <script>
     window.heroNewsData = @json($heroNews);
 </script>
+@endif
 
 <script src="{{asset('js/sites/heroSlide.js')}}"></script>
 
