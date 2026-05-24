@@ -22,7 +22,7 @@
      </div>
 
      <div class="signin">
-    <button>Sign In</button>
+    <a href="{{ route('login') }}"><button >Sign In</button></a>
            <i class="fa fa-user user-icon"></i>
      </div>
 
