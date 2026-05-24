@@ -87,7 +87,7 @@
 
             <div class="footer">
                 Don’t have an account?
-                <a href="{{ route('register') }}">Create Account</a>
+                <a href="{{ route('register') }}">Sign Up</a>
             </div>
 
         </div>
