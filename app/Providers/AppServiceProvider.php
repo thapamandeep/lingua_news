@@ -4,9 +4,12 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\App;
     
 use Illuminate\Support\Facades\View;
     use App\Models\Category;
+    use App\Models\Language;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -32,6 +35,14 @@ class AppServiceProvider extends ServiceProvider
 
         $view->with('categories', $categories);
     });
+
+
 }
+
+    App::setLocale(Session::get('lang', 'en'));
+         View::share('categories', Category::all());
+         View::share('languages', Language::all());
+
     }
+    
 }

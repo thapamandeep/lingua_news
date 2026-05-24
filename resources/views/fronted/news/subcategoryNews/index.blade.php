@@ -29,7 +29,7 @@
         <div class="sports-header">
 
 
-            <p>Breaking news, live updates, and latest stories.</p>
+            <p  id="breaking-text">{{ __('messages.breaking_news') }}</p>
 
         </div>
 

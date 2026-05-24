@@ -4,137 +4,139 @@
 
 <section class="users-form-section">
 
-    <div class="form-container">
+<div class="form-container">
 
-        <div class="form-header">
-            <h1>Create News</h1>
-            <p>Add latest news for Lingua News Portal</p>
-        </div>
+<div class="form-header">
+<h1>Create News</h1>
+<p>Add latest news for Lingua News Portal</p>
+</div>
 
-        {{-- SUCCESS MESSAGE --}}
-        @if(session('success'))
-            <div class="alert alert-success">
-                {{ session('success') }}
-            </div>
-        @endif
+@if(session('success'))
+<div class="alert alert-success">
+{{ session('success') }}
+</div>
+@endif
 
-        {{-- ERROR MESSAGE --}}
-        @if($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
+@if($errors->any())
 
-        <form action="{{route('post.news')}}" method="POST" enctype="multipart/form-data" class="user-form">
+<div class="alert alert-danger">
 
-            @csrf
+<ul>
 
-            <!-- Title -->
-            <div class="form-group">
-                <label>News Title</label>
-                <input type="text" name="title" placeholder="Enter news title">
-            </div>
+@foreach($errors->all() as $error)
 
-            <!-- Slug -->
-            <div class="form-group">
-                <label>Slug</label>
-                <input type="text" name="slug" placeholder="Enter slug (seo url)">
-            </div>
+<li>{{ $error }}</li>
 
-            <!-- Category -->
-            <div class="form-group">
-                <label>Category</label>
+@endforeach
 
-                <select name="category_id">
-                    <option value="">Select Category</option>
+</ul>
 
-                    @foreach($categories as $category)
-                        <option value="{{ $category->id }}">
-                            {{ $category->name }}
-                        </option>
-                    @endforeach
+</div>
 
-                </select>
-            </div>
+@endif
 
-               <!-- SUBCATEGORY INPUT (NEW) -->
-              <div class="form-group">
-                <label>Subcategory</label>
+<form action="{{ route('post.news') }}" method="POST" enctype="multipart/form-data">
+@csrf
 
-                <select name="subcategory_id">
-                    <option value="">Select Subcategory</option>
-
-                    @foreach($subcategories as $subcategory)
-                        <option value="{{ $subcategory->id }}"
-                            {{ old('subcategory_id') == $subcategory->id ? 'selected' : '' }}>
-                            {{ $subcategory->name }}
-                        </option>
-                    @endforeach
-
-                </select>
-            </div>
-
-            <!-- Role -->
+<!-- LANGUAGE -->
 <div class="form-group">
-    <label>Select Role</label>
-
-    <select name="role_id">
-
-        <option value="">Select Role</option>
-
-        @foreach($roles as $role)
-            <option value="{{ $role->id }}"
-                {{ old('role_id') == $role->id ? 'selected' : '' }}>
-                {{ $role->name }}
+    <label>Language</label>
+    <select name="language_id" required>
+        <option value="">Select Language</option>
+        @foreach($languages as $lang)
+            <option value="{{ $lang->id }}">
+                {{ $lang->name }}
             </option>
         @endforeach
-
     </select>
 </div>
 
+<!-- TITLE -->
+<div class="form-group">
+    <label>News Title</label>
+    <input type="text" name="title" value="{{ old('title') }}" required>
+</div>
 
-            <!-- Description -->
-            <div class="form-group">
-                <label>Description</label>
-                <textarea name="description" rows="4" placeholder="Short description"></textarea>
-            </div>
+<!-- SLUG -->
+<div class="form-group">
+    <label>Slug</label>
+    <input type="text" name="slug" value="{{ old('slug') }}" required>
+</div>
 
-            <!-- Content -->
-            <div class="form-group">
-                <label>Content</label>
-                <textarea name="content" rows="6" placeholder="Full news content"></textarea>
-            </div>
+<!-- CATEGORY -->
+<div class="form-group">
+    <label>Category</label>
+    <select name="category_id" required>
+        <option value="">Select Category</option>
+        @foreach($categories as $category)
+            <option value="{{ $category->id }}">
+                {{ $category->name }}
+            </option>
+        @endforeach
+    </select>
+</div>
 
-            <!-- Image -->
-            <div class="form-group">
-                <label>News Image</label>
-                <input type="file" name="image">
-            </div>
+<!-- SUBCATEGORY -->
+<div class="form-group">
+    <label>Subcategory</label>
+    <select name="subcategory_id">
+        <option value="">Select Subcategory</option>
+        @foreach($subcategories as $subcategory)
+            <option value="{{ $subcategory->id }}">
+                {{ $subcategory->name }}
+            </option>
+        @endforeach
+    </select>
+</div>
 
-            
+<!-- ROLE -->
+<div class="form-group">
+    <label>Role</label>
+    <select name="role_id">
+        <option value="">Select Role</option>
+        @foreach($roles as $role)
+            <option value="{{ $role->id }}">
+                {{ $role->name }}
+            </option>
+        @endforeach
+    </select>
+</div>
 
-            <!-- Status -->
-            <div class="form-group">
-                <label>Status</label>
+<!-- DESCRIPTION -->
+<div class="form-group">
+    <label>Description</label>
+    <textarea name="description" rows="5">{{ old('description') }}</textarea>
+</div>
 
-                <select name="status">
-                    <option value="draft">Draft</option>
-                    <option value="published">Published</option>
-                </select>
-            </div>
+<!-- CONTENT -->
+<div class="form-group">
+    <label>Content</label>
+    <textarea name="content" rows="8">{{ old('content') }}</textarea>
+</div>
 
-            <!-- Submit -->
-            <div class="form-btn">
-                <button type="submit">Create News</button>
-            </div>
+<!-- IMAGE -->
+<div class="form-group">
+    <label>News Image</label>
+    <input type="file" name="image" required>
+</div>
 
-        </form>
+<!-- STATUS -->
+<div class="form-group">
+    <label>Status</label>
+    <select name="status" required>
+        <option value="draft">Draft</option>
+        <option value="published">Published</option>
+    </select>
+</div>
 
-    </div>
+<!-- BUTTON -->
+<div class="form-btn">
+    <button type="submit">Create News</button>
+</div>
+
+</form>
+
+</div>
 
 </section>
 

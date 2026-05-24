@@ -1,13 +1,17 @@
 document.addEventListener("DOMContentLoaded", function () {
 
     const heroNews = window.heroNewsData || [];
-
     let index = 0;
 
-    const heroImage = document.getElementById("heroImage");
-    const heroTitle = document.getElementById("heroTitle");
+    const heroImage = document.querySelector(".main-img img");
+    const heroTitle = document.querySelector(".main-news-text h2");
+    const heroTime = document.querySelector(".news-time");
 
-    if (!heroNews.length || !heroImage || !heroTitle) return;
+    // safety check
+    if (!heroNews.length || !heroImage || !heroTitle) {
+        console.log("Hero slider stopped: missing data or elements");
+        return;
+    }
 
     setInterval(() => {
 
@@ -15,6 +19,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
         heroImage.src = "/storage/gallery/" + heroNews[index].image;
         heroTitle.textContent = heroNews[index].title;
+
+        if (heroTime) {
+            heroTime.textContent = heroNews[index].date ?? "";
+        }
 
     }, 3000);
 

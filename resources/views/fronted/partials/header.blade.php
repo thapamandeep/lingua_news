@@ -1,3 +1,4 @@
+
 <header class="site-header">
     <div class="background">
 
@@ -50,14 +51,21 @@
     <div class="select-language">
         <select name="language" id="choose-language">
             <option value="">Choose language</option>
-            <option value="english">English</option>
-            <option value="malasayan">Malasayan</option>
-            <option value="chinese">Chinese</option>
-            <option value="tamil">Tamil</option>
-            <option value="nepali">Nepali</option>
+     @foreach($languages as $lang)
+            <option value="{{ $lang->code }}"
+                {{ session('lang','en') == $lang->code ? 'selected' : '' }}>
+                {{ $lang->name }}
+            </option>
+        @endforeach
+
+
         </select>
     </div>
+
+  
     </section>
+
+
 
 
 

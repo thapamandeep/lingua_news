@@ -7,7 +7,8 @@ use App\Http\Controllers\PoliticsController;
 use App\Http\Controllers\EntertainmentsController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\NewsController;
-
+use App\Http\Controllers\LanguageController;
+use Http\Middleware\SetLanguageMiddleware;
 // ---------------------------site----------------------------------//
 Route::get('/',[SiteController::class,'home'])->name('home.index');
 Route::get('/category/{slug}', [SiteController::class, 'categoryPage'])->name('category.page');
@@ -34,3 +35,12 @@ Route::post('/add-subcategory',[AdminController::class,'subcategoryStore'])->nam
 Route::get('/subcategory-index',[AdminController::class,'subcategoryIndex'])->name('get.subcategory.index');
 Route::get('/add-news',[NewsController::class,'newsAdd'])->name('get.addnews');
 Route::post('/store-news',[NewsController::class,'store'])->name('post.news');
+
+Route::get('/language-form',[LanguageController::class,'form'])->name('get.language.form');
+Route::post('/store-language',[LanguageController::class,'store'])->name('languages.store');
+Route::post('/set-language', [LanguageController::class, 'setLanguage'])->name('set.language');
+Route::post('/change-language', [SiteController::class, 'changeLanguage']);
+Route::get('/change-language/{lang}', function($lang) {
+    session(['lang' => $lang]);
+    return back();
+});

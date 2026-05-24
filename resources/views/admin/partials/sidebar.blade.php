@@ -208,6 +208,38 @@
 
 </li>
 
+        <!-- Language Dropdown -->
+<li class="dropdown">
+
+    <a href="javascript:void(0);" class="dropdown-btn">
+        <div>
+           <i class="fa-solid fa-language"></i>
+            Languages
+        </div>
+
+        <i class="fa-solid fa-chevron-down arrow"></i>
+    </a>
+
+    <ul class="dropdown-menu">
+
+        <li>
+            <a href="{{route('get.language.form')}}">
+                <i class="fa-solid fa-plus"></i>
+                Language Forms
+            </a>
+        </li>
+
+        <li>
+            <a href="#">
+                <i class="fa-solid fa-table"></i>
+                Language Table
+            </a>
+        </li>
+
+    </ul>
+
+</li>
+
         <!-- Settings -->
         <li>
             <a href="#">
