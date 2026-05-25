@@ -115,6 +115,11 @@ class AdminController extends Controller
     return view('admin.pages.categories.catTable');
     }
 
+    public function categoryEdit(Category $category){
+
+    return view('admin.pages.categories.edit');
+    }
+
     // ------------------------------------------subcategories------------------------------------//
 
     public function subcategory(){
@@ -154,5 +159,7 @@ class AdminController extends Controller
     return view('admin.pages.subcategories.subcatTable',compact('subcategories'));
     }
 
+
+    
     
 }

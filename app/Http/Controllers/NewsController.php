@@ -102,4 +102,9 @@ $translation->save();
 
 return redirect()->back()->with('success','news has added');
 }
+
+public function edit(News $news){
+
+return view('admin.pages.news.edit');
+}
 }

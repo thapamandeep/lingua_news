@@ -43,6 +43,7 @@ Route::post('/add-subcategory',[AdminController::class,'subcategoryStore'])->nam
 Route::get('/subcategory-index',[AdminController::class,'subcategoryIndex'])->name('get.subcategory.index');
 Route::get('/add-news',[NewsController::class,'newsAdd'])->name('get.addnews');
 Route::post('/store-news',[NewsController::class,'store'])->name('post.news');
+Route::get('/edit-news',[NewsController::class,'edit'])->name('get.edit.news')->middleware('author');
 
 
 Route::get('/language-form',[LanguageController::class,'form'])->name('get.language.form');
