@@ -48,16 +48,22 @@
                 Welcome back! Please login to continue.
             </div>
 
-            <form>
+            @if(session('error'))
+    <div class="alert-error">
+        {{ session('error') }}
+    </div>
+@endif
+
+             <form action="{{route('post.login')}}" method="POST" class="login">@csrf
 
                 <div class="form-group">
                     <label>Email Address</label>
-                    <input type="email" class="input-box" placeholder="Enter your email">
+                    <input type="email" name="email" class="input-box" placeholder="Enter your email">
                 </div>
 
                 <div class="form-group">
                     <label>Password</label>
-                    <input type="password" class="input-box" placeholder="Enter your password">
+                    <input type="password" name="password" class="input-box" placeholder="Enter your password">
                 </div>
 
                 <div class="options">

@@ -250,7 +250,7 @@
 
         <!-- Logout -->
         <li>
-            <a href="#">
+            <a href="{{route('logout')}}">
                 <i class="fa-solid fa-right-from-bracket"></i>
                 Logout
             </a>
