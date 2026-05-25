@@ -51,7 +51,8 @@ Route::post('/add-subcategory',[AdminController::class,'subcategoryStore'])->nam
 Route::get('/subcategory-index',[AdminController::class,'subcategoryIndex'])->name('get.subcategory.index');
 Route::get('/add-news',[NewsController::class,'newsAdd'])->name('get.addnews');
 Route::post('/store-news',[NewsController::class,'store'])->name('post.news');
-Route::get('/edit-news',[NewsController::class,'edit'])->name('get.edit.news')->middleware('author');
+Route::get('/news-index',[NewsController::class,'index'])->name('get.news.index')->middleware('admin');
+Route::get('/edit-news',[NewsController::class,'edit'])->name('get.edit.news')->middleware('admin');
 
 
 Route::get('/language-form',[LanguageController::class,'form'])->name('get.language.form');
@@ -63,18 +64,17 @@ Route::get('/change-language/{lang}', function($lang) {
     return back();
 });
 
-<<<<<<< HEAD
+
 Route::get('/author-dashboard', [AuthorController::class, 'index']);
 
 
-=======
 // =========================Author===========================//
 Route::get('/author-dashboard', [AuthorController::class, 'index'])
 ->name('author.dashboard')
 ->middleware('author');
 
 // -------------login-----------------------------//
->>>>>>> 18cade56f53702ff418024e0c26a456bfc8993a3
+
 Route::get('/login' ,[AuthController::class, 'showLogin'])->name('login');
 Route::post('login-user',[AuthController::class,'login'])->name('post.login');
 Route::get('/logout',[AuthController::class,'logout'])->name('logout');

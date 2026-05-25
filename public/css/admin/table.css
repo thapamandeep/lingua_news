@@ -129,3 +129,13 @@
     background: #fee2e2;
     color: #991b1b;
 }
+.action-buttons{
+    display:flex;
+    gap:8px;
+    align-items:center;
+    flex-wrap:nowrap;
+}
+
+.delete-form{
+    margin:0;
+}
