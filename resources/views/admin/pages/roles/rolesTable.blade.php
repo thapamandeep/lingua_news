@@ -51,13 +51,13 @@
                         </a>
 
                         <!-- EDIT -->
-                        <a href="#"
+                        <a href="{{ route('roles.edit', $role->id) }}"
                            class="btn btn-warning btn-sm">
                             Edit
                         </a>
 
                         <!-- DELETE -->
-                        <form action="#"
+                        <form action="{{ route('roles.delete', $role->id) }}"
                               method="POST"
                               style="display:inline-block;">
 

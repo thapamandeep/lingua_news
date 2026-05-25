@@ -39,10 +39,5 @@ class AppServiceProvider extends ServiceProvider
 
 }
 
-    App::setLocale(Session::get('lang', 'en'));
-         View::share('categories', Category::all());
-         View::share('languages', Language::all());
-
     }
-    
 }

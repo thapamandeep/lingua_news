@@ -55,6 +55,58 @@ class AdminController extends Controller
 
     }
 
+    
+    // -------------------- USERS EDIT -------------------- //
+
+public function usersEdit($id)
+{
+    $user = User::findOrFail($id);
+    $roles = Role::all();
+
+    return view('admin.pages.users.edit', compact('user', 'roles'));
+}
+
+
+public function usersUpdate(Request $request, $id)
+{
+    $data = $request->validate([
+        'name' => 'required|string|max:300',
+        'username' => 'required|string|max:300',
+        'email' => 'required|email',
+        'phone' => 'required|string',
+        'password' => 'nullable|string|max:20',
+        'role_id' => 'required',
+    ]);
+
+    $user = User::findOrFail($id);
+
+    $user->name = $data['name'];
+    $user->username = $data['username'];
+    $user->email = $data['email'];
+    $user->phone = $data['phone'];
+    $user->role_id = $data['role_id'];
+
+    
+    if (!empty($data['password'])) {
+        $user->password = Hash::make($data['password']);
+    }
+
+    $user->save();
+
+    Session::flash('success', 'User updated successfully');
+    return redirect()->route('users.form');
+}
+
+
+public function usersDelete($id)
+{
+    $user = User::findOrFail($id);
+    $user->delete();
+
+    Session::flash('success', 'User deleted successfully');
+    return redirect()->back();
+}
+
     // --------------------------------Roles-----------------------------------//
 
     public function rolesForm(){
@@ -76,6 +128,45 @@ class AdminController extends Controller
         return redirect()->back();
     }
 
+    // -------------------- ROLES EDIT -------------------- //
+
+public function rolesEdit($id)
+{
+    $role = Role::findOrFail($id);
+
+    return view('admin.pages.roles.edit', compact('role'));
+}
+
+
+// -------------------- ROLES UPDATE -------------------- //
+
+public function rolesUpdate(Request $request, $id)
+{
+    $data = $request->validate([
+        'name' => 'required|string|max:255',
+    ]);
+
+    $role = Role::findOrFail($id);
+    $role->name = $data['name'];
+    $role->save();
+
+    Session::flash('success', 'Role updated successfully');
+    return redirect()->route('get.rolesIndex');
+}
+
+
+// -------------------- ROLES DELETE -------------------- //
+
+public function rolesDelete($id)
+{
+    $role = Role::findOrFail($id);
+    $role->delete();
+
+    Session::flash('success', 'Role deleted successfully');
+    return redirect()->back();
+}
+
+
     public function rolesIndex(){
 
     $roles = Role::all();
@@ -93,12 +184,14 @@ class AdminController extends Controller
     public function categoryStore(Request $request){
         $data = $request->validate([
             'name'=>'required|string|max:200',
+    
             'slug'=>'required|string|max:200|unique:categories,slug',
             'status'=>'required|in:active,inactive',
             'description'=>'nullable|string',
         ]);
 
         $categories = new Category();
+        
         $categories->name = $data['name'];
         $categories->slug = $data['slug'];
         $categories->status = $data['status'];

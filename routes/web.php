@@ -12,6 +12,7 @@ use App\Http\Controllers\LanguageController;
 use Http\Middleware\SetLanguageMiddleware;
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\AuthorController;
 
 
 // ---------------------------site----------------------------------//
@@ -24,8 +25,15 @@ Route::get('/subcategory/{slug}', [SiteController::class, 'subcategoryPage'])->n
 Route::get('/admin-dashboard',[AdminController::class,'index'])->name('admin.dashboard');
 Route::get('/users-form',[AdminController::class,'usersForm'])->name('get.usersForm');
 Route::post('/users-store',[AdminController::class,'usersStore'])->name('post.users');
-Route::post('/roles-store',[AdminController::class,'rolesStore'])->name('post.roles');
+Route::get('/users/edit/{id}', [AdminController::class, 'usersEdit'])->name('users.edit');
+Route::post('/users/update/{id}', [AdminController::class, 'usersUpdate'])->name('users.update');
+Route::get('/users/delete/{id}', [AdminController::class, 'usersDelete'])->name('users.delete');
 
+
+Route::post('/roles-store',[AdminController::class,'rolesStore'])->name('post.roles');
+Route::get('/roles/edit/{id}', [AdminController::class, 'rolesEdit'])->name('roles.edit');
+Route::put('/roles/update/{id}', [AdminController::class, 'rolesUpdate'])->name('roles.update');
+Route::get('/roles/delete/{id}', [AdminController::class, 'rolesDelete'])->name('roles.delete');
 Route::get('/roles-form',[AdminController::class,'rolesForm'])->name('get.rolesForm');
 Route::get('/roles-index',[AdminController::class,'rolesIndex'])->name('get.rolesIndex');
 
@@ -50,6 +58,10 @@ Route::get('/change-language/{lang}', function($lang) {
     session(['lang' => $lang]);
     return back();
 });
+
+Route::get('/author-dashboard', [AuthorController::class, 'index']);
+
+
 Route::get('/login' ,[AuthController::class, 'showLogin'])->name('login');
 Route::get('/register' ,[AuthController::class, 'showRegister'])->name('register');
 
