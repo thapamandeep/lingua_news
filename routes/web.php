@@ -7,6 +7,9 @@ use App\Http\Controllers\PoliticsController;
 use App\Http\Controllers\EntertainmentsController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\NewsController;
+use App\Http\Middleware\AdminMiddleware;
+use App\Http\Middleware\AdminMiddlware;
+use App\Http\Middleware\AuthorMiddlware;
 
 use App\Http\Controllers\LanguageController;
 use Http\Middleware\SetLanguageMiddleware;
@@ -22,7 +25,7 @@ Route::get('/subcategory/{slug}', [SiteController::class, 'subcategoryPage'])->n
 // Route::get('/sports-page',[SportsController::class,'index'])->name('get.sportPage');
 
 // ----------------------------Admin----------------------------------//
-Route::get('/admin-dashboard',[AdminController::class,'index'])->name('admin.dashboard');
+Route::get('/admin-dashboard',[AdminController::class,'index'])->name('admin.dashboard')->middleware('admin');
 Route::get('/users-form',[AdminController::class,'usersForm'])->name('get.usersForm');
 Route::post('/users-store',[AdminController::class,'usersStore'])->name('post.users');
 Route::get('/users/edit/{id}', [AdminController::class, 'usersEdit'])->name('users.edit');
@@ -59,9 +62,20 @@ Route::get('/change-language/{lang}', function($lang) {
     return back();
 });
 
+<<<<<<< HEAD
 Route::get('/author-dashboard', [AuthorController::class, 'index']);
 
 
+=======
+// =========================Author===========================//
+Route::get('/author-dashboard', [AuthorController::class, 'index'])
+->name('author.dashboard')
+->middleware('author');
+
+// -------------login-----------------------------//
+>>>>>>> 18cade56f53702ff418024e0c26a456bfc8993a3
 Route::get('/login' ,[AuthController::class, 'showLogin'])->name('login');
+Route::post('login-user',[AuthController::class,'login'])->name('post.login');
+Route::get('/logout',[AuthController::class,'logout'])->name('logout');
 Route::get('/register' ,[AuthController::class, 'showRegister'])->name('register');
 
