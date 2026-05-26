@@ -15,6 +15,7 @@ public function home()
 {
     $categories = Category::all();
 
+<<<<<<< HEAD
     /*
     ====================
     GET SELECTED LANGUAGE
@@ -32,13 +33,27 @@ public function home()
     /*
     ====================
     FETCH NEWS WITH TRANSLATION
+=======
+    $lang = session('lang', 'en');
+
+    $language = Language::where('code', $lang)->first()
+        ?? Language::where('code', 'en')->first();
+
+    /*
+    ====================
+    FETCH NEWS
+>>>>>>> 158f77579a6b05585a9b865a881f0528a745bd6e
     ====================
     */
     $news = News::with([
             'subcategory',
+<<<<<<< HEAD
             'translations' => function ($q) use ($language) {
                 $q->where('language_id', $language->id);
             }
+=======
+            'translations'
+>>>>>>> 158f77579a6b05585a9b865a881f0528a745bd6e
         ])
         ->where('status', 'published')
         ->latest()
@@ -46,11 +61,16 @@ public function home()
 
     /*
     ====================
+<<<<<<< HEAD
     MAP TRANSLATED DATA SAFELY
+=======
+    FILTER TRANSLATION IN MEMORY
+>>>>>>> 158f77579a6b05585a9b865a881f0528a745bd6e
     ====================
     */
     $news->each(function ($item) use ($language) {
 
+<<<<<<< HEAD
         $translation = $item->translations->first();
 
         if ($translation) {
@@ -69,10 +89,22 @@ public function home()
     RETURN VIEW WITH SPLIT DATA
     ====================
     */
+=======
+        $translation = $item->translations
+            ->where('language_id', $language->id)
+            ->first();
+
+        $item->title = $translation->title ?? 'No Title';
+        $item->description = $translation->description ?? '';
+        $item->content = $translation->content ?? '';
+    });
+
+>>>>>>> 158f77579a6b05585a9b865a881f0528a745bd6e
     return view('fronted.home.index', [
         'categories' => $categories,
 
         'heroNews' => $news->take(3)->values(),
+<<<<<<< HEAD
 
         'subHeroNews' => $news->skip(1)->take(2)->values(),
 
@@ -80,6 +112,12 @@ public function home()
 
         'previousNews' => $news->skip(11)->values(),
 
+=======
+        'subHeroNews' => $news->skip(1)->take(2)->values(),
+        'latestNews' => $news->skip(3)->take(8)->values(),
+        'previousNews' => $news->skip(11)->values(),
+
+>>>>>>> 158f77579a6b05585a9b865a881f0528a745bd6e
         'languages' => Language::all(),
     ]);
 }

@@ -19,9 +19,19 @@
 
                 <div class="main-news-text">
 
+<<<<<<< HEAD
                     <h2>
                         {{ $heroNews[0]->title ?? 'No Title' }}
                     </h2>
+=======
+                  @php
+    $hero = $heroNews[0]->translations->first();
+@endphp
+
+<h2>
+    {{ $hero->title  }}
+</h2>
+>>>>>>> 158f77579a6b05585a9b865a881f0528a745bd6e
 
                 </div>
 
