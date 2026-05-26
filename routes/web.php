@@ -69,10 +69,7 @@ Route::get('/change-language/{lang}', function($lang) {
 Route::get('/author-dashboard', [AuthorController::class, 'index']);
 
 
-<<<<<<< HEAD
 
-=======
->>>>>>> 158deaaeb1044718251b047ba596283fe43c6e5e
 // =========================Author===========================//
 Route::get('/author-dashboard', [AuthorController::class, 'index'])
 ->name('author.dashboard')

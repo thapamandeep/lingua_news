@@ -41,7 +41,7 @@ public function login(Request $request)
                 return redirect()->route('admin.dashboard');
             }
 
-            elseif ($user->role_id == 1) {
+            elseif ($user->role_id == 4) {
                 return redirect()->route('author.dashboard');
             }
 
