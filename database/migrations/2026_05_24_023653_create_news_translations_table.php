@@ -12,21 +12,25 @@ return new class extends Migration
 
             $table->id();
 
+            // NEWS RELATION
             $table->foreignId('news_id')
                 ->constrained('news')
                 ->onDelete('cascade');
 
+            // LANGUAGE RELATION
             $table->foreignId('language_id')
                 ->constrained('languages')
                 ->onDelete('cascade');
 
+            // CONTENT
             $table->string('title');
-
             $table->text('description');
-
             $table->longText('content')->nullable();
 
             $table->timestamps();
+
+            // 🔥 IMPORTANT: prevent duplicate language per news
+            $table->unique(['news_id', 'language_id']);
         });
     }
 

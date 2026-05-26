@@ -7,9 +7,7 @@
     <div class="heroes-section">
 
         {{-- HERO NEWS --}}
-      
-
-             <div class="main-img">
+        <div class="main-img">
 
             @if(isset($heroNews[0]))
 
@@ -21,7 +19,9 @@
 
                 <div class="main-news-text">
 
-                 <h2>{{ $heroNews[0]->title ?? '' }}</h2>
+                    <h2>
+                        {{ $heroNews[0]->title ?? 'No Title' }}
+                    </h2>
 
                 </div>
 
@@ -48,9 +48,9 @@
                             {{ $news->subcategory->name ?? 'General' }}
                         </span>
 
-                        
-                           <h4>{{ $news->title }}</h4>
-                        
+                        <h4>
+                            {{ $news->title ?? 'No Title' }}
+                        </h4>
 
                     </div>
 
@@ -93,11 +93,11 @@
                     <div class="news-content">
 
                         <h3>
-                            {{ $news->title }}
+                            {{ $news->title ?? 'No Title' }}
                         </h3>
 
                         <p>
-                            {{ \Illuminate\Support\Str::limit($news->description, 120) }}
+                            {{ \Illuminate\Support\Str::limit($news->description ?? '', 120) }}
                         </p>
 
                         <a href="#" class="read-more-btn">
@@ -133,13 +133,15 @@
                 <div class="previous-news-card">
 
                     <div class="news-img">
+
                         <img src="{{ asset('storage/gallery/' . $news->image) }}">
+
                     </div>
 
                     <div class="news-content">
 
                         <h3>
-                            {{ $news->title }}
+                            {{ $news->title ?? 'No Title' }}
                         </h3>
 
                         <div class="news-time">
@@ -147,7 +149,7 @@
                         </div>
 
                         <p>
-                            {{ \Illuminate\Support\Str::limit($news->description, 200) }}
+                            {{ \Illuminate\Support\Str::limit($news->description ?? '', 200) }}
                         </p>
 
                     </div>

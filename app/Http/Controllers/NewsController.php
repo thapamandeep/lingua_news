@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use App\Models\Category;
 use App\Models\News;
 use App\Models\Role;
@@ -13,68 +14,46 @@ use Illuminate\Support\Str;
 
 class NewsController extends Controller
 {
-    public function newsAdd(){
 
-    $categories = Category::all();
-    $subcategories = Subcategory::all();
-    $roles = Role::all();
-    $languages = Language::all();
+public function news(){
 
-    return view('admin.pages.news.add', compact('categories','subcategories','roles','languages'));
+$categories = Category::all();
+$subcategories = Subcategory::all();
+$roles = Role::all();
+
+return view('admin.pages.news.add-news', compact('categories','subcategories','roles'));
+}
+  
+
+
+
+ public function store(Request $request)
+{
+    $data = $request->validate([
+        // NEWS ONLY
+        'slug' => 'required|unique:news,slug',
+        'category_id' => 'required|exists:categories,id',
+        'subcategory_id' => 'nullable|exists:subcategories,id',
+        'role_id' => 'required|exists:roles,id',
+        'status' => 'required|in:draft,published',
+        'image' => 'required|image',
+    ]);
+
+    // IMAGE UPLOAD
+    $imageName = null;
+
+    if ($request->hasFile('image')) {
+        $file = $request->file('image');
+
+        $imageName = time().'.'.$file->getClientOriginalExtension();
+
+        $file->storeAs('gallery', $imageName, 'public');
     }
 
-    public function store(Request $request)
-    {
-        $data = $request->validate([
-
-            // NEWS
-            'slug' => 'required|unique:news,slug',
-            'category_id' => 'required|exists:categories,id',
-            'subcategory_id' => 'nullable|exists:subcategories,id',
-            'role_id' => 'required|exists:roles,id',
-            'status' => 'required|in:draft,published',
-            'image' => 'required|image',
-
-            // TRANSLATION
-            'language_id' => 'required|exists:languages,id',
-            'title' => 'required|string|max:255',
-            'description' => 'required|string',
-            'content' => 'nullable|string',
-        ]);
-
-        /*
-        ==================
-        IMAGE UPLOAD
-        ==================
-        */
-
-        $imageName = null;
-
-        if ($request->hasFile('image')) {
-
-            $file = $request->file('image');
-
-            $imageName =
-                time().'.'.
-                $file->getClientOriginalExtension();
-
-            $file->storeAs(
-                'gallery',
-                $imageName,
-                'public'
-            );
-        }
-
-        /*
-        ==================
-        SAVE NEWS
-        ==================
-        */
-
-    
+    // SAVE NEWS
     $news = new News();
 
-    $news->slug = \Illuminate\Support\Str::slug($data['slug']);
+    $news->slug = Str::slug($data['slug']);
     $news->category_id = $data['category_id'];
     $news->subcategory_id = $data['subcategory_id'];
     $news->role_id = $data['role_id'];
@@ -83,35 +62,184 @@ class NewsController extends Controller
 
     $news->save();
 
-        /*
-        ==================
-        SAVE TRANSLATION
-        ==================
-        */
-$translation = new NewsTranslation();
-
-$translation->news_id = $news->id;
-$translation->language_id = $data['language_id'];
-$translation->title = $data['title'];
-$translation->description = $data['description'];
-$translation->content = $data['content'];
-
-$translation->save();
-
-// dd($request->all());
-
-return redirect()->back()->with('success','news has added');
+    return redirect()->back()->with('success','news has been added');
 }
 
 public function index(){
 
+$news = News::all();
+
+return view('admin.pages.news.news-index', compact('news'));
+}
+
+public function newsTranslate(){
+
+$news = News::all();
+
+$slugs =  News::where('slug')->get();
+
+return view('admin.pages.news_translations.news-translations',compact('slugs','news'));
+}
+
+public function storeTranslation(Request $request)
+{
+    $data = $request->validate([
+        'news_id' => 'required|exists:news,id',
+        'language_id' => 'required|exists:languages,id',
+        'title' => 'required|string|max:255',
+        'description' => 'required|string',
+        'content' => 'nullable|string',
+    ]);
+
+    // Save or update translation (prevents duplicates)
+    NewsTranslation::updateOrCreate(
+        [
+            'news_id' => $data['news_id'],
+            'language_id' => $data['language_id'],
+        ],
+        [
+            'title' => $data['title'],
+            'description' => $data['description'],
+            'content' => $data['content'],
+        ]
+    );
+
+    return redirect()
+        ->back()
+        ->with('success', 'News translation saved successfully');
+}
+
+public function translateIndex(){
+
 $news = NewsTranslation::all();
 
-return view('admin.pages.news.index', compact('news'));
+return view('admin.pages.news_translations.index',compact('news'));
 }
 
 public function edit(NewsTranslation $news){
 
-return view('admin.pages.news.edit');
+$languages = Language::all();
+$subcategories = Subcategory::all();
+$roles = Role::all();
+
+return view('admin.pages.news.edit',compact('news','languages','subcategories','roles'));
+}
+
+
+public function update(Request $request, News $news)
+{
+    $data = $request->validate([
+
+        // NEWS
+        'slug' => 'required|unique:news,slug,' . $news->id,
+        'category_id' => 'required|exists:categories,id',
+        'subcategory_id' => 'nullable|exists:subcategories,id',
+        'role_id' => 'required|exists:roles,id',
+        'status' => 'required|in:draft,published',
+        'image' => 'nullable|image',
+
+        // TRANSLATION
+        'language_id' => 'required|exists:languages,id',
+        'title' => 'required|string|max:255',
+        'description' => 'required|string',
+        'content' => 'nullable|string',
+    ]);
+
+    /*
+    ==================
+    IMAGE UPDATE
+    ==================
+    */
+
+    if ($request->hasFile('image')) {
+
+        if ($news->image) {
+
+            Storage::disk('public')
+                ->delete('gallery/' . $news->image);
+        }
+
+        $file = $request->file('image');
+
+        $imageName =
+            time().'.'.
+            $file->getClientOriginalExtension();
+
+        $file->storeAs(
+            'gallery',
+            $imageName,
+            'public'
+        );
+
+        $news->image = $imageName;
+    }
+
+    /*
+    ==================
+    UPDATE NEWS
+    ==================
+    */
+
+    $news->slug =
+        \Illuminate\Support\Str::slug($data['slug']);
+
+    $news->category_id =
+        $data['category_id'];
+
+    $news->subcategory_id =
+        $data['subcategory_id'];
+
+    $news->role_id =
+        $data['role_id'];
+
+    $news->status =
+        $data['status'];
+
+    $news->save();
+
+    /*
+    ==================
+    UPDATE TRANSLATION
+    ==================
+    */
+
+    $translation =
+        NewsTranslation::where(
+            'news_id',
+            $news->id
+        )
+        ->where(
+            'language_id',
+            $data['language_id']
+        )
+        ->first();
+
+    if ($translation) {
+
+        $translation->title =
+            $data['title'];
+
+        $translation->description =
+            $data['description'];
+
+        $translation->content =
+            $data['content'];
+
+        $translation->save();
+    }
+
+    return redirect()
+        ->back()
+        ->with(
+            'success',
+            'News updated successfully'
+        );
+}
+
+public function delete( NewsTranslation $news){
+
+$news->delete();
+
+return redirect()->back();
 }
 }

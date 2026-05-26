@@ -49,10 +49,16 @@ Route::get('/get-category-index',[AdminController::class,'categoryIndex'])->name
 Route::get('/form-subcategory',[AdminController::class,'subcategory'])->name('get.subcategory');
 Route::post('/add-subcategory',[AdminController::class,'subcategoryStore'])->name('subcategories.store');
 Route::get('/subcategory-index',[AdminController::class,'subcategoryIndex'])->name('get.subcategory.index');
-Route::get('/add-news',[NewsController::class,'newsAdd'])->name('get.addnews');
+Route::get('/add-news',[NewsController::class,'news'])->name('get.addnews');
 Route::post('/store-news',[NewsController::class,'store'])->name('post.news');
 Route::get('/news-index',[NewsController::class,'index'])->name('get.news.index')->middleware('admin');
-Route::get('/edit-news',[NewsController::class,'edit'])->name('get.edit.news')->middleware('admin');
+Route::get('/edit-news/{news}',[NewsController::class,'edit'])->name('get.edit.news')->middleware('admin');
+Route::post('/update-news/{news}',[NewsController::class,'update'])->name('update.news')->middleware('admin');
+Route::delete('/delete-news/{news}',[NewsController::class,'delete'])->name('delete.news')->middleware('admin');
+
+Route::get('/news-translate',[NewsController::class,'newsTranslate'])->name('news.translate')->middleware('admin');
+Route::post('/translate-store',[NewsController::class,'storeTranslation'])->name('post.storeTranslation')->middleware('admin');
+Route::get('/translate-index',[NewsController::class,'translateIndex'])->name('translate.index')->middleware('admin');
 
 
 Route::get('/language-form',[LanguageController::class,'form'])->name('get.language.form');

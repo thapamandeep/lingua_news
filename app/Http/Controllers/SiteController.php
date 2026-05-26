@@ -15,106 +15,73 @@ public function home()
 {
     $categories = Category::all();
 
-    $lang = session('lang', 'en');
-
     /*
     ====================
     GET SELECTED LANGUAGE
     ====================
     */
+    $lang = session('lang', 'en');
 
-    $language = Language::where(
-        'code',
-        $lang
-    )->first();
+    $language = Language::where('code', $lang)->first();
+
+    // fallback to English if session language not found
+    if (!$language) {
+        $language = Language::where('code', 'en')->first();
+    }
 
     /*
     ====================
-    FETCH ONLY SELECTED
-    LANGUAGE NEWS
+    FETCH NEWS WITH TRANSLATION
     ====================
     */
-
     $news = News::with([
-        'subcategory',
-        'translations'
-    ])
-    ->where(
-        'status',
-        'published'
-    )
-    ->whereHas(
-        'translations',
-        function ($q) use ($language) {
-
-            $q->where(
-                'language_id',
-                $language->id
-            );
-
-        }
-    )
-    ->latest()
-    ->get();
+            'subcategory',
+            'translations' => function ($q) use ($language) {
+                $q->where('language_id', $language->id);
+            }
+        ])
+        ->where('status', 'published')
+        ->latest()
+        ->get();
 
     /*
     ====================
-    REPLACE TEXT
+    MAP TRANSLATED DATA SAFELY
     ====================
     */
-
     $news->each(function ($item) use ($language) {
 
-        $translation =
-            $item
-            ->translations
-            ->where(
-                'language_id',
-                $language->id
-            )
-            ->first();
+        $translation = $item->translations->first();
 
-        $item->title =
-            $translation->title;
-
-        $item->description =
-            $translation->description;
-
-        $item->content =
-            $translation->content;
+        if ($translation) {
+            $item->title = $translation->title;
+            $item->description = $translation->description;
+            $item->content = $translation->content;
+        } else {
+            // fallback if translation missing
+            $item->title = $item->title;
+            $item->description = $item->description;
+        }
     });
 
-    return view(
-        'fronted.home.index',
-        [
-            'categories' => $categories,
+    /*
+    ====================
+    RETURN VIEW WITH SPLIT DATA
+    ====================
+    */
+    return view('fronted.home.index', [
+        'categories' => $categories,
 
-            'heroNews' =>
-                $news
-                ->take(3)
-                ->values(),
+        'heroNews' => $news->take(3)->values(),
 
-            'subHeroNews' =>
-                $news
-                ->skip(1)
-                ->take(2)
-                ->values(),
+        'subHeroNews' => $news->skip(1)->take(2)->values(),
 
-            'latestNews' =>
-                $news
-                ->skip(3)
-                ->take(8)
-                ->values(),
+        'latestNews' => $news->skip(3)->take(8)->values(),
 
-            'previousNews' =>
-                $news
-                ->skip(11)
-                ->values(),
+        'previousNews' => $news->skip(11)->values(),
 
-            'languages' =>
-                Language::all(),
-        ]
-    );
+        'languages' => Language::all(),
+    ]);
 }
 public function categoryPage($slug)
 {

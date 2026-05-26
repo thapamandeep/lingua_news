@@ -25,11 +25,11 @@
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>News ID</th>
-                    <th>Language ID</th>
-                    <th>Title</th>
-                    <th>Description</th>
-                    <th>Content</th>
+                    <th>Image</th>
+                    <th>Category ID</th>
+                    <th>SubCategory ID</th>
+                    <th>Role ID</th>
+                    <th>Status</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -41,26 +41,13 @@
 
                     <td>{{ $news->id }}</td>
 
-                    <td>{{ $news->news_id }}</td>
+                    <td>{{ $news->category_id }}</td>
 
 
-                    <td>{{ $news->language_id }}</td>
+                    <td>{{ $news->subcategory_id }}</td>
 
-                    <td><p class="text-secondary mb-0"
-       style="max-width:250px; word-wrap:break-word;">
-        {{ \Illuminate\Support\Str::words($news->title, 6, '...') }}
-    </p></td>
-                    <td><p class="text-secondary mb-0"
-       style="max-width:250px; word-wrap:break-word;">
-        {{ \Illuminate\Support\Str::words($news->description, 12, '...') }}
-    </p></td>
-
-                    <td><p class="text-secondary mb-0"
-       style="max-width:250px; word-wrap:break-word;">
-        {{ \Illuminate\Support\Str::words($news->content, 15, '...') }}
-    </p></td>
-
-                    
+                    <td>  {{ $news->role_id}}</td>
+                    <td> {{$news->status}}</td>         
 
               <td>
 
@@ -72,12 +59,12 @@
         </a>
 
         <!-- EDIT -->
-        <a href="#" class="btn btn-warning btn-sm">
+        <a href="{{route('get.edit.news',$news->id)}}" class="btn btn-warning btn-sm">
             Edit
         </a>
 
         <!-- DELETE -->
-        <form action="#" method="POST" class="delete-form">
+        <form action="{{route('delete.news',$news->id)}}" method="POST" class="delete-form">
 
             @csrf
             @method('DELETE')
