@@ -15,30 +15,19 @@ public function home()
 {
     $categories = Category::all();
 
-    /*
-    ====================
-    GET SELECTED LANGUAGE
-    ====================
-    */
     $lang = session('lang', 'en');
 
-    $language = Language::where('code', $lang)->first();
-
-    // fallback to English if session language not found
-    if (!$language) {
-        $language = Language::where('code', 'en')->first();
-    }
+    $language = Language::where('code', $lang)->first()
+        ?? Language::where('code', 'en')->first();
 
     /*
     ====================
-    FETCH NEWS WITH TRANSLATION
+    FETCH NEWS
     ====================
     */
     $news = News::with([
             'subcategory',
-            'translations' => function ($q) use ($language) {
-                $q->where('language_id', $language->id);
-            }
+            'translations'
         ])
         ->where('status', 'published')
         ->latest()
@@ -46,38 +35,26 @@ public function home()
 
     /*
     ====================
-    MAP TRANSLATED DATA SAFELY
+    FILTER TRANSLATION IN MEMORY
     ====================
     */
     $news->each(function ($item) use ($language) {
 
-        $translation = $item->translations->first();
+        $translation = $item->translations
+            ->where('language_id', $language->id)
+            ->first();
 
-        if ($translation) {
-            $item->title = $translation->title;
-            $item->description = $translation->description;
-            $item->content = $translation->content;
-        } else {
-            // fallback if translation missing
-            $item->title = $item->title;
-            $item->description = $item->description;
-        }
+        $item->title = $translation->title ?? 'No Title';
+        $item->description = $translation->description ?? '';
+        $item->content = $translation->content ?? '';
     });
 
-    /*
-    ====================
-    RETURN VIEW WITH SPLIT DATA
-    ====================
-    */
     return view('fronted.home.index', [
         'categories' => $categories,
 
         'heroNews' => $news->take(3)->values(),
-
         'subHeroNews' => $news->skip(1)->take(2)->values(),
-
         'latestNews' => $news->skip(3)->take(8)->values(),
-
         'previousNews' => $news->skip(11)->values(),
 
         'languages' => Language::all(),

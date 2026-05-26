@@ -37,7 +37,7 @@ public function login(Request $request)
 
             $request->session()->regenerate();
 
-            if ($user->role_id == 5) {
+            if ($user->role_id == 2) {
                 return redirect()->route('admin.dashboard');
             }
 

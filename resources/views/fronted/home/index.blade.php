@@ -19,9 +19,13 @@
 
                 <div class="main-news-text">
 
-                    <h2>
-                        {{ $heroNews[0]->title ?? 'No Title' }}
-                    </h2>
+                  @php
+    $hero = $heroNews[0]->translations->first();
+@endphp
+
+<h2>
+    {{ $hero->title  }}
+</h2>
 
                 </div>
 
