@@ -108,6 +108,20 @@
                     </a>
                 </li>
 
+                 <li>
+                    <a href="{{route('news.translate')}}">
+                        <i class="fa-solid fa-plus"></i>
+                        Add Translate
+                    </a>
+                </li>
+
+                  <li>
+                    <a href="{{route('translate.index')}}">
+                        <i class="fa-solid fa-table"></i>
+                        Translate Table
+                    </a>
+                </li>
+
             </ul>
 
         </li>

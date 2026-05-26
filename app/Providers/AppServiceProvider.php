@@ -34,6 +34,7 @@ class AppServiceProvider extends ServiceProvider
         $categories = Category::where('status', 'active')->get();
 
         $view->with('categories', $categories);
+         $view->with('languages', Language::all());
     });
 
 

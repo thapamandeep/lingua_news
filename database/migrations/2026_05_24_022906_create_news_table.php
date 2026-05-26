@@ -6,30 +6,44 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
-     Schema::create('news', function (Blueprint $table) {
-    $table->id();
+        Schema::create('news', function (Blueprint $table) {
+            $table->id();
 
-    $table->string('slug')->unique();
-    $table->string('image')->nullable();
+            // BASIC INFO
+            $table->string('slug')->unique();
+            $table->string('image')->nullable();
 
-    $table->foreignId('category_id')->constrained()->onDelete('cascade');
-    $table->foreignId('subcategory_id')->nullable()->constrained()->onDelete('cascade');
-    $table->foreignId('role_id')->nullable()->constrained()->onDelete('cascade');
+            // RELATIONS
+            $table->foreignId('category_id')
+                ->constrained()
+                ->onDelete('cascade');
 
-    $table->enum('status', ['published', 'draft'])->default('draft');
+            $table->foreignId('subcategory_id')
+                ->nullable()
+                ->constrained()
+                ->onDelete('cascade');
 
-    $table->timestamps();
-});
+            $table->foreignId('role_id')
+                ->nullable()
+                ->constrained()
+                ->onDelete('cascade');
+
+            // STATUS (good as-is)
+            $table->enum('status', ['published', 'draft'])
+                ->default('draft');
+
+            // OPTIONAL (recommended for admin tracking)
+            $table->foreignId('created_by')
+                ->nullable()
+                ->constrained('users')
+                ->onDelete('set null');
+
+            $table->timestamps();
+        });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('news');
