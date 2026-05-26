@@ -45,6 +45,7 @@ class AdminController extends Controller
         $users->name = $data['name'];
         $users->username = $data['username'];
         $users->email = $data['email'];
+        $users->phone = $data['phone'];
         $users->password = Hash::make($data['password']);
         $users->role_id = $data['role_id'];
 
@@ -53,6 +54,13 @@ class AdminController extends Controller
         Session::flash('success','users data has been saved');
         return redirect()->back();
 
+    }
+
+    public function usersIndex()
+    {
+        $users = User::with('role')->get();
+
+        return view('admin.pages.users.index', compact('users'));
     }
 
     

@@ -26,10 +26,11 @@ Route::get('/subcategory/{slug}', [SiteController::class, 'subcategoryPage'])->n
 
 // ----------------------------Admin----------------------------------//
 Route::get('/admin-dashboard',[AdminController::class,'index'])->name('admin.dashboard')->middleware('admin');
-Route::get('/users-form',[AdminController::class,'usersForm'])->name('get.usersForm');
+Route::get('/users-form',[AdminController::class,'usersForm'])->name('users.form');
 Route::post('/users-store',[AdminController::class,'usersStore'])->name('post.users');
+Route::get('/users-index' ,[AdminController::class, 'usersIndex'])->name('users.index');
 Route::get('/users/edit/{id}', [AdminController::class, 'usersEdit'])->name('users.edit');
-Route::post('/users/update/{id}', [AdminController::class, 'usersUpdate'])->name('users.update');
+Route::put('/users/update/{id}', [AdminController::class, 'usersUpdate'])->name('users.update');
 Route::get('/users/delete/{id}', [AdminController::class, 'usersDelete'])->name('users.delete');
 
 
@@ -72,6 +73,7 @@ Route::get('/change-language/{lang}', function($lang) {
 
 
 Route::get('/author-dashboard', [AuthorController::class, 'index']);
+
 
 
 // =========================Author===========================//

@@ -7,9 +7,10 @@
     <div class="table-container">
 
         <div class="table-header">
-            <h1>All Subcategories</h1>
-            <a href="{{ route('get.categoryForm') }}" class="btn btn-primary">
-                + Add category
+            <h1>All Users</h1>
+
+            <a href="{{ route('users.form') }}" class="btn btn-primary">
+                + Add User
             </a>
         </div>
 
@@ -20,28 +21,46 @@
             </div>
         @endif
 
+        {{-- ERROR MESSAGE --}}
+        @if(session('error'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
+            </div>
+        @endif
+
         <table class="table">
 
             <thead>
                 <tr>
                     <th>ID</th>
                     <th>Name</th>
-                    <th>Action</th>
-                
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Role</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
 
             <tbody>
 
-                @foreach($roles as $role)
+                @foreach($users as $user)
+
                 <tr>
 
-                    <td>{{ $role->id }}</td>
+                    <td>{{ $user->id }}</td>
 
-                    <td>{{ $role->name }}</td>
+                    <td>{{ $user->name }}</td>
 
+                    <td>{{ $user->username }}</td>
 
-        
+                    <td>{{ $user->email }}</td>
+
+                    <td>{{ $user->phone }}</td>
+
+                    <td>
+                        {{ $user->role->name ?? 'No Role' }}
+                    </td>
 
                     <td>
 
@@ -52,13 +71,13 @@
                         </a>
 
                         <!-- EDIT -->
-                        <a href="{{ route('roles.edit', $role->id) }}"
+                        <a href="{{ route('users.edit', $user->id) }}"
                            class="btn btn-warning btn-sm">
                             Edit
                         </a>
 
                         <!-- DELETE -->
-                        <form action="{{ route('roles.delete', $role->id) }}"
+                        <form action="{{ route('users.delete', $user->id) }}"
                               method="POST"
                               style="display:inline-block;">
 
@@ -76,6 +95,7 @@
                     </td>
 
                 </tr>
+
                 @endforeach
 
             </tbody>

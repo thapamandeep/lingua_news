@@ -173,14 +173,14 @@
             <ul class="dropdown-menu">
 
                 <li>
-                    <a href="{{ route('get.usersForm') }}">
+                    <a href="{{ route('users.form') }}">
                         <i class="fa-solid fa-user-plus"></i>
                         Users Form
                     </a>
                 </li>
 
                 <li>
-                    <a href="#">
+                    <a href="{{ route('users.index') }}">
                         <i class="fa-solid fa-table"></i>
                         Users Table
                     </a>
