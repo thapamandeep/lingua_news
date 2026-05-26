@@ -52,6 +52,8 @@ Route::post('/add-subcategory',[AdminController::class,'subcategoryStore'])->nam
 Route::get('/subcategory-index',[AdminController::class,'subcategoryIndex'])->name('get.subcategory.index');
 Route::get('/add-news',[NewsController::class,'newsAdd'])->name('get.addnews');
 Route::post('/store-news',[NewsController::class,'store'])->name('post.news');
+Route::get('/news-index',[NewsController::class,'index'])->name('get.news.index')->middleware('admin');
+Route::get('/edit-news',[NewsController::class,'edit'])->name('get.edit.news')->middleware('admin');
 
 
 Route::get('/language-form',[LanguageController::class,'form'])->name('get.language.form');
@@ -67,7 +69,10 @@ Route::get('/change-language/{lang}', function($lang) {
 Route::get('/author-dashboard', [AuthorController::class, 'index']);
 
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 158deaaeb1044718251b047ba596283fe43c6e5e
 // =========================Author===========================//
 Route::get('/author-dashboard', [AuthorController::class, 'index'])
 ->name('author.dashboard')

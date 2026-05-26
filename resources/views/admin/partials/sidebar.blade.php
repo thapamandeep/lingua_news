@@ -102,7 +102,7 @@
                 </li>
 
                 <li>
-                    <a href="#">
+                    <a href="{{route('get.news.index')}}">
                         <i class="fa-solid fa-table"></i>
                         News Table
                     </a>

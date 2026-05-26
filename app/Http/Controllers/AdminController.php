@@ -216,6 +216,11 @@ public function rolesDelete($id)
     return view('admin.pages.categories.catTable');
     }
 
+    public function categoryEdit(Category $category){
+
+    return view('admin.pages.categories.edit');
+    }
+
     // ------------------------------------------subcategories------------------------------------//
 
     public function subcategory(){
@@ -255,5 +260,7 @@ public function rolesDelete($id)
     return view('admin.pages.subcategories.subcatTable',compact('subcategories'));
     }
 
+
+    
     
 }

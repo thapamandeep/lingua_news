@@ -102,4 +102,16 @@ $translation->save();
 
 return redirect()->back()->with('success','news has added');
 }
+
+public function index(){
+
+$news = NewsTranslation::all();
+
+return view('admin.pages.news.index', compact('news'));
+}
+
+public function edit(NewsTranslation $news){
+
+return view('admin.pages.news.edit');
+}
 }
