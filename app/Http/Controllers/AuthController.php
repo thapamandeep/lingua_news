@@ -37,11 +37,11 @@ public function login(Request $request)
 
             $request->session()->regenerate();
 
-            if ($user->role_id == 2) {
+            if ($user->role_id == 1) {
                 return redirect()->route('admin.dashboard');
             }
 
-            elseif ($user->role_id == 4) {
+            elseif ($user->role_id == 2) {
                 return redirect()->route('author.dashboard');
             }
 
