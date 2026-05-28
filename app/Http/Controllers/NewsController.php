@@ -242,9 +242,11 @@ public function update(Request $request, News $news)
         );
 }
 
+
+
 public function delete( NewsTranslation $news){
 
-$news->delete();
+$news->news()->delete();
 
 return redirect()->back();
 }

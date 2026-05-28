@@ -57,7 +57,7 @@
 
                     <p>{{ $first->description }}</p>
 
-                    <a href="#" class="read-more-btn">Read Full Story</a>
+                    <a href="{{route('detail.news',$first->id)}}" class="read-more-btn">Read Full Story</a>
 
                 </div>
 

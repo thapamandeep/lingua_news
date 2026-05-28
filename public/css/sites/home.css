@@ -109,3 +109,11 @@
     font-size: 12px;
     border-radius: 5px;
 }
+.link{
+    text-decoration: none;
+    color: inherit;
+}
+
+.link:hover h2{
+    color: #ff0000; /* optional hover effect */
+}

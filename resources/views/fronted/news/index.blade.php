@@ -56,9 +56,9 @@
 
                     <h2>{{ $first->title }}</h2>
 
-                    <p>{{ $first->description }}</p>
+                    <p>{{ \Illuminate\Support\Str::limit($first->description, 150) }}</p>
 
-                    <a href="#" class="read-more-btn">Read Full Story</a>
+                    <a href="{{route('detail.news',$first->id)}}" class="read-more-btn">Read Full Story</a>
 
                 </div>
 
@@ -81,9 +81,9 @@
 
                             <h3>{{ $item->title }}</h3>
 
-                            <p>{{ $item->description }}</p>
+                            <p> {{ \Illuminate\Support\Str::limit($item->description, 150) }}</p>
 
-                            <a href="#" class="read-me">Read More</a>
+                            <a href="{{route('detail.news',$item->id)}}" class="read-me">Read More</a>
 
                         </div>
 

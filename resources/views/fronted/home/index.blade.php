@@ -19,19 +19,20 @@
 
                 <div class="main-news-text">
 
-<<<<<<< HEAD
-                    <h2>
-                        {{ $heroNews[0]->title ?? 'No Title' }}
-                    </h2>
-=======
-                  @php
-    $hero = $heroNews[0]->translations->first();
+                @php
+$hero = $heroNews[0]->translations
+            ->where('language_id', $language->id ?? null)
+            ->first();
 @endphp
 
-<h2>
-    {{ $hero->title  }}
-</h2>
->>>>>>> 158f77579a6b05585a9b865a881f0528a745bd6e
+<a href="{{ route('detail.news', $heroNews[0]->id) }}" class="link">
+    <h2 class="hero-title">
+        {{ $hero->title ?? 'No Title' }}
+    </h2>
+</a>
+                   
+
+
 
                 </div>
 
@@ -58,9 +59,9 @@
                             {{ $news->subcategory->name ?? 'General' }}
                         </span>
 
-                        <h4>
+                       <a href="{{route('detail.news',$news->id)}}" class="link"><h4>
                             {{ $news->title ?? 'No Title' }}
-                        </h4>
+                        </h4></a> 
 
                     </div>
 
@@ -73,6 +74,7 @@
     </div>
 
 </section>
+<br>
 
 <!-- ================= LATEST NEWS ================= -->
 
@@ -82,6 +84,11 @@
 
         <div class="section-title">
             <h2>Latest News</h2>
+               
+            <div class="slider-btns">
+        <button class="btns" onclick="slideLeft()">←</button>
+        <button  class="btns" onclick="slideRight()">→</button>
+    </div>
         </div>
 
         <div class="latest-news-grid">
@@ -110,7 +117,7 @@
                             {{ \Illuminate\Support\Str::limit($news->description ?? '', 120) }}
                         </p>
 
-                        <a href="#" class="read-more-btn">
+                        <a href="{{route('detail.news',$news->id)}}" class="read-more-btn">
                             Read More
                         </a>
 
@@ -161,6 +168,10 @@
                         <p>
                             {{ \Illuminate\Support\Str::limit($news->description ?? '', 200) }}
                         </p>
+
+                        <a href="{{route('detail.news',$news->id)}}" class="read-more-btn">
+                            Read More
+                        </a>
 
                     </div>
 

@@ -28,6 +28,32 @@ class LanguageController extends Controller
         return redirect()->back()->with('success','language has been added');
     }
 
+    public function langIndex(){
+
+    $languages = Language::all();
+
+    return view('admin.pages.languages.lang-index',compact('languages'));
+    }
+
+    public function edit(Language $language){
+
+    return view('admin.pages.languages.edit',compact('language'));
+    }
+
+    public function update(Request $request , Language $language){
+
+    $data = $request->validate([
+        'name'=>'required|string',
+        'code'=>'required'
+    ]);
+
+    $language->name = $data['name'];
+    $language->code = $data['code'];
+
+    $language->save();
+
+    return redirect()->back()->with('success','your language has been updated');
+}
 // public function setLanguage(Request $request)
 // {
 //     Session::put('lang', $request->language);
