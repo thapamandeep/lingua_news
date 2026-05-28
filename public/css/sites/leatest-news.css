@@ -3,7 +3,7 @@
     justify-content:space-between;
     align-items:center;
 }
-.slider-buttons button{
+.btns{
     background:none;
     color:white;
     border:none;
@@ -14,14 +14,17 @@
     transition:0.3s;
 }
 
-.slider-buttons button:hover{
+.slider-btns :hover{
     background:red;
 }
 .latest-news-grid{
     display:flex;
     gap:25px;
     margin-top:30px;
-    overflow:hidden;
+
+    overflow-x:auto;   /* important */
+    overflow-y:hidden;
+    scroll-behavior:smooth;
 }
 
 .news-card{

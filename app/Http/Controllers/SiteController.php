@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\News;
 use App\Models\Subcategory;
 use App\Models\Language;
+use App\Models\NewsTranslation;
 use Carbon\Carbon;
 
 class SiteController extends Controller
@@ -78,13 +79,6 @@ public function home()
 
 
     
-        $translation = $item->translations
-            ->where('language_id', $language->id)
-            ->first();
-
-        $item->title = $translation->title ?? 'No Title';
-        $item->description = $translation->description ?? '';
-        $item->content = $translation->content ?? '';
    
 
 
@@ -101,10 +95,7 @@ public function home()
         'previousNews' => $news->skip(11)->values(),
 
 
-        'subHeroNews' => $news->skip(1)->take(2)->values(),
-        'latestNews' => $news->skip(3)->take(8)->values(),
-        'previousNews' => $news->skip(11)->values(),
-
+       
         'languages' => Language::all(),
     ]);
 }
@@ -185,6 +176,15 @@ public function changeLanguage(Request $request)
 {
     session(['lang' => $request->language]);
     return response()->json(['success' => true]);
+}
+
+
+
+public function detail($id)
+{
+    $news = News::with('translations')->findOrFail($id);
+
+    return view('fronted.news.detail', compact('news'));
 }
    
 }

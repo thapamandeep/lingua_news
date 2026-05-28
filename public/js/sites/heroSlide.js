@@ -4,12 +4,11 @@ document.addEventListener("DOMContentLoaded", function () {
     let index = 0;
 
     const heroImage = document.querySelector(".main-img img");
-    const heroTitle = document.querySelector(".main-news-text h2");
+    const heroTitle = document.querySelector(".hero-title");
     const heroTime = document.querySelector(".news-time");
+    const heroLink = document.querySelector(".hero-link");
 
-    // safety check
     if (!heroNews.length || !heroImage || !heroTitle) {
-        console.log("Hero slider stopped: missing data or elements");
         return;
     }
 
@@ -17,11 +16,22 @@ document.addEventListener("DOMContentLoaded", function () {
 
         index = (index + 1) % heroNews.length;
 
-        heroImage.src = "/storage/gallery/" + heroNews[index].image;
-        heroTitle.textContent = heroNews[index].title;
+        const current = heroNews[index];
 
+        // IMAGE
+        heroImage.src = "/storage/gallery/" + current.image;
+
+        // TITLE
+        heroTitle.textContent = current.title ?? "No Title";
+
+        // DATE
         if (heroTime) {
-            heroTime.textContent = heroNews[index].date ?? "";
+            heroTime.textContent = current.date ?? "";
+        }
+
+        // LINK (VERY IMPORTANT 🔥)
+        if (heroLink) {
+            heroLink.href = "/detail-news/" + current.id;
         }
 
     }, 3000);

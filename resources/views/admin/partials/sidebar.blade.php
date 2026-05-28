@@ -244,7 +244,7 @@
         </li>
 
         <li>
-            <a href="#">
+            <a href="{{route('lang.index')}}">
                 <i class="fa-solid fa-table"></i>
                 Language Table
             </a>

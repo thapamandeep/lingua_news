@@ -58,6 +58,10 @@
 .badge-danger {
     background: #ef4444;
 }
+.news-img{
+    height: 60px;
+    width: 80px;
+}
 
 /* BUTTONS */
 .btn {

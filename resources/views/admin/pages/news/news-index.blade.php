@@ -7,7 +7,7 @@
     <div class="table-container">
 
         <div class="table-header">
-            <h1>All Subcategories</h1>
+            <h1>All News</h1>
             <a href="{{ route('get.categoryForm') }}" class="btn btn-primary">
                 + Add category
             </a>
@@ -39,7 +39,11 @@
                 @foreach($news as $news)
                 <tr>
 
-                    <td>{{ $news->id }}</td>
+                    <td>{{$loop->iteration  }}</td>
+
+                    <td>
+                        <img  class="news-img" src="{{asset('storage/gallery/'.$news->image)}}" alt="news-image">
+                    </td>
 
                     <td>{{ $news->category_id }}</td>
 

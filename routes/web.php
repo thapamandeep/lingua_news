@@ -22,6 +22,7 @@ use App\Http\Controllers\AuthorController;
 Route::get('/',[SiteController::class,'home'])->name('home.index');
 Route::get('/category/{slug}', [SiteController::class, 'categoryPage'])->name('category.page');
 Route::get('/subcategory/{slug}', [SiteController::class, 'subcategoryPage'])->name('subcategory.page');
+Route::get('/detail-news/{id}',[SiteController::class,'detail'])->name('detail.news');
 // Route::get('/sports-page',[SportsController::class,'index'])->name('get.sportPage');
 
 // ----------------------------Admin----------------------------------//
@@ -64,6 +65,9 @@ Route::get('/translate-index',[NewsController::class,'translateIndex'])->name('t
 
 Route::get('/language-form',[LanguageController::class,'form'])->name('get.language.form');
 Route::post('/store-language',[LanguageController::class,'store'])->name('languages.store');
+Route::get('/lang-index',[LanguageController::class,'langIndex'])->name('lang.index')->middleware('admin');
+Route::get('/edit-lang/{language}',[LanguageController::class,'edit'])->name('edit.lang')->middleware('admin');
+Route::post('update/{language}',[LanguageController::class,'update'])->name('update.language')->middleware('admin');
 Route::post('/set-language', [LanguageController::class, 'setLanguage'])->name('set.language');
 Route::post('/change-language', [SiteController::class, 'changeLanguage']);
 Route::get('/change-language/{lang}', function($lang) {
