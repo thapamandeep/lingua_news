@@ -36,6 +36,7 @@ class AppServiceProvider extends ServiceProvider
         $view->with('categories', $categories);
          $view->with('languages', Language::all());
     });
+    
 
 
 }

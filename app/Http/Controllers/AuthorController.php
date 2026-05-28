@@ -6,8 +6,8 @@ use Illuminate\Http\Request;
 
 class AuthorController extends Controller
 {
-  public function index(){
+  public function dashboard(){
 
-  return view('author.index'); 
+  return view('author.dashboard'); 
   }
 }

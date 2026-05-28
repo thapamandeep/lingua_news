@@ -17,7 +17,6 @@ class SiteController extends Controller
     {
         $code = session('lang', 'en');
 
-<<<<<<< HEAD
         return Language::where('code', $code)->first()
             ?? Language::where('code', 'en')->first();
     }
@@ -28,134 +27,16 @@ class SiteController extends Controller
     private function applyTranslations($news, $language)
     {
         return $news->map(function ($item) use ($language) {
-=======
-    /*
-    ====================
-    GET SELECTED LANGUAGE
-    ====================
-    */
-    $lang = session('lang', 'en');
-
-    $language = Language::where('code', $lang)->first();
-
-    // fallback to English if session language not found
-    if (!$language) {
-        $language = Language::where('code', 'en')->first();
-    }
-
-    
-    
-    $lang = session('lang', 'en');
->>>>>>> 9b9704cd9fb83b3d122a6b08e14b05a83763d835
 
             $translation = $item->translations
                 ->where('language_id', $language->id)
                 ->first();
 
-<<<<<<< HEAD
             if ($translation) {
                 $item->title = $translation->title;
                 $item->description = $translation->description;
                 $item->content = $translation->content ?? $item->content;
             }
-=======
-    /*
-    ====================
-    FETCH NEWS
-    */
-    $news = News::with([
-            'subcategory',
-
-            'translations' => function ($q) use ($language) {
-                $q->where('language_id', $language->id);
-            }
-
-         
-
-        ])
-        ->where('status', 'published')
-        ->latest()
-        ->get();
-
-    /*
- 
-
-
-    */
-    $news->each(function ($item) use ($language) {
-
-
-        $translation = $item->translations->first();
-
-        if ($translation) {
-            $item->title = $translation->title;
-            $item->description = $translation->description;
-            $item->content = $translation->content;
-        } else {
-            // fallback if translation missing
-            $item->title = $item->title;
-            $item->description = $item->description;
-        }
-    });
-
-
-
-    
-        $translation = $item->translations
-            ->where('language_id', $language->id)
-            ->first();
-
-        $item->title = $translation->title ?? 'No Title';
-        $item->description = $translation->description ?? '';
-        $item->content = $translation->content ?? '';
-   
-
-
-    return view('fronted.home.index', [
-        'categories' => $categories,
-
-        'heroNews' => $news->take(3)->values(),
-
-
-        'subHeroNews' => $news->skip(1)->take(2)->values(),
-
-        'latestNews' => $news->skip(3)->take(8)->values(),
-
-        'previousNews' => $news->skip(11)->values(),
-
-
-        'subHeroNews' => $news->skip(1)->take(2)->values(),
-        'latestNews' => $news->skip(3)->take(8)->values(),
-        'previousNews' => $news->skip(11)->values(),
-
-        'languages' => Language::all(),
-    ]);
-}
-public function categoryPage($slug)
-{
-    $category = Category::where('slug', $slug)->firstOrFail();
-
-    $lang = session('lang', 'en');
-
-    $language = Language::where('code', $lang)->first();
-
-    $news = News::with(['translations'])
-        ->where('category_id', $category->id)
-        ->where('status', 'published')
-        ->whereHas('translations', function ($q) use ($language) {
-            $q->where('language_id', $language->id);
-        })
-        ->latest()
-        ->get()
-        ->map(function ($item) use ($language) {
-
-            $translation = $item->translations
-                ->where('language_id', $language->id)
-                ->first();
-
-            $item->title = $translation->title ?? $item->title;
-            $item->description = $translation->description ?? $item->description;
->>>>>>> 9b9704cd9fb83b3d122a6b08e14b05a83763d835
 
             return $item;
         });

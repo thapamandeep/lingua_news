@@ -9,7 +9,7 @@
 
         <!-- Dashboard -->
         <li class="active">
-            <a href="#">
+            <a href="{{ route('admin.dashboard') }}">
                 <i class="fa-solid fa-house"></i>
                 Dashboard
             </a>
@@ -244,7 +244,7 @@
         </li>
 
         <li>
-            <a href="#">
+            <a href="{{route('language.index')}}">
                 <i class="fa-solid fa-table"></i>
                 Language Table
             </a>
