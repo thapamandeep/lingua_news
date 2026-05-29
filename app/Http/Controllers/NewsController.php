@@ -23,7 +23,7 @@ $roles = Role::all();
  $layout = 'admin.layouts.template';
 
     // for author dashboard
-    if(auth()->user()->role_id == 2){
+   if(auth()->check() && auth()->user()->role_id == 2){
         $layout = 'author.layouts.template';
     }
 
@@ -84,7 +84,14 @@ $news = News::all();
 
 $slugs =  News::where('slug')->get();
 
-return view('admin.pages.news_translations.news-translations',compact('slugs','news'));
+$layout = 'admin.layouts.template';
+
+    // for author dashboard
+   if(auth()->check() && auth()->user()->role_id == 2){
+        $layout = 'author.layouts.template';
+    }
+
+return view('admin.pages.news_translations.news-translations',compact('slugs','news','layout'));
 }
 
 public function storeTranslation(Request $request)

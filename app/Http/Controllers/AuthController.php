@@ -45,6 +45,10 @@ public function login(Request $request)
                 return redirect()->route('author.dashboard');
             }
 
+            elseif ($user->role_id == 3) {
+                return redirect()->route('editor.dashboard');
+            }
+
             else {
                 Session::flash('error', 'User not recognized');
                 return redirect()->back();

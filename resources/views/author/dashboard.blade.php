@@ -1,4 +1,3 @@
-```blade
 @extends('author.layouts.template')
 
 @section('title', 'Author Dashboard')
@@ -11,7 +10,7 @@
     <div class="topbar-left">
 
         <h2>Welcome Back 👋</h2>
-        <p>Manage your articles and publishing workflow.</p>
+        <p>Manage your articles and publishing workflow professionally.</p>
 
     </div>
 
@@ -27,11 +26,12 @@
 
         </div>
 
-        {{-- CREATE BUTTON --}}
+        {{-- BUTTON --}}
         <a href="{{ route('get.addnews') }}"
            class="create-btn">
 
-            + Create News
+            <i class="fa-solid fa-plus"></i>
+            Create News
 
         </a>
 
@@ -39,10 +39,9 @@
 
 </section>
 
-{{-- STATISTICS --}}
+{{-- STATS --}}
 <section class="stats-grid">
 
-    {{-- TOTAL ARTICLES --}}
     <div class="card">
 
         <div class="card-content">
@@ -64,7 +63,6 @@
 
     </div>
 
-    {{-- PUBLISHED --}}
     <div class="card">
 
         <div class="card-content">
@@ -76,7 +74,7 @@
 
             </div>
 
-            <div class="card-icon">
+            <div class="card-icon green">
 
                 <i class="fa-solid fa-chart-line"></i>
 
@@ -86,7 +84,6 @@
 
     </div>
 
-    {{-- PENDING --}}
     <div class="card">
 
         <div class="card-content">
@@ -98,7 +95,7 @@
 
             </div>
 
-            <div class="card-icon">
+            <div class="card-icon yellow">
 
                 <i class="fa-solid fa-clock"></i>
 
@@ -108,7 +105,6 @@
 
     </div>
 
-    {{-- VIEWS --}}
     <div class="card">
 
         <div class="card-content">
@@ -120,7 +116,7 @@
 
             </div>
 
-            <div class="card-icon">
+            <div class="card-icon blue">
 
                 <i class="fa-solid fa-eye"></i>
 
@@ -133,4 +129,3 @@
 </section>
 
 @endsection
-```

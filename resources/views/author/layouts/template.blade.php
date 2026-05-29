@@ -1,4 +1,3 @@
-```blade
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,46 +8,62 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     {{-- TITLE --}}
-    <title>@yield('title', 'Lingua News - Author Panel')</title>
+    <title>@yield('title', 'Lingua News - Author Dashboard')</title>
+
+    {{-- GOOGLE FONT --}}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
     {{-- FONT AWESOME --}}
     <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
 
-    {{-- GLOBAL STYLES --}}
+    {{-- MAIN CSS --}}
     <link rel="stylesheet" href="{{ asset('author/css/style.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/admin/style.css') }}">
     <link rel="stylesheet" href="{{ asset('css/admin/form.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/admin/table.css') }}">
 
-    {{-- PAGE CSS --}}
+    {{-- EXTRA PAGE CSS --}}
     @stack('styles')
 
 </head>
 
 <body>
 
-    <div class="dashboard">
+<div class="dashboard">
 
-        {{-- SIDEBAR --}}
-        @include('author.partials.sidebar')
+    {{-- SIDEBAR --}}
+    @include('author.partials.sidebar')
 
-        {{-- MAIN CONTENT --}}
-        <main class="main-content">
+    {{-- MAIN --}}
+    <main class="main-content">
 
-            @yield('content')
+        {{-- MOBILE TOPBAR --}}
+        <header class="mobile-header">
 
-        </main>
+            <button class="menu-toggle" id="menuToggle">
 
-    </div>
+                <i class="fa-solid fa-bars"></i>
 
-    {{-- JAVASCRIPT --}}
-    <script src="{{ asset('author/js/script.js') }}"></script>
+            </button>
 
-    {{-- PAGE SCRIPTS --}}
-    @stack('scripts')
+            <h2>Lingua News</h2>
+
+        </header>
+
+        @yield('content')
+
+    </main>
+
+</div>
+
+{{-- OVERLAY --}}
+<div class="sidebar-overlay"></div>
+
+{{-- JS --}}
+<script src="{{ asset('author/js/script.js') }}"></script>
+
+{{-- EXTRA PAGE JS --}}
+@stack('scripts')
 
 </body>
-
 </html>
-```

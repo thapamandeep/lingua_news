@@ -16,6 +16,7 @@ use Http\Middleware\SetLanguageMiddleware;
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AuthorController;
+use App\Http\Controllers\EditorController;
 
 
 // ---------------------------site----------------------------------//
@@ -60,30 +61,27 @@ Route::get('/edit-news/{news}',[NewsController::class,'edit'])->name('get.edit.n
 Route::post('/update-news/{news}',[NewsController::class,'update'])->name('update.news')->middleware('admin');
 Route::delete('/delete-news/{news}',[NewsController::class,'delete'])->name('delete.news')->middleware('admin');
 
-Route::get('/news-translate',[NewsController::class,'newsTranslate'])->name('news.translate')->middleware('admin');
-Route::post('/translate-store',[NewsController::class,'storeTranslation'])->name('post.storeTranslation')->middleware('admin');
+Route::get('/news-translate',[NewsController::class,'newsTranslate'])->name('news.translate')->middleware('auth');
+Route::post('/translate-store',[NewsController::class,'storeTranslation'])->name('post.storeTranslation')->middleware('auth');
 Route::get('/translate-index',[NewsController::class,'translateIndex'])->name('translate.index')->middleware('admin');
 
 
 Route::get('/language-form',[LanguageController::class,'form'])->name('get.language.form');
 Route::post('/store-language',[LanguageController::class,'store'])->name('languages.store');
-<<<<<<< HEAD
+
 Route::get('/index-language',[LanguageController::class, 'index'])->name('language.index'); 
 
-=======
+
 Route::get('/lang-index',[LanguageController::class,'langIndex'])->name('lang.index')->middleware('admin');
 Route::get('/edit-lang/{language}',[LanguageController::class,'edit'])->name('edit.lang')->middleware('admin');
 Route::post('update/{language}',[LanguageController::class,'update'])->name('update.language')->middleware('admin');
->>>>>>> f0f029bac44c8e4c698caa448e40ac28823ee402
+
 Route::post('/set-language', [LanguageController::class, 'setLanguage'])->name('set.language');
 Route::post('/change-language', [SiteController::class, 'changeLanguage']);
 Route::get('/change-language/{lang}', function($lang) {
     session(['lang' => $lang]);
     return back();
 });
-
-
-
 
 
 
@@ -99,3 +97,28 @@ Route::post('login-user',[AuthController::class,'login'])->name('post.login');
 Route::get('/logout',[AuthController::class,'logout'])->name('logout');
 Route::get('/register' ,[AuthController::class, 'showRegister'])->name('register');
 
+
+
+//---------EditorController-----------//
+
+
+
+Route::middleware(['auth'])->group(function () {
+
+    Route::get('/editor-dashboard',
+        [EditorController::class,'dashboard']
+    )->name('editor.dashboard');
+
+    Route::get('/editor/pending-news',
+        [EditorController::class,'pendingNews']
+    )->name('editor.pending.news');
+
+    Route::get('/editor/approved-news',
+        [EditorController::class,'approvedNews']
+    )->name('editor.approved.news');
+
+    Route::get('/editor/rejected-news',
+        [EditorController::class,'rejectedNews']
+    )->name('editor.rejected.news');
+
+});

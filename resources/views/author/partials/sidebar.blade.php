@@ -1,10 +1,20 @@
-<aside class="sidebar">
+<aside class="sidebar" id="sidebar">
 
     {{-- LOGO --}}
     <div class="logo">
 
-        <h1>Lingua News</h1>
-        <p>Author Panel</p>
+        <div class="logo-icon">
+
+            <i class="fa-solid fa-globe"></i>
+
+        </div>
+
+        <div class="logo-text">
+
+            <h1>Lingua News</h1>
+            <p>Global Multimedia</p>
+
+        </div>
 
     </div>
 
@@ -15,25 +25,33 @@
         <a href="{{ route('author.dashboard') }}"
            class="{{ request()->routeIs('author.dashboard') ? 'active' : '' }}">
 
-            <i class="fa-solid fa-table-columns"></i>
-            <span>Dashboard</span>
+            <div class="menu-left">
+
+                <i class="fa-solid fa-table-columns"></i>
+                <span>Dashboard</span>
+
+            </div>
 
         </a>
 
-        {{-- MY ARTICLES --}}
+        {{-- ARTICLES --}}
         <a href="#">
 
-            <i class="fa-solid fa-newspaper"></i>
-            <span>My Articles</span>
+            <div class="menu-left">
+
+                <i class="fa-solid fa-newspaper"></i>
+                <span>My Articles</span>
+
+            </div>
 
         </a>
 
-        {{-- DROPDOWN --}}
+        {{-- CREATE ARTICLE --}}
         <div class="dropdown">
 
-            <button class="dropdown-btn">
+            <button type="button" class="dropdown-btn">
 
-                <div class="dropdown-left">
+                <div class="menu-left">
 
                     <i class="fa-solid fa-pen-to-square"></i>
                     <span>Create Article</span>
@@ -49,15 +67,24 @@
                 <a href="{{ route('get.addnews') }}"
                    class="{{ request()->routeIs('get.addnews') ? 'active' : '' }}">
 
-                    <i class="fa-solid fa-pen"></i>
-                    <span>Create News</span>
+                    <div class="menu-left">
+
+                        <i class="fa-solid fa-pen"></i>
+                        <span>Create News</span>
+
+                    </div>
 
                 </a>
 
-                <a href="{{ route('news.translate') }}">
+                <a href="{{ route('news.translate') }}"
+                   class="{{ request()->routeIs('news.translate') ? 'active' : '' }}">
 
-                    <i class="fa-solid fa-language"></i>
-                    <span>Add Translate</span>
+                    <div class="menu-left">
+
+                        <i class="fa-solid fa-language"></i>
+                        <span>Add Translation</span>
+
+                    </div>
 
                 </a>
 
@@ -68,32 +95,48 @@
         {{-- PENDING --}}
         <a href="#">
 
-            <i class="fa-solid fa-clock"></i>
-            <span>Pending Review</span>
+            <div class="menu-left">
+
+                <i class="fa-solid fa-clock"></i>
+                <span>Pending Review</span>
+
+            </div>
 
         </a>
 
-        {{-- NOTIFICATIONS --}}
+        {{-- NOTIFICATION --}}
         <a href="#">
 
-            <i class="fa-solid fa-bell"></i>
-            <span>Notifications</span>
+            <div class="menu-left">
+
+                <i class="fa-solid fa-bell"></i>
+                <span>Notifications</span>
+
+            </div>
 
         </a>
 
         {{-- SETTINGS --}}
         <a href="#">
 
-            <i class="fa-solid fa-gear"></i>
-            <span>Settings</span>
+            <div class="menu-left">
+
+                <i class="fa-solid fa-gear"></i>
+                <span>Settings</span>
+
+            </div>
 
         </a>
 
         {{-- LOGOUT --}}
         <a href="{{ route('logout') }}">
 
-            <i class="fa-solid fa-right-from-bracket"></i>
-            <span>Logout</span>
+            <div class="menu-left">
+
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <span>Logout</span>
+
+            </div>
 
         </a>
 
