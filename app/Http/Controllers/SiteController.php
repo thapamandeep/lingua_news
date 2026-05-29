@@ -10,9 +10,7 @@ use App\Models\Language;
 
 class SiteController extends Controller
 {
-    /**
-     * Get active language safely
-     */
+   
     private function getLanguage()
     {
         $code = session('lang', 'en');
@@ -21,9 +19,13 @@ class SiteController extends Controller
             ?? Language::where('code', 'en')->first();
     }
 
+<<<<<<< HEAD
     /**
      * Apply translations
      */
+=======
+    
+>>>>>>> 07d90873b4866402c7cf1b7821bab028e90c18ab
     private function applyTranslations($news, $language)
     {
         return $news->map(function ($item) use ($language) {
@@ -35,7 +37,7 @@ class SiteController extends Controller
             if ($translation) {
                 $item->title = $translation->title;
                 $item->description = $translation->description;
-                $item->content = $translation->content ?? $item->content;
+                $item->content = $translation->content ?? null;
             }
 
             return $item;
@@ -96,9 +98,13 @@ class SiteController extends Controller
         ));
     }
 
+<<<<<<< HEAD
     /**
      * Subcategory Page
      */
+=======
+   
+>>>>>>> 07d90873b4866402c7cf1b7821bab028e90c18ab
     public function subcategoryPage($slug)
     {
         $subcategory = Subcategory::where('slug', $slug)->firstOrFail();
@@ -124,9 +130,13 @@ class SiteController extends Controller
         ));
     }
 
+<<<<<<< HEAD
     /**
      * Change Language
      */
+=======
+  
+>>>>>>> 07d90873b4866402c7cf1b7821bab028e90c18ab
     public function changeLanguage(Request $request)
     {
         $request->validate([
@@ -143,6 +153,7 @@ class SiteController extends Controller
         ]);
     }
 
+<<<<<<< HEAD
     /**
      * News Detail
      */
@@ -161,6 +172,13 @@ class SiteController extends Controller
             $news->description = $translation->description;
             $news->content = $translation->content;
         }
+=======
+   
+    public function detail($id)
+    {
+        $news = News::with(['translations', 'category'])
+            ->findOrFail($id);
+>>>>>>> 07d90873b4866402c7cf1b7821bab028e90c18ab
 
         return view('fronted.news.detail', compact('news'));
     }
