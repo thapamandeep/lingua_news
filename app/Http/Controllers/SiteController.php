@@ -8,13 +8,9 @@ use App\Models\News;
 use App\Models\Subcategory;
 use App\Models\Language;
 
-use App\Models\NewsTranslation;
-use Carbon\Carbon;
-
-
 class SiteController extends Controller
 {
-    
+   
     private function getLanguage()
     {
         $code = session('lang', 'en');
@@ -23,6 +19,7 @@ class SiteController extends Controller
             ?? Language::where('code', 'en')->first();
     }
 
+    
     private function applyTranslations($news, $language)
     {
         return $news->map(function ($item) use ($language) {
@@ -34,12 +31,16 @@ class SiteController extends Controller
             if ($translation) {
                 $item->title = $translation->title;
                 $item->description = $translation->description;
+                $item->content = $translation->content ?? null;
             }
 
             return $item;
         });
     }
 
+    /**
+     * Home Page
+     */
     public function home()
     {
         $categories = Category::all();
@@ -53,15 +54,18 @@ class SiteController extends Controller
         $news = $this->applyTranslations($news, $language);
 
         return view('fronted.home.index', [
-            'categories' => $categories,
-            'heroNews' => $news->take(3),
-            'subHeroNews' => $news->skip(3)->take(2),
-            'latestNews' => $news->skip(5)->take(8),
-            'previousNews' => $news->skip(13),
-            'languages' => Language::all(),
+            'categories'   => $categories,
+            'heroNews'     => $news->take(3)->values(),
+            'subHeroNews'  => $news->skip(3)->take(2)->values(),
+            'latestNews'   => $news->skip(5)->take(8)->values(),
+            'previousNews' => $news->skip(13)->values(),
+            'languages'    => Language::all(),
         ]);
     }
 
+    /**
+     * Category Page
+     */
     public function categoryPage($slug)
     {
         $category = Category::where('slug', $slug)->firstOrFail();
@@ -82,6 +86,7 @@ class SiteController extends Controller
         return view('fronted.news.index', compact('category', 'news', 'subcategories'));
     }
 
+   
     public function subcategoryPage($slug)
     {
         $subcategory = Subcategory::where('slug', $slug)->firstOrFail();
@@ -106,6 +111,7 @@ class SiteController extends Controller
         ));
     }
 
+  
     public function changeLanguage(Request $request)
     {
         $request->validate([
@@ -120,9 +126,11 @@ class SiteController extends Controller
         ]);
     }
 
+   
     public function detail($id)
     {
-        $news = News::with('translations')->findOrFail($id);
+        $news = News::with(['translations', 'category'])
+            ->findOrFail($id);
 
         return view('fronted.news.detail', compact('news'));
     }

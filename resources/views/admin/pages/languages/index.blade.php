@@ -7,9 +7,9 @@
     <div class="table-container">
 
         <div class="table-header">
-            <h1>Roles</h1>
-            <a href="{{ route('get.rolesForm') }}" class="btn btn-primary">
-                + Add role
+            <h1>Languages</h1>
+            <a href="{{ route('get.language.form') }}" class="btn btn-primary">
+                + Add Language
             </a>
         </div>
 
@@ -33,12 +33,12 @@
 
             <tbody>
 
-                @foreach($roles as $role)
+                @foreach($languages as $language)
                 <tr>
 
-                    <td>{{ $role->id }}</td>
+                    <td>{{ $language->id }}</td>
 
-                    <td>{{ $role->name }}</td>
+                    <td>{{ $language->name }}</td>
 
 
         
@@ -52,13 +52,13 @@
                         </a>
 
                         <!-- EDIT -->
-                        <a href="{{ route('roles.edit', $role->id) }}"
+                        <a href="#"
                            class="btn btn-warning btn-sm">
                             Edit
                         </a>
 
                         <!-- DELETE -->
-                        <form action="{{ route('roles.delete', $role->id) }}"
+                        <form action="#"
                               method="POST"
                               style="display:inline-block;">
 

@@ -26,7 +26,9 @@ Route::get('/detail-news/{id}',[SiteController::class,'detail'])->name('detail.n
 // Route::get('/sports-page',[SportsController::class,'index'])->name('get.sportPage');
 
 // ----------------------------Admin----------------------------------//
-Route::get('/admin-dashboard',[AdminController::class,'index'])->name('admin.dashboard')->middleware('admin');
+Route::get('/admin-dashboard',[AdminController::class,'index'])->name('admin.dashboard')
+->middleware('admin');
+
 Route::get('/users-form',[AdminController::class,'usersForm'])->name('users.form');
 Route::post('/users-store',[AdminController::class,'usersStore'])->name('post.users');
 Route::get('/users-index' ,[AdminController::class, 'usersIndex'])->name('users.index');
@@ -65,9 +67,14 @@ Route::get('/translate-index',[NewsController::class,'translateIndex'])->name('t
 
 Route::get('/language-form',[LanguageController::class,'form'])->name('get.language.form');
 Route::post('/store-language',[LanguageController::class,'store'])->name('languages.store');
+
+Route::get('/index-language',[LanguageController::class, 'index'])->name('language.index'); 
+
+
 Route::get('/lang-index',[LanguageController::class,'langIndex'])->name('lang.index')->middleware('admin');
 Route::get('/edit-lang/{language}',[LanguageController::class,'edit'])->name('edit.lang')->middleware('admin');
 Route::post('update/{language}',[LanguageController::class,'update'])->name('update.language')->middleware('admin');
+
 Route::post('/set-language', [LanguageController::class, 'setLanguage'])->name('set.language');
 Route::post('/change-language', [SiteController::class, 'changeLanguage']);
 Route::get('/change-language/{lang}', function($lang) {
@@ -76,14 +83,14 @@ Route::get('/change-language/{lang}', function($lang) {
 });
 
 
-Route::get('/author-dashboard', [AuthorController::class, 'index']);
+
 
 
 
 // =========================Author===========================//
-Route::get('/author-dashboard', [AuthorController::class, 'index'])
+Route::get('/author-dashboard', [AuthorController::class, 'dashboard'])
 ->name('author.dashboard')
-->middleware('author');
+  ->middleware('author');
 
 // -------------login-----------------------------//
 

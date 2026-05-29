@@ -70,4 +70,11 @@ public function changeLanguage(Request $request)
 
     return redirect()->back();
 }
+
+public function index(){
+
+$languages = Language::all();
+
+return view('admin.pages.languages.index', compact('languages'));
+}
 }

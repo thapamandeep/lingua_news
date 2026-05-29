@@ -20,8 +20,14 @@ public function news(){
 $categories = Category::all();
 $subcategories = Subcategory::all();
 $roles = Role::all();
+ $layout = 'admin.layouts.template';
 
-return view('admin.pages.news.add-news', compact('categories','subcategories','roles'));
+    // for author dashboard
+    if(auth()->user()->role_id == 2){
+        $layout = 'author.layouts.template';
+    }
+
+return view('admin.pages.news.add-news', compact('categories','subcategories','roles','layout'));
 }
   
 
