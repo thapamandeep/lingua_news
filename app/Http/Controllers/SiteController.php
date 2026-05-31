@@ -19,13 +19,12 @@ class SiteController extends Controller
             ?? Language::where('code', 'en')->first();
     }
 
-<<<<<<< HEAD
+
     /**
      * Apply translations
      */
-=======
     
->>>>>>> 07d90873b4866402c7cf1b7821bab028e90c18ab
+
     private function applyTranslations($news, $language)
     {
         return $news->map(function ($item) use ($language) {
@@ -98,13 +97,13 @@ class SiteController extends Controller
         ));
     }
 
-<<<<<<< HEAD
+
     /**
      * Subcategory Page
      */
-=======
+
    
->>>>>>> 07d90873b4866402c7cf1b7821bab028e90c18ab
+
     public function subcategoryPage($slug)
     {
         $subcategory = Subcategory::where('slug', $slug)->firstOrFail();
@@ -130,13 +129,13 @@ class SiteController extends Controller
         ));
     }
 
-<<<<<<< HEAD
+
     /**
      * Change Language
-     */
-=======
+
+
   
->>>>>>> 07d90873b4866402c7cf1b7821bab028e90c18ab
+
     public function changeLanguage(Request $request)
     {
         $request->validate([
@@ -153,33 +152,28 @@ class SiteController extends Controller
         ]);
     }
 
-<<<<<<< HEAD
-    /**
+
+  
      * News Detail
      */
-    public function detail($id)
-    {
-        $language = $this->getLanguage();
+public function detail($id)
+{
+    $language = $this->getLanguage();
 
-        $news = News::with('translations')->findOrFail($id);
+    $news = News::with(['translations', 'category'])->findOrFail($id);
 
-        $translation = $news->translations
-            ->where('language_id', $language->id)
-            ->first();
+    $translation = $news->translations
+        ->where('language_id', $language->id)
+        ->first();
 
-        if ($translation) {
-            $news->title = $translation->title;
-            $news->description = $translation->description;
-            $news->content = $translation->content;
-        }
-=======
-   
-    public function detail($id)
-    {
-        $news = News::with(['translations', 'category'])
-            ->findOrFail($id);
->>>>>>> 07d90873b4866402c7cf1b7821bab028e90c18ab
+    return view('fronted.news.detail', compact('news','translation','language'));
+}
+    // public function detail($id)
+    // {
+    //     $news = News::with(['translations', 'category'])
+    //         ->findOrFail($id);
 
-        return view('fronted.news.detail', compact('news'));
-    }
+
+    //     return view('fronted.news.detail', compact('news'));
+    // }
 }

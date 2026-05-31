@@ -8,7 +8,14 @@
         <img  class="img-icon"src="{{asset('img/facebook-1.png')}}" alt="icon-image">
         <img  class="img-icon"src="{{asset('img/youtube-1.png')}}" alt="icon-image">
 
+     
+         <div class="logo">
+              <img src="{{asset('img/lingua-logo.png')}}" alt="logo">
+        </div>
+
+
         <div class="news-head">
+            
             <h2 class="head">Lingua News</h2>
         </div>
 

@@ -5,6 +5,7 @@
 
         
         <div class="footer-box">
+            <img src="{{asset('img/lingua-logo.png')}}" alt="">
             <h2 class="footer-logo">
                 Lingua News
             </h2>
