@@ -128,4 +128,66 @@
 
 </section>
 
+<section class="news-layout">
+
+    <!-- LEFT: TABLE -->
+    <div class="news-table">
+
+        <h2>Published News</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Title</th>
+                    <th>Image</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach($publishedNews as $news)
+                    <tr>
+                        <td>{{ $loop->iteration }}</td>
+
+                        <td>
+                            {{ $news->translations->first()->title ?? 'No Title' }}
+                        </td>
+
+                        <td>
+                            <img src="{{ asset('storage/gallery/'.$news->image) }}" alt="news">
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+
+    </div>
+
+    <!-- RIGHT: CATEGORY PANEL -->
+    <div class="news-sidebar">
+
+        <div class="box">
+            <h3>Categories</h3>
+
+            <ul>
+                @foreach($categories as $category)
+                    <li>{{ $category->name }}</li>
+                @endforeach
+            </ul>
+        </div>
+
+        <div class="box">
+            <h3>Sub Categories</h3>
+
+            <ul>
+                @foreach($subcategories as $sub)
+                    <li>{{ $sub->name }}</li>
+                @endforeach
+            </ul>
+        </div>
+
+    </div>
+
+</section>
+
 @endsection

@@ -102,7 +102,7 @@
                 </li>
 
                 <li>
-                    <a href="{{route('get.news.index')}}">
+                    <a href="{{route('news.index')}}">
                         <i class="fa-solid fa-table"></i>
                         News Table
                     </a>
@@ -244,11 +244,10 @@
         </li>
 
         <li>
-<<<<<<< HEAD
+
             <a href="{{route('language.index')}}">
-=======
             <a href="{{route('lang.index')}}">
->>>>>>> f0f029bac44c8e4c698caa448e40ac28823ee402
+
                 <i class="fa-solid fa-table"></i>
                 Language Table
             </a>
@@ -260,7 +259,7 @@
 
         <!-- Settings -->
         <li>
-            <a href="#">
+            <a href="{{route('view.setting')}}">
                 <i class="fa-solid fa-gear"></i>
                 Settings
             </a>

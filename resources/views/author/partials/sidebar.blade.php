@@ -93,7 +93,7 @@
         </div>
 
         {{-- PENDING --}}
-        <a href="#">
+        <a href="{{route('pending.review')}}">
 
             <div class="menu-left">
 

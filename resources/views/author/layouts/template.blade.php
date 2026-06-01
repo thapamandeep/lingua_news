@@ -21,6 +21,7 @@
     {{-- MAIN CSS --}}
     <link rel="stylesheet" href="{{ asset('author/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('css/admin/form.css') }}">
+    <link rel="stylesheet" href="{{ asset('author/css/index.css') }}">
 
     {{-- EXTRA PAGE CSS --}}
     @stack('styles')

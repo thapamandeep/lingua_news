@@ -211,7 +211,9 @@ public function rolesDelete($id)
 
     public function categoryForm(){
 
-    return view('admin.pages.categories.form');
+    $categories = Category::all();
+
+    return view('admin.pages.categories.form', compact('categories'));
     }
 
     public function categoryStore(Request $request){
