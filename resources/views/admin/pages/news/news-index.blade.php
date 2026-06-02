@@ -63,7 +63,7 @@
         </a>
 
         <!-- EDIT -->
-        <a href="{{route('get.edit.news',$news->id)}}" class="btn btn-warning btn-sm">
+        <a href="{{route('news.edit',$news->id)}}" class="btn btn-warning btn-sm">
             Edit
         </a>
 

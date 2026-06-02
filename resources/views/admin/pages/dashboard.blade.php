@@ -53,38 +53,36 @@
         <canvas id="newsChart"></canvas>
     </div>
 
-    <div class="latest-news">
+  <div class="latest-news">
 
-        <h2>Latest News</h2>
+    <h2>Latest News</h2>
 
-        <div class="latest-item">
-            <img src="https://picsum.photos/80/60?1">
-
-            <div>
-                <h4>Marvel New Movie Breaks Record</h4>
-                <p>Published</p>
-            </div>
-        </div>
+    @forelse($latestNews as $news)
 
         <div class="latest-item">
-            <img src="https://picsum.photos/80/60?2">
 
-            <div>
-                <h4>Popular Singer Releases Music</h4>
-                <p>Published</p>
+            <img src="{{ asset('storage/gallery/' . $news->news->image) }}"
+                 alt="{{ $news->title }}">
+
+            <div class="latest-content">
+
+                <h4>{{ $news->title }}</h4>
+
+                <p>
+                    Published • {{ $news->created_at->diffForHumans() }}
+                </p>
+
             </div>
+
         </div>
 
-        <div class="latest-item">
-            <img src="https://picsum.photos/80/60?3">
+    @empty
 
-            <div>
-                <h4>Sports Team Wins Trophy</h4>
-                <p>Published</p>
-            </div>
-        </div>
+        <p>No published news available.</p>
 
-    </div>
+    @endforelse
+
+</div>
 
 </div>
 
@@ -108,33 +106,47 @@
                 </tr>
             </thead>
 
-            <tbody>
+      <tbody>
 
-                <tr>
-                    <td>Hollywood Star Announced New Project</td>
-                    <td><span class="badge purple-bg">Entertainment</span></td>
-                    <td>John Doe</td>
-                    <td><span class="status published">Published</span></td>
-                    <td>May 31</td>
-                </tr>
+@forelse($recentNews as $news)
 
-                <tr>
-                    <td>Government Announces Economic Plan</td>
-                    <td><span class="badge blue-bg">Politics</span></td>
-                    <td>Jane Smith</td>
-                    <td><span class="status published">Published</span></td>
-                    <td>May 31</td>
-                </tr>
+<tr>
+  <td>
+    {{ optional($news->translations->first())->title ?? 'No Title' }}
+</td>
 
-                <tr>
-                    <td>New Smartphone Launch</td>
-                    <td><span class="badge orange-bg">Technology</span></td>
-                    <td>Mike Brown</td>
-                    <td><span class="status draft">Draft</span></td>
-                    <td>May 30</td>
-                </tr>
+    <td>
+        <span class="badge purple-bg">
+            {{ $news->category->name ?? 'No Category' }}
+        </span>
+    </td>
 
-            </tbody>
+    <td>
+        {{ $news->role->name ?? 'Admin' }}
+    </td>
+
+    <td>
+        @if($news->status == 'published')
+            <span class="status published">Published</span>
+        @else
+            <span class="status draft">Draft</span>
+        @endif
+    </td>
+
+    <td>
+        {{ $news->created_at->format('M d') }}
+    </td>
+</tr>
+
+@empty
+
+<tr>
+    <td colspan="5">No news found</td>
+</tr>
+
+@endforelse
+
+</tbody>
 
         </table>
 
@@ -147,4 +159,84 @@
 
 </div>
 
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const labels = @json($newsByMonth->pluck('month'));
+    const data = @json($newsByMonth->pluck('total'));
+
+    const canvas = document.getElementById('newsChart');
+
+    if (!canvas) {
+        console.error("Canvas not found");
+        return;
+    }
+
+    new Chart(canvas, {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'News Overview',
+                data: data,
+                borderColor: '#4F46E5',
+                backgroundColor: 'rgba(79, 70, 229, 0.2)',
+                tension: 0.4,
+                fill: true,
+                pointRadius: 5
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        stepSize: 1
+                    }
+                }
+            }
+        }
+    });
+
+});
+</script>
+
+<script>
+const categoryLabels = @json($categoryData->pluck('name'));
+const categoryCounts = @json($categoryData->pluck('news_count'));
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const ctx = document.getElementById('pieChart');
+
+    new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: categoryLabels,
+            datasets: [{
+                data: categoryCounts,
+                backgroundColor: [
+                    '#0d6efd',
+                    '#28a745',
+                    '#fd7e14',
+                    '#6f42c1',
+                    '#dc3545',
+                    '#20c997'
+                ]
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'bottom'
+                }
+            }
+        }
+    });
+
+});
+</script>
 @endsection

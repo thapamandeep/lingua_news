@@ -32,6 +32,9 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="{{asset('js/admin/chart.js')}}"></script>
+
+
 <script src="{{ asset('admin/js/app.js') }}"></script>
 <script src="{{ asset('js/admin/downdrop.js') }}"></script>
 

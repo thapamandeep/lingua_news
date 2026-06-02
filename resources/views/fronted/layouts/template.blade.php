@@ -34,6 +34,7 @@
 <script src="{{asset('js/sites/heroSlide.js')}}"></script>
 
 <script src="{{asset('js/sites/translate.js')}}"></script>
+<script src="{{asset('js/sites/previous-news.js')}}"></script>
 
 
 <script src="{{asset('js/sites/leatest-news.js')}}"></script>

@@ -6,6 +6,17 @@
     z-index: 999;
     background: white;
 }
+
+
+.logo{
+    position: relative;
+    width: 45px;
+    height: 45px;
+    top: 5px;
+   left:140px;
+
+    margin-left: auto;   /* pushes logo to middle/right side */
+}
 .background{
     background-color:white;
     width: 100%;

@@ -21,9 +21,18 @@ class SiteController extends Controller
             ?? Language::where('code', 'en')->first();
     }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 5c0e138e5342b04d25c85d5c1e8cc1fe2a1323f5
     /**
      * Apply translations to collection
      */
+<<<<<<< HEAD
+=======
+    
+
+>>>>>>> 5c0e138e5342b04d25c85d5c1e8cc1fe2a1323f5
     private function applyTranslations($news, $language)
     {
         if (!$language) {
@@ -119,9 +128,19 @@ class SiteController extends Controller
         );
     }
 
+<<<<<<< HEAD
     /**
      * Subcategory Page
      */
+=======
+
+    /**
+     * Subcategory Page
+     */
+
+   
+
+>>>>>>> 5c0e138e5342b04d25c85d5c1e8cc1fe2a1323f5
     public function subcategoryPage($slug)
     {
         $subcategory = Subcategory::where('slug', $slug)->firstOrFail();
@@ -149,9 +168,19 @@ class SiteController extends Controller
         );
     }
 
+<<<<<<< HEAD
     /**
      * Change Language
      */
+=======
+
+    /**
+     * Change Language
+
+
+  
+
+>>>>>>> 5c0e138e5342b04d25c85d5c1e8cc1fe2a1323f5
     public function changeLanguage(Request $request)
     {
         $request->validate([
@@ -168,13 +197,20 @@ class SiteController extends Controller
         ]);
     }
 
+<<<<<<< HEAD
     /**
      * News Detail Page
-     */
-    public function detail($id)
-    {
-        $language = $this->getLanguage();
+=======
 
+  
+     * News Detail
+>>>>>>> 5c0e138e5342b04d25c85d5c1e8cc1fe2a1323f5
+     */
+public function detail($id)
+{
+    $language = $this->getLanguage();
+
+<<<<<<< HEAD
         $news = News::with([
             'translations',
             'category',
@@ -191,4 +227,22 @@ class SiteController extends Controller
             compact('news', 'language')
         );
     }
+=======
+    $news = News::with(['translations', 'category'])->findOrFail($id);
+
+    $translation = $news->translations
+        ->where('language_id', $language->id)
+        ->first();
+
+    return view('fronted.news.detail', compact('news','translation','language'));
+}
+    // public function detail($id)
+    // {
+    //     $news = News::with(['translations', 'category'])
+    //         ->findOrFail($id);
+
+
+    //     return view('fronted.news.detail', compact('news'));
+    // }
+>>>>>>> 5c0e138e5342b04d25c85d5c1e8cc1fe2a1323f5
 }

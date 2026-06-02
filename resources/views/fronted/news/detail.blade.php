@@ -3,9 +3,7 @@
 @section('content')
 
 
-@php
-    $translation = $news->translations->first();
-@endphp
+
 
 <section class="single-news-page">
 
@@ -20,9 +18,7 @@
         {{-- RIGHT SIDE CONTENT --}}
         <div class="news-right">
 
-            @php
-                $translation = $news->translations->first();
-            @endphp
+          
 
             <span class="category">
                 {{ $news->category->name ?? 'News' }}

@@ -17,6 +17,7 @@ use Http\Middleware\SetLanguageMiddleware;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\EditorController;
+use App\Http\Controllers\SettingController;
 
 
 // ---------------------------site----------------------------------//
@@ -56,9 +57,11 @@ Route::post('/add-subcategory',[AdminController::class,'subcategoryStore'])->nam
 Route::get('/subcategory-index',[AdminController::class,'subcategoryIndex'])->name('get.subcategory.index');
 Route::get('/add-news',[NewsController::class,'news'])->name('get.addnews');
 Route::post('/store-news',[NewsController::class,'store'])->name('post.news');
-Route::get('/news-index',[NewsController::class,'index'])->name('get.news.index')->middleware('admin');
-Route::get('/edit-news/{news}',[NewsController::class,'edit'])->name('get.edit.news')->middleware('admin');
-Route::post('/update-news/{news}',[NewsController::class,'update'])->name('update.news')->middleware('admin');
+Route::get('/news-index',[NewsController::class,'index'])->name('news.index')->middleware('admin');
+Route::get('/news-edit/{news}',[NewsController::class,'editNews'])->name('news.edit')->middleware('admin');
+Route::get('/edit-news/{translation}',[NewsController::class,'edit'])->name('get.edit.news')->middleware('admin');
+Route::post('/update-news/{news}',[NewsController::class,'updateNews'])->name('update.news')->middleware('admin');
+Route::post('/update-news/{translation}',[NewsController::class,'updateTranslation'])->name('update.translation')->middleware('admin');
 Route::delete('/delete-news/{news}',[NewsController::class,'delete'])->name('delete.news')->middleware('admin');
 
 Route::get('/news-translate',[NewsController::class,'newsTranslate'])->name('news.translate')->middleware('auth');
@@ -121,4 +124,13 @@ Route::middleware(['auth'])->group(function () {
         [EditorController::class,'rejectedNews']
     )->name('editor.rejected.news');
 
+    Route::get('/pending-review',[AuthorController::class,'pendingReview'])->name('pending.review');
+
+});
+
+// ----------------------------------------------setting-----------------------------------//
+
+Route::middleware(['admin'])->group(function(){
+
+Route::get('seeting',[SettingController::class,'view'])->name('view.setting');
 });

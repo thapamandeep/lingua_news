@@ -177,7 +177,11 @@ body{
 }
 
 .latest-item img{
+    width:90px;
+    height:65px;
+    object-fit:cover;
     border-radius:10px;
+    flex-shrink:0;
 }
 
 .table-section{
@@ -287,6 +291,11 @@ body{
 .dropdown.active .arrow{
     transform:rotate(180deg);
 }
+canvas {
+    width: 100% !important;
+    height: 300px !important;
+}
+
 
 
 @media(max-width:1200px){

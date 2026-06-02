@@ -10,6 +10,7 @@ use App\Models\Role;
 use App\Models\News;
 use App\Models\Category;
 use App\Models\Subcategory;
+use App\Models\NewsTranslation;
 
 class AdminController extends Controller
 {
@@ -18,7 +19,31 @@ class AdminController extends Controller
     $totalNews = News::count();
     $totalUsers = Role::count();
     $totalCategories = Category::count();
-    return view('admin.pages.dashboard', compact('totalNews','totalUsers','totalCategories'));
+
+$newsByMonth = NewsTranslation::whereNotNull('created_at')
+    ->selectRaw('MONTH(created_at) as month, COUNT(*) as total')
+    ->groupByRaw('MONTH(created_at)')
+    ->orderByRaw('MONTH(created_at)')
+    ->get();
+
+   $latestNews = NewsTranslation::with('news')
+    ->whereHas('news', function ($query) {
+        $query->where('status', 'published');
+    })
+    ->latest()
+    ->take(3)
+    ->get();
+
+   $recentNews = News::with(['category', 'translations'])
+    ->latest()
+    ->take(10)
+    ->get();
+
+    $categoryData = Category::withCount('news')->get();
+
+
+    return view('admin.pages.dashboard', compact('totalNews','totalUsers','totalCategories', 
+     'newsByMonth','latestNews','recentNews','categoryData'));
     }
 
     // ---------------------------------------users---------------------------------//
@@ -186,7 +211,9 @@ public function rolesDelete($id)
 
     public function categoryForm(){
 
-    return view('admin.pages.categories.form');
+    $categories = Category::all();
+
+    return view('admin.pages.categories.form', compact('categories'));
     }
 
     public function categoryStore(Request $request){

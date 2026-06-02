@@ -1,3 +1,5 @@
+
+
 .heroes-section{
     display: grid;
     grid-template-columns: 3fr 1fr;
@@ -35,6 +37,7 @@
     padding:25px;
     box-sizing:border-box;
 }
+
 
 /* HEADING */
 .main-news-text h2{
@@ -117,3 +120,4 @@
 .link:hover h2{
     color: #ff0000; /* optional hover effect */
 }
+
