@@ -28,7 +28,7 @@ Route::get('/detail-news/{id}',[SiteController::class,'detail'])->name('detail.n
 
 // ----------------------------Admin----------------------------------//
 Route::get('/admin-dashboard',[AdminController::class,'index'])->name('admin.dashboard')
-->middleware('admin');
+;
 
 Route::get('/users-form',[AdminController::class,'usersForm'])->name('users.form');
 Route::post('/users-store',[AdminController::class,'usersStore'])->name('post.users');

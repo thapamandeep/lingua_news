@@ -1,4 +1,4 @@
-@extends($layout)
+@extends('admin.layouts.template')
 
 @section('content')
 
