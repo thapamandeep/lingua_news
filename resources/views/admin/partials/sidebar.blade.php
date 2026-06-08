@@ -259,7 +259,7 @@
 
         <!-- Settings -->
         <li>
-            <a href="{{route('view.setting')}}">
+            <a href="{{route('admin.settings')}}">
                 <i class="fa-solid fa-gear"></i>
                 Settings
             </a>

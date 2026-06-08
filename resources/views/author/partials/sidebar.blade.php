@@ -117,7 +117,7 @@
         </a>
 
         {{-- SETTINGS --}}
-        <a href="#">
+        <a href="{{route('author.settings')}}">
 
             <div class="menu-left">
 

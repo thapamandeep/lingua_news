@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="{{ asset('css/sites/leatest-news.css') }}">
     <link rel="stylesheet" href="{{ asset('css/sites/previous-news.css') }}">
     <link rel="stylesheet" href="{{ asset('css/sites/detail.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/sites/search-index.css') }}">
 
 </head>
 <body>

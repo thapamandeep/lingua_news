@@ -19,14 +19,31 @@
             <h2 class="head">Lingua News</h2>
         </div>
 
-        <div class="date">
-            <input class="select-date" type="date">
-        </div>
+    <form action="{{ route('news.search') }}" method="GET" style="display:flex;">
 
-        <div class="search-bar">
-    <input type="text" placeholder="Search news...">
-    <i class="fa fa-search search-icon"></i>
-     </div>
+    <div class="date">
+        <input
+            class="select-date"
+            type="date"
+            name="date"
+            value="{{ request('date') }}">
+    </div>
+
+    <div class="search-bar">
+        <input
+            type="text"
+            name="search"
+            placeholder="Search news..."
+            value="{{ request('search') }}">
+
+        <button type="submit" style="border:none;background:none;cursor:pointer;">
+            <i class="fa fa-search search-icon"></i>
+        </button>
+    </div>
+
+</form>
+
+</form>
 
      <div class="signin">
     <a href="{{ route('login') }}"><button >Sign In</button></a>
