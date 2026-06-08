@@ -64,7 +64,7 @@
             </select>
         </div>
 
-        {{-- ROLE --}}
+        <!-- {{-- ROLE --}}
         <div class="form-group">
             <label>Role</label>
             <select name="role_id" >
@@ -75,7 +75,7 @@
                     </option>
                 @endforeach
             </select>
-        </div>
+        </div> -->
 
         {{-- IMAGE --}}
         <div class="form-group">
@@ -83,14 +83,7 @@
             <input type="file" name="image" >
         </div>
 
-        {{-- STATUS --}}
-        <div class="form-group">
-            <label>Status</label>
-            <select name="status" >
-                <option value="draft">Draft</option>
-                <option value="published">Published</option>
-            </select>
-        </div>
+       
 
         {{-- SUBMIT --}}
         <div class="form-btn">

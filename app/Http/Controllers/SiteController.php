@@ -11,28 +11,20 @@ use App\Models\Language;
 class SiteController extends Controller
 {
     /**
-     * Get current language
+     * Current language
      */
     private function getLanguage()
     {
-        $code = session('lang', 'en');
-
-        return Language::where('code', $code)->first()
-            ?? Language::where('code', 'en')->first();
+        return Language::where(
+            'code',
+            session('lang', 'en')
+        )->first()
+        ?? Language::where('code', 'en')->first();
     }
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 5c0e138e5342b04d25c85d5c1e8cc1fe2a1323f5
     /**
      * Apply translations to collection
      */
-<<<<<<< HEAD
-=======
-    
-
->>>>>>> 5c0e138e5342b04d25c85d5c1e8cc1fe2a1323f5
     private function applyTranslations($news, $language)
     {
         if (!$language) {
@@ -42,8 +34,10 @@ class SiteController extends Controller
         return $news->map(function ($item) use ($language) {
 
             $translation = $item->translations
-                ->where('language_id', $language->id)
-                ->first();
+                ->firstWhere(
+                    'language_id',
+                    $language->id
+                );
 
             if ($translation) {
                 $item->title = $translation->title;
@@ -56,7 +50,7 @@ class SiteController extends Controller
     }
 
     /**
-     * Apply translation to single news
+     * Apply translation to single news item
      */
     private function applySingleTranslation($news, $language)
     {
@@ -65,8 +59,10 @@ class SiteController extends Controller
         }
 
         $translation = $news->translations
-            ->where('language_id', $language->id)
-            ->first();
+            ->firstWhere(
+                'language_id',
+                $language->id
+            );
 
         if ($translation) {
             $news->title = $translation->title;
@@ -78,26 +74,32 @@ class SiteController extends Controller
     }
 
     /**
-     * Home Page
+     * Homepage
      */
     public function home()
     {
         $language = $this->getLanguage();
 
-        $news = News::with(['subcategory', 'translations'])
-            ->where('status', 'published')
+        $news = News::with([
+                'translations',
+                'subcategory'
+            ])
+            ->where('status', 'approved')
             ->latest()
             ->get();
 
-        $news = $this->applyTranslations($news, $language);
+        $news = $this->applyTranslations(
+            $news,
+            $language
+        );
 
         return view('fronted.home.index', [
             'categories'   => Category::all(),
+            'languages'    => Language::all(),
             'heroNews'     => $news->take(3)->values(),
             'subHeroNews'  => $news->skip(3)->take(2)->values(),
             'latestNews'   => $news->skip(5)->take(8)->values(),
             'previousNews' => $news->skip(13)->values(),
-            'languages'    => Language::all(),
         ]);
     }
 
@@ -106,81 +108,87 @@ class SiteController extends Controller
      */
     public function categoryPage($slug)
     {
-        $category = Category::where('slug', $slug)->firstOrFail();
+        $category = Category::where(
+            'slug',
+            $slug
+        )->firstOrFail();
 
         $language = $this->getLanguage();
 
         $news = News::with('translations')
             ->where('category_id', $category->id)
-            ->where('status', 'published')
+            ->where('status', 'approved')
             ->latest()
             ->get();
 
-        $news = $this->applyTranslations($news, $language);
+        $news = $this->applyTranslations(
+            $news,
+            $language
+        );
 
-        $subcategories = Subcategory::where('category_id', $category->id)
+        $subcategories = Subcategory::where(
+                'category_id',
+                $category->id
+            )
             ->where('status', 1)
             ->get();
 
         return view(
             'fronted.news.index',
-            compact('category', 'news', 'subcategories')
+            compact(
+                'category',
+                'news',
+                'subcategories'
+            )
         );
     }
 
-<<<<<<< HEAD
     /**
      * Subcategory Page
      */
-=======
-
-    /**
-     * Subcategory Page
-     */
-
-   
-
->>>>>>> 5c0e138e5342b04d25c85d5c1e8cc1fe2a1323f5
     public function subcategoryPage($slug)
     {
-        $subcategory = Subcategory::where('slug', $slug)->firstOrFail();
+        $subcategory = Subcategory::where(
+            'slug',
+            $slug
+        )->firstOrFail();
 
         $language = $this->getLanguage();
 
         $news = News::with('translations')
-            ->where('subcategory_id', $subcategory->id)
-            ->where('status', 'published')
+            ->where(
+                'subcategory_id',
+                $subcategory->id
+            )
+            ->where('status', 'approved')
             ->latest()
             ->get();
 
-        $news = $this->applyTranslations($news, $language);
+        $news = $this->applyTranslations(
+            $news,
+            $language
+        );
 
         $subcategories = Subcategory::where(
-            'category_id',
-            $subcategory->category_id
-        )
-        ->where('status', 1)
-        ->get();
+                'category_id',
+                $subcategory->category_id
+            )
+            ->where('status', 1)
+            ->get();
 
         return view(
             'fronted.news.subcategoryNews.index',
-            compact('subcategory', 'news', 'subcategories')
+            compact(
+                'subcategory',
+                'news',
+                'subcategories'
+            )
         );
     }
 
-<<<<<<< HEAD
     /**
      * Change Language
      */
-=======
-
-    /**
-     * Change Language
-
-
-  
-
->>>>>>> 5c0e138e5342b04d25c85d5c1e8cc1fe2a1323f5
     public function changeLanguage(Request $request)
     {
         $request->validate([
@@ -197,25 +205,20 @@ class SiteController extends Controller
         ]);
     }
 
-<<<<<<< HEAD
     /**
-     * News Detail Page
-=======
-
-  
      * News Detail
->>>>>>> 5c0e138e5342b04d25c85d5c1e8cc1fe2a1323f5
      */
-public function detail($id)
-{
-    $language = $this->getLanguage();
+    public function detail($id)
+    {
+        $language = $this->getLanguage();
 
-<<<<<<< HEAD
         $news = News::with([
-            'translations',
-            'category',
-            'subcategory'
-        ])->findOrFail($id);
+                'translations',
+                'category',
+                'subcategory'
+            ])
+            ->where('status', 'approved')
+            ->findOrFail($id);
 
         $news = $this->applySingleTranslation(
             $news,
@@ -224,25 +227,10 @@ public function detail($id)
 
         return view(
             'fronted.news.detail',
-            compact('news', 'language')
+            compact(
+                'news',
+                'language'
+            )
         );
     }
-=======
-    $news = News::with(['translations', 'category'])->findOrFail($id);
-
-    $translation = $news->translations
-        ->where('language_id', $language->id)
-        ->first();
-
-    return view('fronted.news.detail', compact('news','translation','language'));
-}
-    // public function detail($id)
-    // {
-    //     $news = News::with(['translations', 'category'])
-    //         ->findOrFail($id);
-
-
-    //     return view('fronted.news.detail', compact('news'));
-    // }
->>>>>>> 5c0e138e5342b04d25c85d5c1e8cc1fe2a1323f5
 }

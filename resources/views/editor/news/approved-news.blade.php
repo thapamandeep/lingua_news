@@ -3,67 +3,71 @@
 @section('content')
 
 <div class="page-header">
-
     <h1>Approved News</h1>
-
+    <p>Published and visible articles</p>
 </div>
 
-<div class="table-container">
+<div class="table-wrapper">
 
-    <table class="news-table">
+    <div class="table-card">
 
-        <thead>
+        <table class="news-table">
 
-            <tr>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Title</th>
+                    <th>Language</th>
+                    <th>Author</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
 
-                <th>ID</th>
-                <th>Title</th>
-                <th>Status</th>
-                <th>Date</th>
-
-            </tr>
-
-        </thead>
-
-        <tbody>
+            <tbody>
 
             @forelse($news as $item)
 
-            <tr>
+                @php
+                    $translation = $item->translations->first();
+                @endphp
 
-                <td>{{ $item->id }}</td>
+                <tr>
 
-                <td>{{ $item->title }}</td>
+                    <td class="muted">#{{ $item->id }}</td>
 
-                <td>
-                    <span class="badge approved">
-                        {{ $item->status }}
-                    </span>
-                </td>
+                    <td class="title-cell">
+                        {{ $translation->title ?? $item->slug ?? 'No Title' }}
+                    </td>
 
-                <td>
-                    {{ $item->created_at->format('d M Y') }}
-                </td>
+                    <td>
+                        {{ $translation->language->name ?? 'N/A' }}
+                    </td>
 
-            </tr>
+                    <td>
+                        {{ $item->author->name ?? 'Unknown' }}
+                    </td>
+
+                    <td class="muted">
+                        {{ $item->created_at->format('d M Y, h:i A') }}
+                    </td>
+
+                </tr>
 
             @empty
 
-            <tr>
-
-                <td colspan="4">
-
-                    No Approved News Found
-
-                </td>
-
-            </tr>
+                <tr>
+                    <td colspan="5" class="empty-state">
+                        No Approved News Found 🎉
+                    </td>
+                </tr>
 
             @endforelse
 
-        </tbody>
+            </tbody>
 
-    </table>
+        </table>
+
+    </div>
 
 </div>
 

@@ -102,30 +102,32 @@ Route::get('/register' ,[AuthController::class, 'showRegister'])->name('register
 
 
 
-//---------EditorController-----------//
-
-
-
 Route::middleware(['auth'])->group(function () {
 
-    Route::get('/editor-dashboard',
-        [EditorController::class,'dashboard']
-    )->name('editor.dashboard');
+    // DASHBOARD
+    Route::get('/editor-dashboard', [EditorController::class, 'dashboard'])
+        ->name('editor.dashboard');
 
-    Route::get('/editor/pending-news',
-        [EditorController::class,'pendingNews']
-    )->name('editor.pending.news');
+    // LISTING PAGES
+    Route::get('/editor/pending-news', [EditorController::class, 'pendingNews'])
+        ->name('editor.pending.news');
 
-    Route::get('/editor/approved-news',
-        [EditorController::class,'approvedNews']
-    )->name('editor.approved.news');
+    Route::get('/editor/approved-news', [EditorController::class, 'approvedNews'])
+        ->name('editor.approved.news');
 
-    Route::get('/editor/rejected-news',
-        [EditorController::class,'rejectedNews']
-    )->name('editor.rejected.news');
+    Route::get('/editor/rejected-news', [EditorController::class, 'rejectedNews'])
+        ->name('editor.rejected.news');
 
-    Route::get('/pending-review',[AuthorController::class,'pendingReview'])->name('pending.review');
+    // ACTION ROUTES (IMPORTANT FIX ✔)
+    Route::post('/editor/news/{news}/approve', [EditorController::class, 'approve'])
+        ->name('editor.news.approve');
 
+    Route::post('/editor/news/{news}/reject', [EditorController::class, 'reject'])
+        ->name('editor.news.reject');
+
+    // AUTHOR SIDE
+    Route::get('/pending-review', [AuthorController::class, 'pendingReview'])
+        ->name('pending.review');
 });
 
 // ----------------------------------------------setting-----------------------------------//
@@ -134,3 +136,13 @@ Route::middleware(['admin'])->group(function(){
 
 Route::get('seeting',[SettingController::class,'view'])->name('view.setting');
 });
+
+Route::post(
+    '/translation/{translation}/approve',
+    [NewsController::class, 'approveTranslation']
+)->name('translation.approve');
+
+Route::post(
+    '/translation/{translation}/reject',
+    [NewsController::class, 'rejectTranslation']
+)->name('translation.reject');

@@ -25,20 +25,27 @@ return new class extends Migration
                 ->constrained()
                 ->onDelete('cascade');
 
-            $table->foreignId('role_id')
-                ->nullable()
-                ->constrained()
-                ->onDelete('cascade');
 
             // STATUS (good as-is)
-            $table->enum('status', ['published', 'draft'])
-                ->default('draft');
+            $table->enum('status', [
+    'pending',
+    'approved',
+    'rejected'
+])->default('pending');
 
             // OPTIONAL (recommended for admin tracking)
-            $table->foreignId('created_by')
+            $table->foreignId('author_id')
                 ->nullable()
                 ->constrained('users')
                 ->onDelete('set null');
+
+                $table->foreignId('approved_by')
+    ->nullable()
+    ->constrained('users')
+    ->nullOnDelete();
+
+$table->timestamp('approved_at')
+    ->nullable();
 
             $table->timestamps();
         });

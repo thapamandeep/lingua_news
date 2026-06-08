@@ -81,6 +81,20 @@
 
         </form>
 
+        @if($news->status !== 'approved')
+<form action="{{ route('news.approve', $news->id) }}" method="POST">
+    @csrf
+    <button class="btn btn-success">Approve</button>
+</form>
+@endif
+
+@if($news->status !== 'rejected')
+<form action="{{ route('news.reject', $news->id) }}" method="POST">
+    @csrf
+    <button class="btn btn-danger">Reject</button>
+</form>
+@endif
+
     </div>
 
 </td>
