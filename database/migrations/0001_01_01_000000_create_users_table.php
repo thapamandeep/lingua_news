@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('phone')->nullable();
             $table->string('password');
            $table->foreignId('role_id')->constrained()->onDelete('cascade');
+               $table->string('otp')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

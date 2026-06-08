@@ -31,6 +31,7 @@ Route::get('/detail-news/{id}',[SiteController::class,'detail'])->name('detail.n
 Route::get('/admin-dashboard',[AdminController::class,'index'])->name('admin.dashboard')
 ;
 
+
 Route::get('/users-form',[AdminController::class,'usersForm'])->name('users.form');
 Route::post('/users-store',[AdminController::class,'usersStore'])->name('post.users');
 Route::get('/users-index' ,[AdminController::class, 'usersIndex'])->name('users.index');
@@ -130,10 +131,18 @@ Route::middleware(['auth'])->group(function () {
         ->name('pending.review');
 });
 
+// search news -------------------------------//
+
+
+Route::get('/search-news', [NewsController::class, 'search'])
+    ->name('news.search');
+
+    
 // ----------------------------------------------setting-----------------------------------//
 
 Route::middleware(['admin'])->group(function(){
 
+<<<<<<< HEAD
 Route::get('seeting',[SettingController::class,'view'])->name('view.setting');
 });
 
@@ -146,3 +155,58 @@ Route::post(
     '/translation/{translation}/reject',
     [NewsController::class, 'rejectTranslation']
 )->name('translation.reject');
+=======
+Route::get('/setting',[SettingController::class,'view'])->name('admin.settings');
+
+Route::post('/admin/settings/general', [SettingController::class, 'storeGeneral'])
+    ->name('general.store');
+
+// Route::get('/', [SettingController::class, 'index'])
+//         ->name('general');
+
+Route::get('/admin/settings/header-footer', [SettingController::class, 'headerFooter'])
+    ->name('settings.header-footer');
+
+    Route::post('/admin/settings/header-footer', [SettingController::class, 'storeHeaderFooter'])
+    ->name('header-footer.store');
+
+    Route::get('/admin/settings/social-links', [SettingController::class, 'socialLinks'])
+    ->name('settings.social-links');
+
+    Route::post('/admin/settings/social', [SettingController::class, 'storeSocialLinks'])
+    ->name('social.store');
+
+    Route::get('/admin/settings/seo', [SettingController::class, 'seo'])
+    ->name('settings.seo');
+    
+    Route::post('/admin/settings/seo', [SettingController::class, 'storeSeo'])
+    ->name('seo.store');
+
+
+    Route::get('/admin/settings/email', [SettingController::class, 'email'])
+    ->name('settings.email');
+
+    Route::post('/admin/settings/email', [SettingController::class, 'storeEmail'])
+    ->name('emails.store');
+
+    Route::post('/admin/settings/email/test', [SettingController::class, 'sendTestEmail'])
+    ->name('emails.test');
+
+});
+
+Route::middleware(['author'])->group(function(){
+    Route::get('/author/settings', [SettingController::class, 'index'])
+->name('author.settings');
+});
+
+// forgot password ==========================//
+
+Route::get('/forgot-password',[AuthController::class,'forgotPassword'])->name('forgot.password');
+Route::post('/otp',[AuthController::class,'otp'])->name('send.otp');
+Route::get('/update-password',[AuthController::class,'newPassword'])->name('new.password');
+
+Route::post('/change-password', [AuthController::class, 'changePassword'])
+    ->name('change.password');
+
+    Route::post('/update-password',[AuthController::class,'updatePassword'])->name('update.password');
+>>>>>>> df45221c528a8074abbd506cb6a666712b73ec37

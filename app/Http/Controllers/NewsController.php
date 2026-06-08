@@ -382,4 +382,34 @@ public function rejectTranslation(NewsTranslation $translation)
         'Translation rejected successfully'
     );
 }
+
+// search-----------------------//
+
+public function search(Request $request)
+{
+    $query = News::with(['translations', 'category']);
+
+    // Search by title or description
+    if ($request->filled('search')) {
+
+        $search = trim($request->search);
+
+        $query->whereHas('translations', function ($q) use ($search) {
+
+            $q->where('title', 'LIKE', "%{$search}%")
+              ->orWhere('description', 'LIKE', "%{$search}%");
+        });
+    }
+
+    // Filter by date
+    if ($request->filled('date')) {
+        $query->whereDate('created_at', $request->date);
+    }
+
+    $news = $query->latest()->paginate(10);
+
+
+
+    return view('fronted.searchs.index', compact('news'));
+}
 }

@@ -73,7 +73,7 @@
                         Remember me
                     </label>
 
-                    <a href="#">Forgot Password?</a>
+                    <a href="{{route('forgot.password')}}">Forgot Password?</a>
 
                 </div>
 
