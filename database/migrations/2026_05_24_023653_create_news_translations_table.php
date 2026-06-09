@@ -12,24 +12,41 @@ return new class extends Migration
 
             $table->id();
 
-            // NEWS RELATION
+
             $table->foreignId('news_id')
                 ->constrained('news')
-                ->onDelete('cascade');
+                ->cascadeOnDelete();
 
-            // LANGUAGE RELATION
             $table->foreignId('language_id')
                 ->constrained('languages')
-                ->onDelete('cascade');
+                ->cascadeOnDelete();
 
-            // CONTENT
+            $table->foreignId('author_id')
+                ->nullable()
+                ->constrained('users')
+                ->nullOnDelete();
+
+            $table->enum('status', [
+                'pending',
+                'approved',
+                'rejected'
+            ])->default('pending');
+
+            $table->foreignId('approved_by')
+                ->nullable()
+                ->constrained('users')
+                ->nullOnDelete();
+
+            $table->timestamp('approved_at')
+                ->nullable();
+
             $table->string('title');
             $table->text('description');
             $table->longText('content')->nullable();
 
             $table->timestamps();
 
-            // 🔥 IMPORTANT: prevent duplicate language per news
+            // Prevent duplicate translations for same language
             $table->unique(['news_id', 'language_id']);
         });
     }

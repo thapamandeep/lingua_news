@@ -18,6 +18,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\EditorController;
 use App\Http\Controllers\SettingController;
+use App\Http\Controllers\MembersController;
 
 
 // ---------------------------site----------------------------------//
@@ -103,30 +104,32 @@ Route::get('/register' ,[AuthController::class, 'showRegister'])->name('register
 
 
 
-//---------EditorController-----------//
-
-
-
 Route::middleware(['auth'])->group(function () {
 
-    Route::get('/editor-dashboard',
-        [EditorController::class,'dashboard']
-    )->name('editor.dashboard');
+    // DASHBOARD
+    Route::get('/editor-dashboard', [EditorController::class, 'dashboard'])
+        ->name('editor.dashboard');
 
-    Route::get('/editor/pending-news',
-        [EditorController::class,'pendingNews']
-    )->name('editor.pending.news');
+    // LISTING PAGES
+    Route::get('/editor/pending-news', [EditorController::class, 'pendingNews'])
+        ->name('editor.pending.news');
 
-    Route::get('/editor/approved-news',
-        [EditorController::class,'approvedNews']
-    )->name('editor.approved.news');
+    Route::get('/editor/approved-news', [EditorController::class, 'approvedNews'])
+        ->name('editor.approved.news');
 
-    Route::get('/editor/rejected-news',
-        [EditorController::class,'rejectedNews']
-    )->name('editor.rejected.news');
+    Route::get('/editor/rejected-news', [EditorController::class, 'rejectedNews'])
+        ->name('editor.rejected.news');
 
-    Route::get('/pending-review',[AuthorController::class,'pendingReview'])->name('pending.review');
+    // ACTION ROUTES (IMPORTANT FIX ✔)
+    Route::post('/editor/news/{news}/approve', [EditorController::class, 'approve'])
+        ->name('editor.news.approve');
 
+    Route::post('/editor/news/{news}/reject', [EditorController::class, 'reject'])
+        ->name('editor.news.reject');
+
+    // AUTHOR SIDE
+    Route::get('/pending-review', [AuthorController::class, 'pendingReview'])
+        ->name('pending.review');
 });
 
 // search news -------------------------------//
@@ -139,6 +142,18 @@ Route::get('/search-news', [NewsController::class, 'search'])
 // ----------------------------------------------setting-----------------------------------//
 
 Route::middleware(['admin'])->group(function(){
+
+Route::get('setting',[SettingController::class,'view'])->name('view.setting');
+
+Route::post(
+    '/translation/{translation}/approve',
+    [NewsController::class, 'approveTranslation']
+)->name('translation.approve');
+
+Route::post(
+    '/translation/{translation}/reject',
+    [NewsController::class, 'rejectTranslation']
+)->name('translation.reject');
 
 Route::get('/setting',[SettingController::class,'view'])->name('admin.settings');
 
@@ -193,3 +208,7 @@ Route::post('/change-password', [AuthController::class, 'changePassword'])
     ->name('change.password');
 
     Route::post('/update-password',[AuthController::class,'updatePassword'])->name('update.password');
+
+
+    // members ===============================//
+    Route::post('/create-members',[MembersController::class,'store'])->name('members.store');

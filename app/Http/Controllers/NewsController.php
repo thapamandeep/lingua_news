@@ -21,6 +21,7 @@ $categories = Category::all();
 $subcategories = Subcategory::all();
 $roles = Role::all();
  $layout = 'admin.layouts.template';
+ News::with(['author', 'category']);
 
     // for author dashboard
    if(auth()->check() && auth()->user()->role_id == 2){
@@ -33,49 +34,46 @@ return view('admin.pages.news.add-news', compact('categories','subcategories','r
 
 
 
- public function store(Request $request)
+public function store(Request $request)
 {
     $data = $request->validate([
-        // NEWS ONLY
         'slug' => 'required|unique:news,slug',
         'category_id' => 'required|exists:categories,id',
         'subcategory_id' => 'nullable|exists:subcategories,id',
-        'role_id' => 'required|exists:roles,id',
-        'status' => 'required|in:draft,published',
+        
         'image' => 'required|image',
     ]);
 
-    // IMAGE UPLOAD
     $imageName = null;
 
     if ($request->hasFile('image')) {
         $file = $request->file('image');
-
         $imageName = time().'.'.$file->getClientOriginalExtension();
-
         $file->storeAs('gallery', $imageName, 'public');
     }
 
-    // SAVE NEWS
     $news = new News();
-
     $news->slug = Str::slug($data['slug']);
     $news->category_id = $data['category_id'];
     $news->subcategory_id = $data['subcategory_id'];
-    $news->role_id = $data['role_id'];
-    $news->status = $data['status'];
+    $news->status = 'pending';
+
+    // NEW SYSTEM FIELDS
+    $news->author_id = auth()->id();
     $news->image = $imageName;
 
     $news->save();
 
-    return redirect()->back()->with('success','news has been added');
+    return back()->with('success', 'News created successfully');
 }
 
-public function index(){
+public function index()
+{
+    $news = News::with(['author', 'category'])
+        ->latest()
+        ->get();
 
-$news = News::all();
-
-return view('admin.pages.news.news-index', compact('news'));
+    return view('admin.pages.news.news-index', compact('news'));
 }
 
 public function editNews(News $news){
@@ -86,22 +84,22 @@ $roles = Role::all();
 return view('admin.pages.news.edit',compact('news','subcategories','roles'));
 }
 
-public function newsTranslate(){
+public function newsTranslate()
+{
+    $news = News::latest()->get();
+    $languages = Language::all();
 
-$news = News::all();
+    $layout = 'admin.layouts.template';
 
-$slugs =  News::where('slug')->get();
-
-$layout = 'admin.layouts.template';
-
-    // for author dashboard
-   if(auth()->check() && auth()->user()->role_id == 2){
+    if (auth()->check() && auth()->user()->role_id == 2) {
         $layout = 'author.layouts.template';
     }
 
-return view('admin.pages.news_translations.news-translations',compact('slugs','news'));
+    return view(
+        'admin.pages.news_translations.news-translations',
+        compact('news', 'languages', 'layout')
+    );
 }
-
 public function storeTranslation(Request $request)
 {
     $data = $request->validate([
@@ -112,7 +110,6 @@ public function storeTranslation(Request $request)
         'content' => 'nullable|string',
     ]);
 
-    // Save or update translation (prevents duplicates)
     NewsTranslation::updateOrCreate(
         [
             'news_id' => $data['news_id'],
@@ -122,17 +119,26 @@ public function storeTranslation(Request $request)
             'title' => $data['title'],
             'description' => $data['description'],
             'content' => $data['content'],
+
+            // Workflow fields
+            'author_id' => auth()->id(),
+            'status' => 'pending',
+            'approved_by' => null,
+            'approved_at' => null,
         ]
     );
 
     return redirect()
         ->back()
-        ->with('success', 'News translation saved successfully');
+        ->with('success', 'Translation submitted for review successfully.');
 }
 
 public function translateIndex(){
 
-$news = NewsTranslation::all();
+$news = NewsTranslation::with([
+    'author',
+    'approver'
+])->latest()->get();
 
 return view('admin.pages.news_translations.index',compact('news'));
 }
@@ -149,33 +155,19 @@ return view('admin.pages.news_translations.edit',compact('translation','language
 
 public function updateNews(Request $request, News $news)
 {
-    /*
-    =========================
-    VALIDATION
-    =========================
-    */
     $data = $request->validate([
         'slug' => 'required|unique:news,slug,' . $news->id,
         'category_id' => 'required|exists:categories,id',
         'subcategory_id' => 'nullable|exists:subcategories,id',
-        'role_id' => 'required|exists:roles,id',
-        'status' => 'required|in:draft,published',
+       
         'image' => 'nullable|image',
     ]);
 
-    /*
-    =========================
-    IMAGE UPDATE
-    =========================
-    */
     if ($request->hasFile('image')) {
-
-        // delete old image
         if ($news->image) {
             Storage::disk('public')->delete('gallery/' . $news->image);
         }
 
-        // upload new image
         $file = $request->file('image');
         $imageName = time() . '.' . $file->getClientOriginalExtension();
         $file->storeAs('gallery', $imageName, 'public');
@@ -183,22 +175,15 @@ public function updateNews(Request $request, News $news)
         $news->image = $imageName;
     }
 
-    /*
-    =========================
-    UPDATE NEWS TABLE
-    =========================
-    */
     $news->slug = Str::slug($data['slug']);
     $news->category_id = $data['category_id'];
     $news->subcategory_id = $data['subcategory_id'];
-    $news->role_id = $data['role_id'];
-    $news->status = $data['status'];
+    $news->status = 'pending';
+    $news->author_id = auth()->id();
 
     $news->save();
 
-
-
-    return redirect()->back()->with('success', 'News updated successfully');
+    return back()->with('success', 'News updated successfully');
 }
 
 
@@ -214,12 +199,18 @@ public function updateTranslation(Request $request, NewsTranslation $translation
     ]);
 
         $translation->news_id = $data['news_id'];
-        $translation->language_id = $data['language_id'];
-        $translation->title = $data['title'];
-        $translation->description = $data['description'];
-        $translation->content = $data['content'];
+$translation->language_id = $data['language_id'];
+$translation->title = $data['title'];
+$translation->description = $data['description'];
+$translation->content = $data['content'];
 
-        $translation->save();
+// Workflow
+$translation->author_id = auth()->id();
+$translation->status = 'pending';
+$translation->approved_by = null;
+$translation->approved_at = null;
+
+$translation->save();
       
 
     return redirect()->back()->with('success', 'Translation updated successfully');
@@ -339,9 +330,57 @@ public function updateTranslation(Request $request, NewsTranslation $translation
 
 public function delete(NewsTranslation $translation)
 {
-    $translation->news()->delete(); // deletes main news
+    $translation->delete();
 
-    return redirect()->back()->with('success', 'Deleted successfully');
+    return back()->with('success', 'Translation deleted successfully');
+}
+
+public function approve(News $news)
+{
+    $news->status = 'approved';
+    $news->approved_by = auth()->id();
+    $news->approved_at = now();
+    $news->save();
+
+    return back()->with('success', 'News approved');
+}
+
+public function reject(News $news)
+{
+    $news->status = 'rejected';
+    $news->approved_by = auth()->id();
+    $news->approved_at = now();
+    $news->save();
+
+    return back()->with('success', 'News rejected');
+}
+
+public function approveTranslation(NewsTranslation $translation)
+{
+    $translation->status = 'approved';
+    $translation->approved_by = auth()->id();
+    $translation->approved_at = now();
+
+    $translation->save();
+
+    return back()->with(
+        'success',
+        'Translation approved successfully'
+    );
+}
+
+public function rejectTranslation(NewsTranslation $translation)
+{
+    $translation->status = 'rejected';
+    $translation->approved_by = auth()->id();
+    $translation->approved_at = now();
+
+    $translation->save();
+
+    return back()->with(
+        'success',
+        'Translation rejected successfully'
+    );
 }
 
 // search-----------------------//

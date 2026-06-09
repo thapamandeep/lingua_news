@@ -233,3 +233,123 @@ body{
 .btn:hover{
     opacity:0.8;
 }
+
+.table-wrapper {
+    padding: 20px;
+}
+
+.table-card {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.08);
+    overflow: hidden;
+}
+
+/* TABLE */
+.news-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+}
+
+/* HEADER */
+.news-table thead {
+    background: #111827;
+    color: #fff;
+}
+
+.news-table th {
+    padding: 14px 16px;
+    text-align: left;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+}
+
+/* ROW */
+.news-table td {
+    padding: 14px 16px;
+    border-bottom: 1px solid #eee;
+    font-size: 14px;
+}
+
+.news-table tbody tr:hover {
+    background: #f9fafb;
+}
+
+/* TITLE */
+.title-cell {
+    font-weight: 600;
+    color: #111827;
+}
+
+/* MUTED TEXT */
+.muted {
+    color: #6b7280;
+}
+
+/* BADGES */
+.badge {
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.badge-pending {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.badge-approved {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.badge-rejected {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+/* ACTIONS */
+.actions {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+/* BUTTONS */
+.btn {
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 13px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+}
+
+/* VIEW */
+.btn-view {
+    background: #e0f2fe;
+    color: #0369a1;
+}
+
+/* APPROVE */
+.btn-approve {
+    background: #dcfce7;
+    color: #166534;
+}
+
+/* REJECT */
+.btn-reject {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+/* EMPTY */
+.empty-state {
+    text-align: center;
+    padding: 40px;
+    color: #6b7280;
+    font-size: 15px;
+}

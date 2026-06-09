@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Mail;
 use App\Models\User;
+use App\Models\Member;
 use App\Mail\OtpMail;
 
 class AuthController extends Controller
@@ -22,51 +23,59 @@ class AuthController extends Controller
   return view('auth.register');
   }
 
+
+
 public function login(Request $request)
 {
-    $credentails = $request->validate([
+    $credentials = $request->validate([
         'email' => 'required|email',
         'password' => 'required',
     ]);
 
-    $user = User::where('email', $credentails['email'])->first();
+    // Check Users Table
+    $user = User::where('email', $credentials['email'])->first();
 
-    if ($user) {
+    if ($user && Hash::check($credentials['password'], $user->password)) {
 
-        if (Hash::check($credentails['password'], $user->password)) {
+        Auth::login($user);
 
-            Auth::login($user);
+        $request->session()->regenerate();
 
-            $request->session()->regenerate();
-
-            if ($user->role_id == 1) {
-                return redirect()->route('admin.dashboard');
-            }
-
-            elseif ($user->role_id == 2) {
-                return redirect()->route('author.dashboard');
-            }
-
-            elseif ($user->role_id == 3) {
-                return redirect()->route('editor.dashboard');
-            }
-
-            else {
-                Session::flash('error', 'User not recognized');
-                return redirect()->back();
-            }
-
-        } else {
-
-            Session::flash('error', 'Incorrect password');
-            return redirect()->back();
+        if ($user->role_id == 1) {
+            return redirect()->route('admin.dashboard');
         }
 
-    } else {
+        if ($user->role_id == 2) {
+            return redirect()->route('author.dashboard');
+        }
 
-        Session::flash('error', 'User not found');
+        if ($user->role_id == 3) {
+            return redirect()->route('editor.dashboard');
+        }
+
+        Session::flash('error', 'User role not recognized');
         return redirect()->back();
     }
+
+    // Check Members Table
+    $member = Member::where('email', $credentials['email'])->first();
+
+    if ($member && Hash::check($credentials['password'], $member->password)) {
+
+        session([
+            'member_id'    => $member->id,
+            'member_name'  => $member->name,
+            'member_email' => $member->email,
+        ]);
+
+        $request->session()->regenerate();
+
+        return redirect()->route('home.index'); // Lingua News homepage
+    }
+
+    Session::flash('error', 'Invalid email or password');
+
+    return redirect()->back();
 }
 
 public function logout(){
@@ -136,5 +145,7 @@ public function updatePassword(Request $request)
 
     return redirect()->route('login');
 }
+
+
 
 }

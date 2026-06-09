@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\Role;
 use App\Models\Subcategory;
 use App\Models\NewsTranslation;
+use App\Models\User;
 
 class News extends Model
 {
@@ -15,8 +16,11 @@ class News extends Model
         'image',
         'category_id',
         'subcategory_id',
-        'role_id',
-        'status'
+        'author_id',
+        'status',
+        'approved_by',
+        'approved_at'
+
     ];
 
     public function category()
@@ -38,4 +42,9 @@ class News extends Model
     {
         return $this->hasMany(NewsTranslation::class);
     }
+
+    public function author()
+{
+    return $this->belongsTo(User::class, 'author_id');
+}
 }
