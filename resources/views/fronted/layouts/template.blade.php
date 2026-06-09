@@ -18,6 +18,8 @@
     <link rel="stylesheet" href="{{ asset('css/sites/previous-news.css') }}">
     <link rel="stylesheet" href="{{ asset('css/sites/detail.css') }}">
     <link rel="stylesheet" href="{{ asset('css/sites/search-index.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/sites/profile.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/sites/profile-edit.css') }}">
 
 </head>
 <body>

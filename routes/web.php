@@ -212,3 +212,6 @@ Route::post('/change-password', [AuthController::class, 'changePassword'])
 
     // members ===============================//
     Route::post('/create-members',[MembersController::class,'store'])->name('members.store');
+    Route::get('member-profile/{member}',[MembersController::class,'profile'])->name('member.profile');
+    Route::get('member-edit/{member}',[MembersController::class,'edit'])->name('edit.member');
+    Route::post('/update-member/{member}',[MembersController::class,'update'])->name('update.member');
