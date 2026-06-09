@@ -10,7 +10,12 @@ class LanguageController extends Controller
 {
     public function form(){
 
-    return view('admin.pages.languages.add');
+      // for author dashboard
+   if(auth()->check() && auth()->user()->role_id == 2){
+        $layout = 'author.layouts.template';
+    }
+
+    return view('admin.pages.languages.add', compact('layout'));
     }
 
     public function store(Request $request){
@@ -74,7 +79,11 @@ public function changeLanguage(Request $request)
 public function index(){
 
 $languages = Language::all();
+  // for author dashboard
+   if(auth()->check() && auth()->user()->role_id == 2){
+        $layout = 'author.layouts.template';
+    }
 
-return view('admin.pages.languages.index', compact('languages'));
+return view('admin.pages.languages.index', compact('languages', 'layout'));
 }
 }

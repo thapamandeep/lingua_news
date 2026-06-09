@@ -29,7 +29,7 @@
             </div>
         @endif
 
-        <form action="{{route('update.language',$language->id)}}" method="POST" class="user-form">
+        <form action="{{route('languages.update',$language->id)}}" method="POST" class="user-form">
 
             @csrf
           

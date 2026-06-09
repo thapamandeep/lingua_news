@@ -46,7 +46,7 @@
                             </a>
 
                             <!-- DELETE -->
-                            <form action="{{ route('delete.news', $news->id) }}" method="POST" onsubmit="return confirm('Are you sure?')">
+                            <form action="{{ route('news.delete', $news->id) }}" method="POST" onsubmit="return confirm('Are you sure?')">
                                 @csrf
                                 @method('DELETE')
 

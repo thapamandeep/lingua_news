@@ -64,8 +64,8 @@
 
             <div class="dropdown-menu">
 
-                <a href="{{ route('get.addnews') }}"
-                   class="{{ request()->routeIs('get.addnews') ? 'active' : '' }}">
+                <a href="{{ route('news.create') }}"
+                   class="{{ request()->routeIs('news.create') ? 'active' : '' }}">
 
                     <div class="menu-left">
 
@@ -76,8 +76,8 @@
 
                 </a>
 
-                <a href="{{ route('news.translate') }}"
-                   class="{{ request()->routeIs('news.translate') ? 'active' : '' }}">
+                <a href="{{ route('translation.create') }}"
+                   class="{{ request()->routeIs('translation.create') ? 'active' : '' }}">
 
                     <div class="menu-left">
 
@@ -103,6 +103,106 @@
             </div>
 
         </a>
+
+     {{-- Categories --}}
+        <div class="dropdown">
+
+            <button type="button" class="dropdown-btn">
+                <div class="menu-left">
+                    <i class="fa-solid fa-layer-group"></i>
+                    <span>Categories</span>
+                </div>
+                <i class="fa-solid fa-chevron-down arrow"></i>
+            </button>
+
+            <div class="dropdown-menu">
+
+                <a href="{{ route('category.index') }}">
+                    <div class="menu-left">
+                        <i class="fa-solid fa-list"></i>
+                        <span>All Categories</span>
+                    </div>
+                </a>
+
+                <a href="{{ route('category.create') }}">
+                    <div class="menu-left">
+                        <i class="fa-solid fa-plus"></i>
+                        <span>Add Category</span>
+                    </div>
+                </a>
+
+            </div>
+
+        </div>
+
+        {{-- Sub Categories --}}
+        <div class="dropdown">
+
+            <button type="button" class="dropdown-btn">
+                <div class="menu-left">
+                    <i class="fa-solid fa-folder-tree"></i>
+                    <span>Sub Categories</span>
+                </div>
+                <i class="fa-solid fa-chevron-down arrow"></i>
+            </button>
+
+            <div class="dropdown-menu">
+
+                <a href="{{ route('subcategories.index') }}">
+                    <div class="menu-left">
+                        <i class="fa-solid fa-list"></i>
+                        <span>All Sub Categories</span>
+                    </div>
+                </a>
+
+                <a href="{{ route('subcategories.create') }}">
+                    <div class="menu-left">
+                        <i class="fa-solid fa-plus"></i>
+                        <span>Add Sub Category</span>
+                    </div>
+                </a>
+
+            </div>
+
+        </div>
+
+        {{-- Languages --}}
+        <div class="dropdown">
+
+            <button type="button" class="dropdown-btn">
+                <div class="menu-left">
+                    <i class="fa-solid fa-language"></i>
+                    <span>Languages</span>
+                </div>
+                <i class="fa-solid fa-chevron-down arrow"></i>
+            </button>
+
+            <div class="dropdown-menu">
+
+                <a href="{{ route('languages.index') }}">
+                    <div class="menu-left">
+                        <i class="fa-solid fa-list"></i>
+                        <span>All Languages</span>
+                    </div>
+                </a>
+
+                <a href="{{ route('languages.create') }}">
+                    <div class="menu-left">
+                        <i class="fa-solid fa-plus"></i>
+                        <span>Add Language</span>
+                    </div>
+                </a>
+
+                <a href="{{ route('translation.create') }}">
+                    <div class="menu-left">
+                        <i class="fa-solid fa-earth-asia"></i>
+                        <span>Translate News</span>
+                    </div>
+                </a>
+
+            </div>
+
+        </div>
 
         {{-- NOTIFICATION --}}
         <a href="#">

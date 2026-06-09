@@ -1,4 +1,4 @@
-@extends('admin.layouts.template')
+@extends($layout)
 
 @section('content')
 
@@ -8,7 +8,7 @@
 
         <div class="table-header">
             <h1>Languages</h1>
-            <a href="{{ route('get.language.form') }}" class="btn btn-primary">
+            <a href="{{ route('get.languages.create') }}" class="btn btn-primary">
                 + Add Language
             </a>
         </div>

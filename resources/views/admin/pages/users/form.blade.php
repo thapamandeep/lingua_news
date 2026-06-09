@@ -22,7 +22,7 @@
         </div>
     @endif
 
-        <form action="{{route('post.users')}}" method="POST" class="user-form">@csrf
+        <form action="{{route('users.store')}}" method="POST" class="user-form">@csrf
 
             <!-- Name -->
             <div class="form-group">

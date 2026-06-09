@@ -8,7 +8,7 @@
 
         <div class="table-header">
             <h1>All Subcategories</h1>
-            <a href="{{ route('get.subcategory') }}" class="btn btn-primary">
+            <a href="{{ route('subcategories.create') }}" class="btn btn-primary">
                 + Add Subcategory
             </a>
         </div>

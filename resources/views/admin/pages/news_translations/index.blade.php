@@ -8,8 +8,8 @@
 
         <div class="table-header">
             <h1>All Subcategories</h1>
-            <a href="{{ route('get.categoryForm') }}" class="btn btn-primary">
-                + Add category
+            <a href="{{ route('translation.create') }}" class="btn btn-primary">
+                + Add Translation News
             </a>
         </div>
 
@@ -72,12 +72,12 @@
         </a>
 
         <!-- EDIT -->
-        <a href="{{route('get.edit.news',$news->id)}}" class="btn btn-warning btn-sm">
+        <a href="{{route('news.edit',$news->id)}}" class="btn btn-warning btn-sm">
             Edit
         </a>
 
         <!-- DELETE -->
-        <form action="{{route('delete.news',$news->id)}}" method="POST" class="delete-form">
+        <form action="{{route('news.delete',$news->id)}}" method="POST" class="delete-form">
 
             @csrf
             @method('DELETE')

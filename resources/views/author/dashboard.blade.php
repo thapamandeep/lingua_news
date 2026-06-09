@@ -27,7 +27,7 @@
         </div>
 
         {{-- BUTTON --}}
-        <a href="{{ route('get.addnews') }}"
+        <a href="{{ route('news.create') }}"
            class="create-btn">
 
             <i class="fa-solid fa-plus"></i>

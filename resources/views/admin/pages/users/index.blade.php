@@ -9,7 +9,7 @@
         <div class="table-header">
             <h1>All Users</h1>
 
-            <a href="{{ route('users.form') }}" class="btn btn-primary">
+            <a href="{{ route('users.create') }}" class="btn btn-primary">
                 + Add User
             </a>
         </div>

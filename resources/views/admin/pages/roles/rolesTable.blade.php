@@ -8,7 +8,7 @@
 
         <div class="table-header">
             <h1>Roles</h1>
-            <a href="{{ route('get.rolesForm') }}" class="btn btn-primary">
+            <a href="{{ route('roles.create') }}" class="btn btn-primary">
                 + Add role
             </a>
         </div>

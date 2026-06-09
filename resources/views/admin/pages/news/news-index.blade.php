@@ -8,7 +8,7 @@
 
         <div class="table-header">
             <h1>All News</h1>
-            <a href="{{ route('get.categoryForm') }}" class="btn btn-primary">
+            <a href="{{ route('category.create') }}" class="btn btn-primary">
                 + Add category
             </a>
         </div>
@@ -68,7 +68,7 @@
         </a>
 
         <!-- DELETE -->
-        <form action="{{route('delete.news',$news->id)}}" method="POST" class="delete-form">
+        <form action="{{route('news.delete',$news->id)}}" method="POST" class="delete-form">
 
             @csrf
             @method('DELETE')

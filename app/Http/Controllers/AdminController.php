@@ -41,6 +41,8 @@ $newsByMonth = NewsTranslation::whereNotNull('created_at')
 
     $categoryData = Category::withCount('news')->get();
 
+    
+
 
     return view('admin.pages.dashboard', compact('totalNews','totalUsers','totalCategories', 
      'newsByMonth','latestNews','recentNews','categoryData'));
@@ -213,7 +215,12 @@ public function rolesDelete($id)
 
     $categories = Category::all();
 
-    return view('admin.pages.categories.form', compact('categories'));
+      // for author dashboard
+   if(auth()->check() && auth()->user()->role_id == 2){
+        $layout = 'author.layouts.template';
+    }
+
+    return view('admin.pages.categories.form', compact('categories', 'layout'));
     }
 
     public function categoryStore(Request $request){
@@ -240,7 +247,12 @@ public function rolesDelete($id)
 
     public function categoryIndex(){
 
-    return view('admin.pages.categories.catTable');
+      // for author dashboard
+   if(auth()->check() && auth()->user()->role_id == 2){
+        $layout = 'author.layouts.template';
+    }
+
+    return view('admin.pages.categories.catTable', compact('layout'));
     }
 
     public function categoryEdit(Category $category){
@@ -255,7 +267,12 @@ public function rolesDelete($id)
     $categories = Category::all();
     $subcategories = Subcategory::all();
 
-    return view('admin.pages.subcategories.form',compact('categories','subcategories'));
+      // for author dashboard
+   if(auth()->check() && auth()->user()->role_id == 2){
+        $layout = 'author.layouts.template';
+    }
+
+    return view('admin.pages.subcategories.form',compact('categories','subcategories', 'layout'));
     }
 
     public function subcategoryStore(Request $request){
@@ -284,7 +301,12 @@ public function rolesDelete($id)
 
     $subcategories = Subcategory::all();
 
-    return view('admin.pages.subcategories.subcatTable',compact('subcategories'));
+      // for author dashboard
+   if(auth()->check() && auth()->user()->role_id == 2){
+        $layout = 'author.layouts.template';
+    }
+
+    return view('admin.pages.subcategories.subcatTable',compact('subcategories', 'layout'));
     }
 
 

@@ -30,14 +30,14 @@
             <ul class="dropdown-menu">
 
                 <li>
-                    <a href="{{route('get.categoryForm')}}">
+                    <a href="{{route('category.create')}}">
                         <i class="fa-solid fa-plus"></i>
                         Category Form
                     </a>
                 </li>
 
                 <li>
-                    <a href="{{route('get.categoryIndex')}}">
+                    <a href="{{route('category.index')}}">
                         <i class="fa-solid fa-table"></i>
                         Category Table
                     </a>
@@ -61,14 +61,14 @@
             <ul class="dropdown-menu">
 
                 <li>
-                    <a href="{{route('get.subcategory')}}">
+                    <a href="{{route('subcategories.create')}}">
                         <i class="fa-solid fa-plus"></i>
                         Sub category Form
                     </a>
                 </li>
 
                 <li>
-                    <a href="{{route('get.subcategory.index')}}">
+                    <a href="{{route('subcategories.index')}}">
                         <i class="fa-solid fa-table"></i>
                         Sub category Table
                     </a>
@@ -95,7 +95,7 @@
             <ul class="dropdown-menu">
 
                 <li>
-                    <a href="{{route('get.addnews')}}">
+                    <a href="{{route('news.create')}}">
                         <i class="fa-solid fa-plus"></i>
                         News Add
                     </a>
@@ -109,14 +109,14 @@
                 </li>
 
                  <li>
-                    <a href="{{route('news.translate')}}">
+                    <a href="{{route('translation.create')}}">
                         <i class="fa-solid fa-plus"></i>
                         Add Translate
                     </a>
                 </li>
 
                   <li>
-                    <a href="{{route('translate.index')}}">
+                    <a href="{{route('translation.index')}}">
                         <i class="fa-solid fa-table"></i>
                         Translate Table
                     </a>
@@ -173,7 +173,7 @@
             <ul class="dropdown-menu">
 
                 <li>
-                    <a href="{{ route('users.form') }}">
+                    <a href="{{ route('users.create') }}">
                         <i class="fa-solid fa-user-plus"></i>
                         Users Form
                     </a>
@@ -205,14 +205,14 @@
     <ul class="dropdown-menu">
 
         <li>
-            <a href="{{route('get.rolesForm')}}">
+            <a href="{{route('roles.create')}}">
                 <i class="fa-solid fa-plus"></i>
                 Role Forms
             </a>
         </li>
 
         <li>
-            <a href="{{route('get.rolesIndex')}}">
+            <a href="{{route('roles.index')}}">
                 <i class="fa-solid fa-table"></i>
                 Role Table
             </a>
@@ -237,7 +237,7 @@
     <ul class="dropdown-menu">
 
         <li>
-            <a href="{{route('get.language.form')}}">
+            <a href="{{route('languages.create')}}">
                 <i class="fa-solid fa-plus"></i>
                 Language Forms
             </a>
@@ -245,7 +245,7 @@
 
         <li>
 
-            <a href="{{route('language.index')}}">
+            <a href="{{route('languages.index')}}">
             <a href="{{route('lang.index')}}">
 
                 <i class="fa-solid fa-table"></i>

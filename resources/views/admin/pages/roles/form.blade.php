@@ -22,7 +22,7 @@
 
     <div class="form-container">
 
-        <form action="{{route('post.roles')}}" method="POST">
+        <form action="{{route('roles.store')}}" method="POST">
 
             @csrf
 

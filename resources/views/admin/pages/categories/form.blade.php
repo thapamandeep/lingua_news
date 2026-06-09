@@ -1,4 +1,4 @@
-@extends('admin.layouts.template')
+@extends($layout)
 
 @section('content')
 
@@ -37,7 +37,7 @@
             </div>
         @endif
 
-        <form action="{{ route('post.category') }}" method="POST" class="user-form">
+        <form action="{{ route('category.store') }}" method="POST" class="user-form">
 
             @csrf
 

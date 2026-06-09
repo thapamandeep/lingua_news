@@ -8,7 +8,7 @@
 
         <div class="table-header">
             <h1>All Subcategories</h1>
-            <a href="{{ route('get.categoryForm') }}" class="btn btn-primary">
+            <a href="{{ route('category.create') }}" class="btn btn-primary">
                 + Add category
             </a>
         </div>

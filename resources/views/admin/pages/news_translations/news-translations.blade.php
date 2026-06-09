@@ -30,7 +30,7 @@
     @endif
 
 
-    <form action="{{route('post.storeTranslation')}}" method="POST">
+    <form action="{{route('translation.store')}}" method="POST">
         @csrf
 
         <!-- NEWS SELECT -->
