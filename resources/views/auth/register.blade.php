@@ -49,54 +49,74 @@
                 Create your account to continue.
             </div>
 
-            <form>
+      <form action="{{ route('members.store') }}" method="POST">
+    @csrf
 
-              
+    
 
-                <div class="form-group">
-                    <label>Email Address</label>
+    <div class="form-group">
+        <label>Email Address</label>
 
-                    <input
-                        type="email"
-                        class="input-box"
-                        placeholder="Enter your email"
-                    >
-                </div>
+        <input
+            type="email"
+            name="email"
+            class="input-box"
+            placeholder="Enter your email"
+            value="{{ old('email') }}"
+        >
 
-                <div class="form-group">
-                    <label>Password</label>
+        @error('email')
+            <small style="color:red;">
+                {{ $message }}
+            </small>
+        @enderror
+    </div>
 
-                    <input
-                        type="password"
-                        class="input-box"
-                        placeholder="Create password"
-                    >
-                </div>
+    <div class="form-group">
+        <label>Password</label>
 
-                <div class="form-group">
-                    <label>Confirm Password</label>
+        <input
+            type="password"
+            name="password"
+            class="input-box"
+            placeholder="Create password"
+        >
 
-                    <input
-                        type="password"
-                        class="input-box"
-                        placeholder="Confirm password"
-                    >
-                </div>
+        @error('password')
+            <small style="color:red;">
+                {{ $message }}
+            </small>
+        @enderror
+    </div>
 
-                <div class="options">
+    <div class="form-group">
+        <label>Confirm Password</label>
 
-                    <label>
-                        <input type="checkbox">
-                        I agree to Terms & Privacy Policy
-                    </label>
+        <input
+            type="password"
+            name="confirm_password"
+            class="input-box"
+            placeholder="Confirm password"
+        >
 
-                </div>
+        @error('confirm_password')
+            <small style="color:red;">
+                {{ $message }}
+            </small>
+        @enderror
+    </div>
 
-                <button class="login-btn">
-                    Create Account
-                </button>
+    <div class="options">
+        <label>
+            <input type="checkbox">
+            I agree to Terms & Privacy Policy
+        </label>
+    </div>
 
-            </form>
+    <button type="submit" class="login-btn">
+        Create Account
+    </button>
+</form>
 
             <div class="divider">
                 OR

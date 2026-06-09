@@ -1,0 +1,57 @@
+
+.form-group{
+    margin-bottom:20px;
+}
+
+.form-group label{
+    display:block;
+    margin-bottom:8px;
+    font-weight:600;
+    color:#222;
+}
+
+.form-control{
+    width:100%;
+    padding:14px 16px;
+    border:1px solid #dcdcdc;
+    border-radius:8px;
+    font-size:15px;
+    transition:.3s;
+}
+
+.form-control:focus{
+    outline:none;
+    border-color:#c1121f;
+    box-shadow:0 0 0 3px rgba(193,18,31,.1);
+}
+
+.form-text{
+    color:#777;
+    font-size:13px;
+}
+
+.text-danger{
+    color:#dc3545;
+    font-size:13px;
+}
+
+.profile-actions{
+    margin-top:30px;
+    display:flex;
+    gap:12px;
+}
+
+.btn-cancel{
+    display:inline-block;
+    background:#6c757d;
+    color:#fff;
+    text-decoration:none;
+    padding:13px 30px;
+    border-radius:8px;
+    font-weight:600;
+}
+
+.btn-cancel:hover{
+    background:#5a6268;
+}
+

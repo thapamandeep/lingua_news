@@ -18,6 +18,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\EditorController;
 use App\Http\Controllers\SettingController;
+use App\Http\Controllers\MembersController;
 
 
 // ---------------------------site----------------------------------//
@@ -143,7 +144,11 @@ Route::get('/search-news', [NewsController::class, 'search'])
 Route::middleware(['admin'])->group(function(){
 
 
+
 Route::get('seeting',[SettingController::class,'view'])->name('view.setting');
+
+
+Route::get('setting',[SettingController::class,'view'])->name('view.setting');
 
 
 Route::post(
@@ -209,3 +214,12 @@ Route::post('/change-password', [AuthController::class, 'changePassword'])
     ->name('change.password');
 
     Route::post('/update-password',[AuthController::class,'updatePassword'])->name('update.password');
+
+
+
+    // members ===============================//
+    Route::post('/create-members',[MembersController::class,'store'])->name('members.store');
+    Route::get('member-profile/{member}',[MembersController::class,'profile'])->name('member.profile');
+    Route::get('member-edit/{member}',[MembersController::class,'edit'])->name('edit.member');
+    Route::post('/update-member/{member}',[MembersController::class,'update'])->name('update.member');
+

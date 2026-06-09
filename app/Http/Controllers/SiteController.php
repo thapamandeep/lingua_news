@@ -22,9 +22,20 @@ class SiteController extends Controller
         ?? Language::where('code', 'en')->first();
     }
 
+
+
     /**
      * Apply translations to collection
      */
+
+
+    
+
+
+    /**
+     * Apply translations to collection
+     */
+
     private function applyTranslations($news, $language)
     {
         if (!$language) {
@@ -143,9 +154,19 @@ class SiteController extends Controller
         );
     }
 
+
+
     /**
      * Subcategory Page
      */
+
+   
+
+
+    /**
+     * Subcategory Page
+     */
+
     public function subcategoryPage($slug)
     {
         $subcategory = Subcategory::where(
@@ -186,9 +207,25 @@ class SiteController extends Controller
         );
     }
 
+
+
     /**
      * Change Language
      */
+
+
+    /**
+     * Change Language
+
+
+  
+
+
+
+   
+     * Change Language
+     */
+
     public function changeLanguage(Request $request)
     {
         $request->validate([
@@ -205,12 +242,19 @@ class SiteController extends Controller
         ]);
     }
 
-    /**
-     * News Detail
-     */
+
+
+  
+   
+
+
+    
     public function detail($id)
     {
         $language = $this->getLanguage();
+
+
+
 
         $news = News::with([
                 'translations',
@@ -232,5 +276,27 @@ class SiteController extends Controller
                 'language'
             )
         );
-    }
+
+    
+
+    $news = News::with(['translations', 'category'])->findOrFail($id);
+
+    $translation = $news->translations
+        ->where('language_id', $language->id)
+        ->first();
+
+    return view('fronted.news.detail', compact('news','translation','language'));
 }
+    // public function detail($id)
+    // {
+    //     $news = News::with(['translations', 'category'])
+    //         ->findOrFail($id);
+
+
+    //     return view('fronted.news.detail', compact('news'));
+    // }
+}
+
+    
+
+
