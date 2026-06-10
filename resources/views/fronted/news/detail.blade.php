@@ -25,15 +25,15 @@
             </span>
 
             <h1>
-                {{ $translation->title ?? 'No Title' }}
-            </h1>
+    {{ $news->translations->first()->title ?? 'No Title' }}
+</h1>
 
             <div class="news-date">
                 {{ $news->created_at->format('F d, Y') }}
             </div>
 
             <div class="description">
-                {!! $translation->description ?? '' !!}
+                {{ $news->translations->first()->content ?? '' }}
             </div>
 
         </div>

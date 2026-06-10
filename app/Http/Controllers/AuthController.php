@@ -62,11 +62,7 @@ public function login(Request $request)
 
     if ($member && Hash::check($credentials['password'], $member->password)) {
 
-        session([
-            'member_id'    => $member->id,
-            'member_name'  => $member->name,
-            'member_email' => $member->email,
-        ]);
+        Auth::login($member);
 
         $request->session()->regenerate();
 

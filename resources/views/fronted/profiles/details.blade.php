@@ -39,6 +39,13 @@
                     <a href="{{route('edit.member',$member->id)}}" class="btn-edit">
                         Edit Profile
                     </a>
+
+            <a href="{{ route('logout') }}" class="btn-logout">
+        Logout
+    </a>
+    </form>
+</div>
+
                 </div>
 
             </div>

@@ -72,6 +72,12 @@ class EditorController extends Controller
             'approved_at' => now(),
         ]);
 
+        $news->translations()->update([
+        'status' => 'approved',
+        'approved_by' => auth()->id(),
+        'approved_at' => now(),
+    ]);
+
         return back()->with('success', 'News approved successfully');
     }
 

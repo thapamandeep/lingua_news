@@ -45,16 +45,18 @@
 
 </form>
 
-@php
-use App\Models\Member;
 
-$member = Member::where('email', session('member_email'))->first();
-@endphp
-
-     <div class="signin">
-    <a href="{{ route('login') }}"><button >Sign In</button></a>
-          <a href="{{route('member.profile',$member->id)}}"> <i class="fa fa-user user-icon"></i></a>
-     </div>
+   <div class="signin">
+    @if(Auth::check())
+        <a href="{{ route('member.profile', Auth::user()->id) }}">
+            <i class="fa fa-user user-icon"></i>
+        </a>
+    @else
+        <a href="{{ route('login') }}">
+            <button>Sign In</button>
+        </a>
+    @endif
+</div>
 
     </div>
     </div>

@@ -120,13 +120,12 @@
             {{ $news->category->name ?? 'No Category' }}
         </span>
     </td>
+    
+<td>{{ $news->author->role->name }}</td>
+
 
     <td>
-        {{ $news->role->name ?? 'Admin' }}
-    </td>
-
-    <td>
-        @if($news->status == 'published')
+        @if($news->status == 'approved')
             <span class="status published">Published</span>
         @else
             <span class="status draft">Draft</span>
