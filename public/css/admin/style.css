@@ -59,7 +59,7 @@ body{
 
 .sidebar ul li a:hover,
 .sidebar ul li.active a{
-    background:#0d6efd;
+    background:#e30817;
 }
 
 
@@ -273,7 +273,7 @@ body{
 }
 
 .dropdown-menu li a{
-    background:#0b1c38;
+    background:#e00b0b;
     padding:12px;
     border-radius:8px;
     font-size:14px;

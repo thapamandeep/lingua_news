@@ -60,12 +60,12 @@ body{
 }
 
 .menu a:hover{
-    background:#1f2937;
+    background:#fd0909;
     color:#fff;
 }
 
 .menu a.active{
-    background:#2563eb;
+    background:#e30e2b;
     color:#fff;
 }
 
@@ -126,7 +126,7 @@ body{
 .card p{
     font-size:32px;
     font-weight:700;
-    color:#2563eb;
+    color:#eb2525;
 }
 
 /* PAGE HEADER */
@@ -146,7 +146,7 @@ body{
     background:#fff;
     padding:25px;
     border-radius:18px;
-    box-shadow:0 4px 12px rgba(0,0,0,0.05);
+    box-shadow:0 4px 12px rgba(224, 7, 57, 0.05);
     overflow-x:auto;
 }
 
@@ -160,7 +160,7 @@ body{
 /* TABLE HEADER */
 
 .news-table thead{
-    background:#2563eb;
+    background:#e30627;
 }
 
 .news-table th{
@@ -254,7 +254,7 @@ body{
 
 /* HEADER */
 .news-table thead {
-    background: #111827;
+    background: #d30812;
     color: #fff;
 }
 
