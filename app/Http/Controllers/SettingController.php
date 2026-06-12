@@ -60,7 +60,8 @@ class SettingController extends Controller
     $newImage = time() . '.' . $file->getClientOriginalExtension();
 
     // store in storage/app/public/settings
-    $file->storeAs('public/settings', $newImage);
+   
+$file->storeAs('settings', $newImage, 'public');
 
     Setting::updateOrCreate(
         ['key' => 'site_logo'],

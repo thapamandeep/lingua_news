@@ -82,7 +82,9 @@
 
                             <p>{{ $item->description }}</p>
 
-                            <a href="#" class="read-me">Read More</a>
+                          <a href="{{ route('detail.news', $item->id) }}" class="read-me">
+    Read More
+</a>
 
                         </div>
 

@@ -24,18 +24,16 @@
                 {{ $news->category->name ?? 'News' }}
             </span>
 
-            <h1>
-    {{ $news->translations->first()->title ?? 'No Title' }}
+       <h1>
+    {{ $news->title }}
 </h1>
-
             <div class="news-date">
                 {{ $news->created_at->format('F d, Y') }}
             </div>
 
-            <div class="description">
-                {{ $news->translations->first()->content ?? '' }}
-            </div>
-
+          <div class="description">
+    {!! $news->content !!}
+</div>
         </div>
 
     </div>

@@ -10,13 +10,13 @@
 
      
          <div class="logo">
-              <img src="{{asset('img/lingua-logo.png')}}" alt="logo">
+              <img src="{{ asset($logo->value) }}" alt="logo">
         </div>
 
 
         <div class="news-head">
             
-            <h2 class="head">Lingua News</h2>
+            <h2 class="head">{{ $siteTitle }}</h2>
         </div>
 
     <form action="{{ route('news.search') }}" method="GET" style="display:flex;">
