@@ -1,0 +1,267 @@
+/* =========================
+   MODERN ABOUT PAGE
+========================= */
+
+.about-modern{
+    max-width:1200px;
+    margin:40px auto 120px;
+    padding:0 15px;
+    position:relative;
+}
+
+/* HERO */
+
+.about-hero{
+    position:relative;
+    height:500px;
+    overflow:hidden;
+    border-radius:12px;
+}
+
+.about-hero img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.hero-overlay{
+    position:absolute;
+    inset:0;
+    background:rgba(0,0,0,0.55);
+}
+
+/* CONTENT INSIDE HERO */
+
+.hero-content{
+    position:absolute;
+    inset:0;
+    z-index:2;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:60px;
+}
+
+.hero-left{
+    max-width:600px;
+}
+
+
+.about-label{
+    color:#fff;
+    font-size:14px;
+    letter-spacing:2px;
+    font-weight:600;
+}
+
+.hero-left h1{
+    color:#fff;
+    font-size:70px;
+    font-weight:800;
+    margin:10px 0 20px;
+}
+
+.hero-left p{
+    color:#f5f5f5;
+    font-size:18px;
+    line-height:1.8;
+}
+
+/* FEATURE BOX */
+
+.hero-features{
+    background:#ef5a3c;
+    padding:35px;
+    width:320px; /* your existing size */
+
+    opacity:0;
+    transform:translateX(60px);
+    animation:slideBox .8s ease forwards;
+}
+
+@keyframes slideBox{
+    from{
+        opacity:0;
+        transform:translateX(60px);
+    }
+    to{
+        opacity:1;
+        transform:translateX(0);
+    }
+}
+
+.feature-item{
+    color:#fff; /* keep white text */
+    font-size:16px;
+    line-height:1.7;
+    padding:16px 0;
+    border-bottom:1px solid rgba(255,255,255,.15);
+
+    opacity:0;
+    transform:translateX(25px);
+    animation:itemSlide .5s ease forwards;
+}
+
+.feature-item:nth-child(1){animation-delay:.7s;}
+.feature-item:nth-child(2){animation-delay:.9s;}
+.feature-item:nth-child(3){animation-delay:1.1s;}
+.feature-item:nth-child(4){animation-delay:1.3s;}
+
+@keyframes itemSlide{
+    from{
+        opacity:0;
+        transform:translateX(25px);
+    }
+    to{
+        opacity:1;
+        transform:translateX(0);
+    }
+}
+
+.feature-item:last-child{
+    border-bottom:none;
+}
+
+/* STORY CARD */
+
+.story-card{
+    background:#f4f4f4;
+    max-width:700px;
+    padding:45px 55px;
+    margin-top:-70px;
+    margin-left:80px;
+    position:relative;
+    z-index:10;
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+    /* Animation */
+    opacity:0;
+    transform:translateY(100px);
+    animation:storyUp 1s ease-out forwards;
+    animation-delay:.5s;
+}
+
+@keyframes storyUp{
+    from{
+        opacity:0;
+        transform:translateY(100px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+.story-card span{
+    color:#666;
+    font-size:13px;
+    font-weight:700;
+    letter-spacing:1px;
+}
+
+.story-card h2{
+    font-size:38px;
+    margin-top:15px;
+    color:#111;
+    line-height:1.4;
+}
+
+/* CONTENT */
+
+.about-content-box{
+    background:#fff;
+    padding:50px;
+    margin-top:40px;
+    border-radius:12px;
+    box-shadow:0 4px 15px rgba(0,0,0,.05);
+}
+
+.about-content-box h3{
+    font-size:28px;
+    margin-bottom:15px;
+    color:#111;
+}
+
+.about-content-box p{
+    color:#666;
+    line-height:1.9;
+    margin-bottom:18px;
+}
+
+.about-content-box blockquote{
+    background:#f7f7f7;
+    border-left:4px solid #ef5a3c;
+    padding:20px;
+    margin:30px 0;
+    font-style:italic;
+}
+
+/* STATS */
+
+.about-stats{
+    display:flex;
+    gap:20px;
+    margin-top:40px;
+    flex-wrap:wrap;
+}
+
+.stat-box{
+    flex:1;
+    min-width:220px;
+    background:#fafafa;
+    text-align:center;
+    padding:25px;
+    border-radius:10px;
+}
+
+.stat-box h4{
+    font-size:34px;
+    color:#ef5a3c;
+    margin-bottom:8px;
+}
+
+.stat-box span{
+    color:#666;
+}
+
+/* MOBILE */
+
+@media(max-width:991px){
+
+    .about-hero{
+        height:auto;
+    }
+
+    .hero-content{
+        position:relative;
+        flex-direction:column;
+        align-items:flex-start;
+        padding:30px;
+    }
+
+    .hero-features{
+        width:100%;
+        margin-top:30px;
+    }
+
+    .hero-left h1{
+        font-size:42px;
+    }
+
+    .story-card{
+        margin:20px 0 0;
+        max-width:100%;
+    }
+
+    .story-card h2{
+        font-size:28px;
+    }
+
+    .about-content-box{
+        padding:30px;
+    }
+
+    .about-stats{
+        flex-direction:column;
+    }
+}

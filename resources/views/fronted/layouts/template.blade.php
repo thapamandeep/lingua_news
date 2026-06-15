@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="{{ asset('css/sites/search-index.css') }}">
     <link rel="stylesheet" href="{{ asset('css/sites/profile.css') }}">
     <link rel="stylesheet" href="{{ asset('css/sites/profile-edit.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/sites/abouts.css') }}">
 
 </head>
 <body>

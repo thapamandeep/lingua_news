@@ -10,7 +10,7 @@
 
      
          <div class="logo">
-              <img src="{{ asset($logo->value) }}" alt="logo">
+              <img src="{{ asset($logo) }}" alt="logo">
         </div>
 
 

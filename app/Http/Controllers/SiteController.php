@@ -105,10 +105,10 @@ class SiteController extends Controller
             $language
         );
 
-   $logo = Setting::where('key', 'site_logo')->first();
-   $siteTitle = Setting::where('key', 'site_title')->value('value');
-   $settings = Setting::pluck('value', 'key');
+$settings = Setting::pluck('value', 'key');
 
+$logo = $settings['site_logo'] ?? null;
+$siteTitle = $settings['site_title'] ?? '';
 
         return view('fronted.home.index', [
             'categories'   => Category::all(),
@@ -117,9 +117,9 @@ class SiteController extends Controller
             'subHeroNews'  => $news->skip(3)->take(2)->values(),
             'latestNews'   => $news->skip(5)->take(8)->values(),
             'previousNews' => $news->skip(13)->values(),
-               'logo' => $logo,
-                'siteTitle' => $siteTitle,
-                  'settings' => $settings,
+             'logo'         => $logo,
+              'siteTitle'    => $siteTitle,
+              'settings'     => $settings,
         ]);
     }
 
@@ -153,15 +153,17 @@ class SiteController extends Controller
             ->where('status', 1)
             ->get();
 
-             $logo = Setting::where('key', 'site_logo')->first();
-   $siteTitle = Setting::where('key', 'site_title')->value('value');
+    $settings = Setting::pluck('value', 'key');
+
+$logo = $settings['site_logo'] ?? null;
+$siteTitle = $settings['site_title'] ?? '';
 
         return view(
             'fronted.news.index',
             compact(
                 'category',
                 'news',
-                'subcategories','logo','siteTitle'
+                'subcategories','logo','siteTitle','settings'
             )
         );
     }
@@ -209,15 +211,17 @@ class SiteController extends Controller
             ->where('status', 1)
             ->get();
 
-             $logo = Setting::where('key', 'site_logo')->first();
-   $siteTitle = Setting::where('key', 'site_title')->value('value');
+     $settings = Setting::pluck('value', 'key');
+
+$logo = $settings['site_logo'] ?? null;
+$siteTitle = $settings['site_title'] ?? '';
 
         return view(
             'fronted.news.subcategoryNews.index',
             compact(
                 'subcategory',
                 'news',
-                'subcategories','logo','siteTitle'
+                'subcategories','logo','siteTitle','settings'
             )
         );
     }
@@ -284,14 +288,16 @@ class SiteController extends Controller
             $language,
         );
 
-         $logo = Setting::where('key', 'site_logo')->first();
-   $siteTitle = Setting::where('key', 'site_title')->value('value');
+      $settings = Setting::pluck('value', 'key');
+
+$logo = $settings['site_logo'] ?? null;
+$siteTitle = $settings['site_title'] ?? '';
 
         return view(
             'fronted.news.detail',
             compact(
                 'news',
-                'language','logo','siteTitle'
+                'language','logo','siteTitle','settings'
             )
         );
 
@@ -314,6 +320,8 @@ class SiteController extends Controller
     //     return view('fronted.news.detail', compact('news'));
     // }
 }
+
+
 
     
 

@@ -17,26 +17,25 @@
             </p>
 
             
-    <div class="footer-social">
+ <div class="footer-social">
 
-    <a href="{{ $settings['facebook'] ?? '#' }}" target="_blank">
+    <a href="{{ $settings['facebook'] ?? '#' }}" target="_blank" rel="noopener noreferrer">
         <i class="fab fa-facebook-f"></i>
     </a>
 
-    <a href="{{ $settings['twitter'] ?? '#' }}" target="_blank">
+    <a href="{{ $settings['twitter'] ?? '#' }}" target="_blank" rel="noopener noreferrer">
         <i class="fab fa-twitter"></i>
     </a>
 
-    <a href="{{ $settings['instagram'] ?? '#' }}" target="_blank">
+    <a href="{{ $settings['instagram'] ?? '#' }}" target="_blank" rel="noopener noreferrer">
         <i class="fab fa-instagram"></i>
     </a>
 
-    <a href="{{ $settings['youtube'] ?? '#' }}" target="_blank">
+    <a href="{{ $settings['youtube'] ?? '#' }}" target="_blank" rel="noopener noreferrer">
         <i class="fab fa-youtube"></i>
     </a>
 
 </div>
-
         </div>
 
     
@@ -56,12 +55,9 @@
                     <a href="#">Latest News</a>
                 </li>
 
+               
                 <li>
-                    <a href="#">Categories</a>
-                </li>
-
-                <li>
-                    <a href="#">About Us</a>
+                    <a href="{{route('abouts')}}">About Us</a>
                 </li>
 
                 <li>
@@ -72,24 +68,23 @@
 
         </div>
 
-        <div class="footer-box">
+     <div class="footer-box">
 
-            <h3 class="footer-title">
-                Categories
-            </h3>
+    <h3 class="footer-title">
+        Categories
+    </h3>
 
-            <ul class="footer-links">
+    <ul class="footer-links">
+        @foreach($categories as $category)
+            <li>
+                <a href="{{ route('category.page', $category->slug) }}">
+                    {{ $category->name }}
+                </a>
+            </li>
+        @endforeach
+    </ul>
 
-                <li><a href="#">Politics</a></li>
-                <li><a href="#">Technology</a></li>
-                <li><a href="#">Business</a></li>
-                <li><a href="#">Sports</a></li>
-                <li><a href="#">Entertainment</a></li>
-
-            </ul>
-
-        </div>
-
+</div>
         
         <div class="footer-box">
 

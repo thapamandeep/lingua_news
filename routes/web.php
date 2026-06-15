@@ -20,6 +20,7 @@ use App\Http\Controllers\EditorController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\MembersController;
 use App\Http\Controllers\SubscribeController;
+use App\Http\Controllers\AboutController;
 
 
 // ---------------------------site----------------------------------//
@@ -223,6 +224,10 @@ Route::post('/change-password', [AuthController::class, 'changePassword'])
     Route::get('member-profile/{member}',[MembersController::class,'profile'])->name('member.profile');
     Route::get('member-edit/{member}',[MembersController::class,'edit'])->name('edit.member');
     Route::post('/update-member/{member}',[MembersController::class,'update'])->name('update.member');
+
+
+    // abouts===================//
+    Route::get('/abouts',[AboutController::class,'abouts'])->name('abouts');
 
 
     // subscribe===================//
