@@ -20,44 +20,75 @@
             </thead>
 
             <tbody>
-                @forelse($pendingNews as $news)
+
+                @forelse($pendingNews as $key => $news)
+
+                    @php
+                        $translation = $news->translations->first();
+
+                        $title = $translation->title ?? 'Untitled News';
+
+                        // SAFE image fallback
+                        $imagePath = !empty($news->image)
+                            ? asset('storage/gallery/' . $news->image)
+                            : asset('images/default-news.png');
+
+                        // IMPORTANT: translation status (NOT news status)
+                        $status = $translation->status ?? 'pending';
+                    @endphp
+
                     <tr>
 
-                        <td>{{ $loop->iteration }}</td>
+                        <!-- INDEX -->
+                        <td>{{ $key + 1 }}</td>
 
+                        <!-- TITLE -->
+                        <td>{{ $title }}</td>
+
+                        <!-- IMAGE -->
                         <td>
-                            {{ $news->translations->first()->title ?? 'No Title' }}
+                            <img src="{{ $imagePath }}"
+                                 alt="news"
+                                 style="width:70px;height:50px;object-fit:cover;border-radius:6px;">
                         </td>
 
+                        <!-- STATUS -->
                         <td>
-                            <img src="{{ asset('storage/gallery/'.$news->image) }}" alt="news">
-                        </td>
-
-                        <td>
-                            <span class="status pending">draft</span>
+                            @if($status == 'pending')
+                                <span class="status pending">Pending</span>
+                            @elseif($status == 'approved')
+                                <span class="status approved">Approved</span>
+                            @elseif($status == 'rejected')
+                                <span class="status rejected">Rejected</span>
+                            @else
+                                <span class="status unknown">Unknown</span>
+                            @endif
                         </td>
 
                         <!-- ACTIONS -->
                         <td class="actions">
 
-                            <!-- EDIT -->
                             <a href="{{ route('news.edit', $news->id) }}" class="btn edit">
                                 Edit
                             </a>
 
-                            <!-- DELETE -->
-                            <form action="{{ route('news.delete', $news->id) }}" method="POST" onsubmit="return confirm('Are you sure?')">
+                            <form action="{{ route('news.delete', $news->id) }}"
+                                  method="POST"
+                                  onsubmit="return confirm('Are you sure you want to delete this news?')">
+
                                 @csrf
                                 @method('DELETE')
 
                                 <button type="submit" class="btn delete">
                                     Delete
                                 </button>
+
                             </form>
 
                         </td>
 
                     </tr>
+
                 @empty
 
                     <tr>
@@ -67,18 +98,9 @@
                     </tr>
 
                 @endforelse
+
             </tbody>
-
         </table>
-
-    </div>
-
-    <div class="news-sidebar">
-
-        <div class="box">
-            <h3>Review Info</h3>
-            <p>These news are waiting for admin approval before publishing.</p>
-        </div>
 
     </div>
 

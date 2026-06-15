@@ -10,6 +10,8 @@ class LanguageController extends Controller
 {
     public function form(){
 
+    $layout = 'admin.layouts.template';
+
       // for author dashboard
    if(auth()->check() && auth()->user()->role_id == 2){
         $layout = 'author.layouts.template';
@@ -79,6 +81,7 @@ public function changeLanguage(Request $request)
 public function index(){
 
 $languages = Language::all();
+$layout = 'admin.layouts.template';
   // for author dashboard
    if(auth()->check() && auth()->user()->role_id == 2){
         $layout = 'author.layouts.template';
