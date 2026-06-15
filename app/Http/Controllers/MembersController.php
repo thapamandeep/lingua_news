@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Member;
+use App\Models\Setting;
 
 class MembersController extends Controller
 {
@@ -28,7 +29,12 @@ class MembersController extends Controller
 
 public function profile(Member $member){
 
-return view('fronted.profiles.details', compact('member'));
+   $logo = Setting::where('key', 'site_logo')->first();
+   $siteTitle = Setting::where('key', 'site_title')->value('value');
+   $settings = Setting::pluck('value', 'key');
+
+
+return view('fronted.profiles.details', compact('member','logo','siteTitle','settings'));
 }
 
 public function edit(Member $member){

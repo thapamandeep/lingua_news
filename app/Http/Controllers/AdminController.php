@@ -304,12 +304,22 @@ public function rolesDelete($id)
     public function subcategoryIndex(){
 
     $subcategories = Subcategory::all();
+<<<<<<< HEAD
       $layout = 'admin.layouts.template';
+=======
+    $layout = 'admin.layouts.template';
+>>>>>>> a5cb47a0530d443b6c4d012b3486c35ef462fdd0
 
       // for author dashboard
    if(auth()->check() && auth()->user()->role_id == 2){
         $layout = 'author.layouts.template';
+<<<<<<< HEAD
         
+=======
+
+       
+       
+>>>>>>> a5cb47a0530d443b6c4d012b3486c35ef462fdd0
     }
 
     return view('admin.pages.subcategories.subcatTable',compact('subcategories', 'layout'));

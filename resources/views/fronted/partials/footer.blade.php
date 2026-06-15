@@ -17,25 +17,26 @@
             </p>
 
             
-            <div class="footer-social">
+    <div class="footer-social">
 
-                <a href="#">
-                    <i class="fab fa-facebook-f"></i>
-                </a>
+    <a href="{{ $settings['facebook'] ?? '#' }}" target="_blank">
+        <i class="fab fa-facebook-f"></i>
+    </a>
 
-                <a href="#">
-                    <i class="fab fa-twitter"></i>
-                </a>
+    <a href="{{ $settings['twitter'] ?? '#' }}" target="_blank">
+        <i class="fab fa-twitter"></i>
+    </a>
 
-                <a href="#">
-                    <i class="fab fa-instagram"></i>
-                </a>
+    <a href="{{ $settings['instagram'] ?? '#' }}" target="_blank">
+        <i class="fab fa-instagram"></i>
+    </a>
 
-                <a href="#">
-                    <i class="fab fa-youtube"></i>
-                </a>
+    <a href="{{ $settings['youtube'] ?? '#' }}" target="_blank">
+        <i class="fab fa-youtube"></i>
+    </a>
 
-            </div>
+</div>
+
         </div>
 
     
@@ -100,18 +101,15 @@
                 Subscribe to get latest news updates directly in your email.
             </p>
 
-            <form class="footer-form">
+            @auth
+<form action="{{ route('subscribe', auth()->user()->id) }}" method="POST" class="footer-form">
+    @csrf
 
-                <input
-                    type="email"
-                    placeholder="Enter your email"
-                >
-
-                <button type="submit">
-                    Subscribe
-                </button>
-
-            </form>
+    <button type="submit">
+        Subscribe
+    </button>
+</form>
+@endauth
 
         </div>
 

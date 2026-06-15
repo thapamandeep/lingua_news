@@ -25,7 +25,7 @@ $hero = $heroNews[0]->translations
             ->first();
 @endphp
 
-<a href="{{ route('detail.news', $heroNews[0]->id) }}" class="link">
+<a href="{{ route('detail.news', $heroNews[0]->id) }}" class="hero-link">
     <h2 class="hero-title">
         {{ $hero->title ?? 'No Title' }}
     </h2>

@@ -19,7 +19,11 @@ use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\EditorController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\MembersController;
+<<<<<<< HEAD
 use App\Http\Controllers\NotificationController;
+=======
+use App\Http\Controllers\SubscribeController;
+>>>>>>> a5cb47a0530d443b6c4d012b3486c35ef462fdd0
 
 
 // ---------------------------site----------------------------------//
@@ -226,7 +230,15 @@ Route::post('/change-password', [AuthController::class, 'changePassword'])
     Route::get('member-edit/{member}',[MembersController::class,'edit'])->name('edit.member');
     Route::post('/update-member/{member}',[MembersController::class,'update'])->name('update.member');
 
+<<<<<<< HEAD
     //<<-- Notifications-->>
 
 Route::get('/author/notifications', [AuthorController::class, 'notifications'])
     ->name('author.notifications');
+=======
+
+    // subscribe===================//
+    Route::post('/subscribe/{member}', [SubscribeController::class, 'subscribe'])
+    ->middleware('auth')
+    ->name('subscribe');
+>>>>>>> a5cb47a0530d443b6c4d012b3486c35ef462fdd0

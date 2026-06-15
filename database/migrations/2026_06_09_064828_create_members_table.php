@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('country')->nullable();
             $table->enum('status',['active','inActive',
            'suspended','banned' ]);
+               $table->boolean('newsletter_subscribed')->default(false);
             $table->timestamps();
         });
     }

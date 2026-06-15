@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Models\News;
 use App\Models\Role;
 use App\Models\Subcategory;
+use App\Models\Setting;
 use App\Models\Language;
 use App\Models\NewsTranslation;
 use Illuminate\Support\Str;
@@ -388,6 +389,10 @@ public function rejectTranslation(NewsTranslation $translation)
 public function search(Request $request)
 {
     $query = News::with(['translations', 'category']);
+    
+   $logo = Setting::where('key', 'site_logo')->first();
+     $siteTitle = Setting::where('key', 'site_title')->value('value');
+   $settings = Setting::pluck('value', 'key');
 
     // Search by title or description
     if ($request->filled('search')) {
@@ -410,6 +415,6 @@ public function search(Request $request)
 
 
 
-    return view('fronted.searchs.index', compact('news'));
+    return view('fronted.searchs.index', compact('news','logo','siteTitle','settings'));
 }
 }

@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\News;
 use App\Models\Subcategory;
 use App\Models\Language;
+use App\Models\Setting;
 
 class SiteController extends Controller
 {
@@ -104,6 +105,11 @@ class SiteController extends Controller
             $language
         );
 
+   $logo = Setting::where('key', 'site_logo')->first();
+   $siteTitle = Setting::where('key', 'site_title')->value('value');
+   $settings = Setting::pluck('value', 'key');
+
+
         return view('fronted.home.index', [
             'categories'   => Category::all(),
             'languages'    => Language::all(),
@@ -111,6 +117,9 @@ class SiteController extends Controller
             'subHeroNews'  => $news->skip(3)->take(2)->values(),
             'latestNews'   => $news->skip(5)->take(8)->values(),
             'previousNews' => $news->skip(13)->values(),
+               'logo' => $logo,
+                'siteTitle' => $siteTitle,
+                  'settings' => $settings,
         ]);
     }
 
@@ -144,12 +153,15 @@ class SiteController extends Controller
             ->where('status', 1)
             ->get();
 
+             $logo = Setting::where('key', 'site_logo')->first();
+   $siteTitle = Setting::where('key', 'site_title')->value('value');
+
         return view(
             'fronted.news.index',
             compact(
                 'category',
                 'news',
-                'subcategories'
+                'subcategories','logo','siteTitle'
             )
         );
     }
@@ -197,12 +209,15 @@ class SiteController extends Controller
             ->where('status', 1)
             ->get();
 
+             $logo = Setting::where('key', 'site_logo')->first();
+   $siteTitle = Setting::where('key', 'site_title')->value('value');
+
         return view(
             'fronted.news.subcategoryNews.index',
             compact(
                 'subcategory',
                 'news',
-                'subcategories'
+                'subcategories','logo','siteTitle'
             )
         );
     }
@@ -266,14 +281,17 @@ class SiteController extends Controller
 
         $news = $this->applySingleTranslation(
             $news,
-            $language
+            $language,
         );
+
+         $logo = Setting::where('key', 'site_logo')->first();
+   $siteTitle = Setting::where('key', 'site_title')->value('value');
 
         return view(
             'fronted.news.detail',
             compact(
                 'news',
-                'language'
+                'language','logo','siteTitle'
             )
         );
 
