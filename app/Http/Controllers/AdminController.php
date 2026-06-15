@@ -214,6 +214,7 @@ public function rolesDelete($id)
     public function categoryForm(){
 
     $categories = Category::all();
+    $layout = 'admin.layouts.template';
 
       // for author dashboard
    if(auth()->check() && auth()->user()->role_id == 2){
@@ -247,6 +248,8 @@ public function rolesDelete($id)
 
     public function categoryIndex(){
 
+    $layout = 'admin.layouts.template';
+
       // for author dashboard
    if(auth()->check() && auth()->user()->role_id == 2){
         $layout = 'author.layouts.template';
@@ -266,6 +269,7 @@ public function rolesDelete($id)
 
     $categories = Category::all();
     $subcategories = Subcategory::all();
+    $layout = 'admin.layouts.template';
 
       // for author dashboard
    if(auth()->check() && auth()->user()->role_id == 2){
@@ -300,10 +304,12 @@ public function rolesDelete($id)
     public function subcategoryIndex(){
 
     $subcategories = Subcategory::all();
+      $layout = 'admin.layouts.template';
 
       // for author dashboard
    if(auth()->check() && auth()->user()->role_id == 2){
         $layout = 'author.layouts.template';
+        
     }
 
     return view('admin.pages.subcategories.subcatTable',compact('subcategories', 'layout'));

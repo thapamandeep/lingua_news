@@ -2,6 +2,7 @@
 
 @section('settings-content')
 
+{{-- ALERTS --}}
 @if(session('success'))
     <div class="alert alert-success">
         {{ session('success') }}
@@ -14,23 +15,37 @@
     </div>
 @endif
 
-<!-- HEADER -->
+@if($errors->any())
+    <div class="alert alert-danger">
+        <ul style="margin:0;padding-left:20px;">
+            @foreach($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
+{{-- HEADER --}}
 <div class="settings-header">
     <h2>Email Settings</h2>
 
-    <button class="save-btn" type="submit" form="emailForm">
+    <button
+        type="submit"
+        form="emailForm"
+        class="save-btn">
         Save Changes
     </button>
 </div>
 
-<!-- ================= MAIN SAVE FORM ================= -->
-<form id="emailForm"
-      action="{{ route('emails.store') }}"
-      method="POST">
+{{-- MAIN EMAIL SETTINGS FORM --}}
+<form
+    id="emailForm"
+    action="{{ route('emails.store') }}"
+    method="POST">
 
     @csrf
 
-    <!-- SMTP SETTINGS -->
+    {{-- SMTP CONFIGURATION --}}
     <div class="card">
 
         <h3>SMTP Configuration</h3>
@@ -40,39 +55,83 @@
             <div class="col">
 
                 <label>Mail Driver</label>
+
                 <select name="mail_driver">
-                    <option value="smtp">SMTP</option>
-                    <option value="mail">Mail</option>
+
+                    <option value="smtp"
+                        {{ \App\Models\Setting::where('key','mail_driver')->value('value') == 'smtp' ? 'selected' : '' }}>
+                        SMTP
+                    </option>
+
+                    <option value="mail"
+                        {{ \App\Models\Setting::where('key','mail_driver')->value('value') == 'mail' ? 'selected' : '' }}>
+                        Mail
+                    </option>
+
                 </select>
 
                 <label>Mail Host</label>
-                <input type="text" name="mail_host" placeholder="smtp.gmail.com">
+
+                <input
+                    type="text"
+                    name="mail_host"
+                    autocomplete="off"
+                    value="{{ old('mail_host', \App\Models\Setting::where('key','mail_host')->value('value')) }}"
+                    placeholder="smtp.gmail.com">
 
                 <label>Mail Port</label>
-                <input type="text" name="mail_port" placeholder="587">
+
+                <input
+                    type="text"
+                    name="mail_port"
+                    autocomplete="off"
+                    value="{{ old('mail_port', \App\Models\Setting::where('key','mail_port')->value('value')) }}"
+                    placeholder="587">
 
             </div>
 
             <div class="col">
 
                 <label>Mail Username</label>
-                <input type="text" name="mail_username" placeholder="your email">
+
+                <input
+                    type="text"
+                    name="mail_username"
+                    autocomplete="off"
+                    value="{{ old('mail_username', \App\Models\Setting::where('key','mail_username')->value('value')) }}"
+                    placeholder="example@gmail.com">
 
                 <label>Mail Password</label>
-                <input type="password" name="mail_password" placeholder="your password">
+
+                <input
+                    type="password"
+                    name="mail_password"
+                    autocomplete="new-password"
+                    placeholder="Enter SMTP Password">
 
                 <label>Encryption</label>
+
                 <select name="mail_encryption">
-                    <option value="tls">TLS</option>
-                    <option value="ssl">SSL</option>
+
+                    <option value="tls"
+                        {{ \App\Models\Setting::where('key','mail_encryption')->value('value') == 'tls' ? 'selected' : '' }}>
+                        TLS
+                    </option>
+
+                    <option value="ssl"
+                        {{ \App\Models\Setting::where('key','mail_encryption')->value('value') == 'ssl' ? 'selected' : '' }}>
+                        SSL
+                    </option>
+
                 </select>
 
             </div>
 
         </div>
+
     </div>
 
-    <!-- EMAIL INFORMATION (SAVED IN DB) -->
+    {{-- EMAIL CONTENT --}}
     <div class="card">
 
         <h3>Email Information</h3>
@@ -81,14 +140,22 @@
 
             <div class="col">
 
-                <label>Email Title / Subject</label>
-          <input type="text"
-       name="email_title"
-       value="{{ \App\Models\Setting::where('key','email_title')->value('value') }}"
-       placeholder="Important Update from Lingua News">
+                <label>Email Subject</label>
+
+                <input
+                    type="text"
+                    name="email_title"
+                    required
+                    value="{{ old('email_title', \App\Models\Setting::where('key','email_title')->value('value')) }}"
+                    placeholder="Important Update from Lingua News">
+
                 <label>Email Message</label>
-        <textarea name="email_information"
-          placeholder="Write your email content here...">{{ \App\Models\Setting::where('key','email_information')->value('value') }}</textarea>
+
+                <textarea
+                    name="email_information"
+                    rows="8"
+                    required
+                    placeholder="Write your email message here...">{{ old('email_information', \App\Models\Setting::where('key','email_information')->value('value')) }}</textarea>
 
             </div>
 
@@ -98,21 +165,28 @@
 
 </form>
 
-<!-- ================= TEST EMAIL FORM ================= -->
+{{-- TEST EMAIL --}}
 <div class="card" style="margin-top:20px;">
 
-    <h3>Test Email</h3>
+    <h3>Send Test Email</h3>
 
-    <form action="{{ route('emails.test') }}" method="POST">
+    <form
+        action="{{ route('emails.test') }}"
+        method="POST">
+
         @csrf
 
-        <label>Send Test Email To</label>
-        <input type="email"
-               name="test_email"
-               placeholder="test@example.com"
-               required>
+        <label>Recipient Email Address</label>
 
-        <button type="submit" class="btn">
+        <input
+            type="email"
+            name="test_email"
+            required
+            placeholder="test@example.com">
+
+        <button
+            type="submit"
+            class="btn">
             Send Test Email
         </button>
 

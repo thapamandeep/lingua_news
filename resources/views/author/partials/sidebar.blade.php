@@ -35,7 +35,7 @@
         </a>
 
         {{-- ARTICLES --}}
-        <a href="#">
+        <a href="{{ route('author.articles') }}">
 
             <div class="menu-left">
 
@@ -205,7 +205,7 @@
         </div>
 
         {{-- NOTIFICATION --}}
-        <a href="#">
+        <a href="{{ route('author.notifications') }}">
 
             <div class="menu-left">
 

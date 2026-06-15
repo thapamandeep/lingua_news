@@ -19,6 +19,7 @@ use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\EditorController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\MembersController;
+use App\Http\Controllers\NotificationController;
 
 
 // ---------------------------site----------------------------------//
@@ -94,6 +95,8 @@ Route::get('/change-language/{lang}', function($lang) {
 Route::get('/author-dashboard', [AuthorController::class, 'dashboard'])
 ->name('author.dashboard')
   ->middleware('author');
+  Route::get('/author/articles', [AuthorController::class, 'articles'])
+    ->name('author.articles');
 
 // -------------login-----------------------------//
 
@@ -223,3 +226,7 @@ Route::post('/change-password', [AuthController::class, 'changePassword'])
     Route::get('member-edit/{member}',[MembersController::class,'edit'])->name('edit.member');
     Route::post('/update-member/{member}',[MembersController::class,'update'])->name('update.member');
 
+    //<<-- Notifications-->>
+
+Route::get('/author/notifications', [AuthorController::class, 'notifications'])
+    ->name('author.notifications');

@@ -4,9 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\News;
+use App\Models\NewsTranslation;
+use App\Models\Notification;
 
 class EditorController extends Controller
 {
+    /* -----------------------------
+        DASHBOARD
+    ------------------------------*/
     public function dashboard()
     {
         $totalNews = News::count();
@@ -23,6 +28,9 @@ class EditorController extends Controller
         ));
     }
 
+    /* -----------------------------
+        PENDING NEWS
+    ------------------------------*/
     public function pendingNews()
     {
         $news = News::with(['author', 'translations.language'])
@@ -33,6 +41,9 @@ class EditorController extends Controller
         return view('editor.news.pending-news', compact('news'));
     }
 
+    /* -----------------------------
+        APPROVED NEWS
+    ------------------------------*/
     public function approvedNews()
     {
         $news = News::with(['author', 'translations.language'])
@@ -43,6 +54,9 @@ class EditorController extends Controller
         return view('editor.news.approved-news', compact('news'));
     }
 
+    /* -----------------------------
+        REJECTED NEWS
+    ------------------------------*/
     public function rejectedNews()
     {
         $news = News::with(['author', 'translations.language'])
@@ -54,7 +68,7 @@ class EditorController extends Controller
     }
 
     /* -----------------------------
-        APPROVE NEWS
+        APPROVE NEWS (MAIN)
     ------------------------------*/
     public function approve(News $news)
     {
@@ -72,17 +86,25 @@ class EditorController extends Controller
             'approved_at' => now(),
         ]);
 
+        // update translations too
         $news->translations()->update([
-        'status' => 'approved',
-        'approved_by' => auth()->id(),
-        'approved_at' => now(),
-    ]);
+            'status' => 'approved',
+            'approved_by' => auth()->id(),
+            'approved_at' => now(),
+        ]);
+
+        // notification to author
+        Notification::create([
+            'user_id' => $news->author_id,
+            'title' => 'News Approved',
+            'message' => 'Your article "' . ($news->translations->first()->title ?? 'Untitled') . '" has been approved.'
+        ]);
 
         return back()->with('success', 'News approved successfully');
     }
 
     /* -----------------------------
-        REJECT NEWS
+        REJECT NEWS (MAIN)
     ------------------------------*/
     public function reject(News $news)
     {
@@ -94,6 +116,18 @@ class EditorController extends Controller
             'status' => 'rejected',
             'approved_by' => auth()->id(),
             'approved_at' => now(),
+        ]);
+
+        $news->translations()->update([
+            'status' => 'rejected',
+            'approved_by' => auth()->id(),
+            'approved_at' => now(),
+        ]);
+
+        Notification::create([
+            'user_id' => $news->author_id,
+            'title' => 'News Rejected',
+            'message' => 'Your article "' . ($news->translations->first()->title ?? 'Untitled') . '" has been rejected.'
         ]);
 
         return back()->with('success', 'News rejected successfully');
