@@ -72,13 +72,11 @@
 .hero-features{
     background:#ef5a3c;
     padding:35px;
-    width:320px; /* your existing size */
+    width:320px;
 
     opacity:0;
     transform:translateX(60px);
-    animation:slideBox .8s ease forwards;
 }
-
 @keyframes slideBox{
     from{
         opacity:0;
@@ -91,7 +89,7 @@
 }
 
 .feature-item{
-    color:#fff; /* keep white text */
+    color:#fff;
     font-size:16px;
     line-height:1.7;
     padding:16px 0;
@@ -99,7 +97,6 @@
 
     opacity:0;
     transform:translateX(25px);
-    animation:itemSlide .5s ease forwards;
 }
 
 .feature-item:nth-child(1){animation-delay:.7s;}
@@ -134,11 +131,16 @@
     z-index:10;
     box-shadow:0 10px 25px rgba(0,0,0,.08);
 
-    /* Animation */
     opacity:0;
     transform:translateY(100px);
-    animation:storyUp 1s ease-out forwards;
-    animation-delay:.5s;
+}
+
+.show-feature{
+    animation:slideBox .8s ease forwards;
+}
+
+.show-item{
+    animation:itemSlide .5s ease forwards;
 }
 
 @keyframes storyUp{
@@ -151,6 +153,11 @@
         opacity:1;
         transform:translateY(0);
     }
+
+    
+}
+.show-story{
+    animation:storyUp 1s ease-out forwards;
 }
 .story-card span{
     color:#666;
@@ -223,6 +230,8 @@
 .stat-box span{
     color:#666;
 }
+
+
 
 /* MOBILE */
 

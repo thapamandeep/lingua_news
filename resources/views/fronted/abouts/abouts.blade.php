@@ -17,12 +17,11 @@
                 <span class="about-label">ABOUT US</span>
 
                 <div class="moving-title">
-    <h1>Lingua News</h1>
-</div>
+                    <h1>{{ $about->about_site_name }}</h1>
+                </div>
 
                 <p>
-                    Delivering trusted news, multilingual journalism,
-                    and global stories every day across the world.
+                    {{ $about->about_hero_description }}
                 </p>
 
             </div>
@@ -30,19 +29,19 @@
             <div class="hero-features">
 
                 <div class="feature-item">
-                    ✓ Trusted News Coverage
+                    ✓ {{ $about->feature_1 }}
                 </div>
 
                 <div class="feature-item">
-                    ✓ Multilingual Journalism
+                    ✓ {{ $about->feature_2 }}
                 </div>
 
                 <div class="feature-item">
-                    ✓ Global News Network
+                    ✓ {{ $about->feature_3 }}
                 </div>
 
                 <div class="feature-item">
-                    ✓ 24/7 News Updates
+                    ✓ {{ $about->feature_4 }}
                 </div>
 
             </div>
@@ -56,8 +55,7 @@
         <span>OUR STORY</span>
 
         <h2>
-            Delivering Reliable News & Information
-            Since 2020
+            {{ $about->story_title }}
         </h2>
 
     </div>
@@ -67,45 +65,34 @@
         <h3>Who We Are</h3>
 
         <p>
-            Lingua News is an independent digital news platform committed to
-            providing reliable and timely news coverage. Our journalists
-            and editors work around the clock to deliver stories from
-            politics, sports, business, entertainment and world affairs.
-        </p>
-
-        <p>
-            We focus on making information accessible through multilingual
-            reporting and modern digital journalism, ensuring readers
-            everywhere stay informed.
+            {!! nl2br(e($about->who_we_are)) !!}
         </p>
 
         <blockquote>
-            "Our mission is to connect people with accurate information
-            regardless of language or location."
+            "{{ $about->mission_quote }}"
         </blockquote>
 
         <h3>Our Vision</h3>
 
         <p>
-            To become one of the leading multilingual news platforms,
-            bringing global stories closer to every reader.
+            {!! nl2br(e($about->vision_content)) !!}
         </p>
 
         <div class="about-stats">
 
             <div class="stat-box">
-                <h4>50K+</h4>
-                <span>Monthly Readers</span>
+                <h4>{{ $about->stat1_number }}</h4>
+                <span>{{ $about->stat1_label }}</span>
             </div>
 
             <div class="stat-box">
-                <h4>1000+</h4>
-                <span>Published Stories</span>
+                <h4>{{ $about->stat2_number }}</h4>
+                <span>{{ $about->stat2_label }}</span>
             </div>
 
             <div class="stat-box">
-                <h4>20+</h4>
-                <span>Countries Reached</span>
+                <h4>{{ $about->stat3_number }}</h4>
+                <span>{{ $about->stat3_label }}</span>
             </div>
 
         </div>
