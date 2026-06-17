@@ -19,15 +19,14 @@ use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\EditorController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\MembersController;
-<<<<<<< HEAD
+
 use App\Http\Controllers\NotificationController;
-=======
+
 use App\Http\Controllers\SubscribeController;
-<<<<<<< HEAD
+
 use App\Http\Controllers\AboutController;
-=======
->>>>>>> a5cb47a0530d443b6c4d012b3486c35ef462fdd0
->>>>>>> e16dae6196e8a6277177923d42c78e30db3ef040
+use App\Http\Controllers\ContactController;
+
 
 
 // ---------------------------site----------------------------------//
@@ -234,12 +233,11 @@ Route::post('/change-password', [AuthController::class, 'changePassword'])
     Route::get('member-edit/{member}',[MembersController::class,'edit'])->name('edit.member');
     Route::post('/update-member/{member}',[MembersController::class,'update'])->name('update.member');
 
-<<<<<<< HEAD
     //<<-- Notifications-->>
 
 Route::get('/author/notifications', [AuthorController::class, 'notifications'])
     ->name('author.notifications');
-=======
+
 
     // abouts===================//
     Route::get('/abouts',[AboutController::class,'abouts'])->name('abouts');
@@ -249,4 +247,10 @@ Route::get('/author/notifications', [AuthorController::class, 'notifications'])
     Route::post('/subscribe/{member}', [SubscribeController::class, 'subscribe'])
     ->middleware('auth')
     ->name('subscribe');
->>>>>>> a5cb47a0530d443b6c4d012b3486c35ef462fdd0
+
+
+    // CONTACTS \\
+
+Route::get('/contact', [ContactController::class, 'index'])->name('contact');
+Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
+
