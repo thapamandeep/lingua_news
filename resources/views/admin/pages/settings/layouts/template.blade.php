@@ -33,6 +33,10 @@
             Email Settings
         </a>
 
+         <a href="{{route('about.create')}}">
+            About us
+        </a>
+
     </div>
 
     <!-- ================= MAIN CONTENT ================= -->

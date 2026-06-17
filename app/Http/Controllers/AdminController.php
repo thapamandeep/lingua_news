@@ -308,13 +308,24 @@ public function rolesDelete($id)
       $layout = 'admin.layouts.template';
 
     $layout = 'admin.layouts.template';
+<<<<<<< HEAD
 
+=======
+>>>>>>> 4c364ed4a909a4be184337979c1de2ccdd96f193
 
       // for author dashboard
-   if(auth()->check() && auth()->user()->role_id == 2){
+   
+      if(auth()->check() && auth()->user()->role_id == 2){
         $layout = 'author.layouts.template';
+<<<<<<< HEAD
 
         
+=======
+
+
+       
+       
+>>>>>>> 4c364ed4a909a4be184337979c1de2ccdd96f193
 
     }
 
