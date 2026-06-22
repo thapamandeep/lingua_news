@@ -58,10 +58,14 @@ Route::get('/roles-index',[AdminController::class,'rolesIndex'])->name('roles.in
 Route::get('/form-category',[AdminController::class,'categoryForm'])->name('category.create');
 Route::post('/store-category',[AdminController::class,'categoryStore'])->name('category.store');
 Route::get('/get-category-index',[AdminController::class,'categoryIndex'])->name('category.index');
+Route::get('/category-translation',[AdminController::class,'categoryTranslation'])->name('category.translate');
+Route::post('/category-translation/store', [AdminController::class, 'categoryTranslationStore'])
+->name('category.translation.store');
 
 
-
-Route::get('/form-subcategory',[AdminController::class,'subcategory'])->name('subcategories.create');
+Route::get( '/subcategory-create', [AdminController::class, 'subcategory'])->name('subcategories.create');
+Route::get('/subcategory-translation-form', [AdminController::class, 'subcategoryTranslationCreate'])->name('subcategories.translate.create');
+Route::post('/subcategory-translation-store', [AdminController::class, 'subcategoryTranslationStore'])->name('subcategories.translate.store');
 Route::post('/add-subcategory',[AdminController::class,'subcategoryStore'])->name('subcategories.store');
 Route::get('/subcategory-index',[AdminController::class,'subcategoryIndex'])->name('subcategories.index');
 Route::get('/add-news',[NewsController::class,'news'])->name('news.create');
@@ -132,7 +136,6 @@ Route::middleware(['auth'])->group(function () {
     // ACTION ROUTES (IMPORTANT FIX ✔)
     Route::post('/editor/news/{news}/approve', [EditorController::class, 'approve'])
         ->name('editor.news.approve');
-
     Route::post('/editor/news/{news}/reject', [EditorController::class, 'reject'])
         ->name('editor.news.reject');
 

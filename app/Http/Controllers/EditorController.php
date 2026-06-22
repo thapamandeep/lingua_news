@@ -59,10 +59,10 @@ class EditorController extends Controller
     ------------------------------*/
     public function rejectedNews()
     {
-        $news = News::with(['author', 'translations.language'])
-            ->where('status', 'rejected')
-            ->latest()
-            ->get();
+          $news = News::with('translations')
+                ->where('status', 'rejected')
+                ->get();
+           
 
         return view('editor.news.rejected-news', compact('news'));
     }

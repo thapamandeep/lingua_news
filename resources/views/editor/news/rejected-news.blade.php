@@ -33,7 +33,7 @@
 
                 <td>{{ $item->id }}</td>
 
-                <td>{{ $item->title }}</td>
+             <td>{{ $item->translations->first()?->title ?? 'No Title' }}</td>
 
                 <td>
                     <span class="badge rejected">

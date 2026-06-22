@@ -36,6 +36,13 @@
                     </a>
                 </li>
 
+                 <li>
+                    <a href="{{route('category.translate')}}">
+                        <i class="fa-solid fa-plus"></i>
+                        Category translate
+                    </a>
+                </li>
+
                 <li>
                     <a href="{{route('category.index')}}">
                         <i class="fa-solid fa-table"></i>
@@ -64,6 +71,14 @@
                     <a href="{{route('subcategories.create')}}">
                         <i class="fa-solid fa-plus"></i>
                         Sub category Form
+                    </a>
+                </li>
+
+                
+                <li>
+                    <a href="{{route('subcategories.translate.create')}}">
+                        <i class="fa-solid fa-plus"></i>
+                        Sub category Translation
                     </a>
                 </li>
 
