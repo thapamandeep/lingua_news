@@ -16,4 +16,11 @@ class Language extends Model
 {
     return $this->hasMany(News::class);
 }
+
+public function translation()
+{
+    return $this->hasOne(NewsTranslation::class)
+        ->where('language_id', session('language_id'));
+}
+
 }

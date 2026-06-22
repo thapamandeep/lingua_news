@@ -2,91 +2,153 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Language;
-use Illuminate\Support\Facades\Session;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
+use Illuminate\Validation\Rule;
 
 class LanguageController extends Controller
 {
-    public function form(){
+    /**
+     * Get dashboard layout
+     */
+    private function getLayout()
+    {
+        if (auth()->check() && auth()->user()->role_id == 2) {
+            return 'author.layouts.template';
+        }
 
-    $layout = 'admin.layouts.template';
-
-      // for author dashboard
-   if(auth()->check() && auth()->user()->role_id == 2){
-        $layout = 'author.layouts.template';
+        return 'admin.layouts.template';
     }
 
-    return view('admin.pages.languages.add', compact('layout'));
+    /**
+     * Display all languages
+     */
+    public function index()
+    {
+        $languages = Language::orderBy('name')->get();
+
+        return view('admin.pages.languages.index', [
+            'languages' => $languages,
+            'layout'    => $this->getLayout(),
+        ]);
     }
 
-    public function store(Request $request){
-        $data = $request->validate([
-            'name'=>'required|string',
-             'code' => 'required|string|max:2|unique:languages,code'
+    /**
+     * Show add language form
+     */
+    public function form()
+    {
+        return view('admin.pages.languages.add', [
+            'layout' => $this->getLayout(),
+        ]);
+    }
+
+    /**
+     * Store language
+     */
+    public function store(Request $request)
+    {
+        $validated = $request->validate([
+            'name' => [
+                'required',
+                'string',
+                'max:100',
+            ],
+
+            'code' => [
+                'required',
+                'string',
+                'size:2',
+                'unique:languages,code',
+            ],
         ]);
 
-        $languages = new Language();
-        $languages->name = $data['name'];
-        $languages->code = $data['code'];
+        Language::create([
+            'name' => trim($validated['name']),
+            'code' => strtolower(trim($validated['code'])),
+        ]);
 
-        $languages->save();
-
-        return redirect()->back()->with('success','language has been added');
+        return redirect()->back()->with(
+            'success',
+            __('common.language_added')
+        );
     }
 
-    public function langIndex(){
+    /**
+     * Show language list for frontend dropdown
+     */
+    public function langIndex()
+    {
+        $languages = Language::orderBy('name')->get();
 
-    $languages = Language::all();
-
-    return view('admin.pages.languages.lang-index',compact('languages'));
+        return view('admin.pages.languages.lang-index', [
+            'languages' => $languages,
+            'layout'    => $this->getLayout(),
+        ]);
     }
 
-    public function edit(Language $language){
-
-    return view('admin.pages.languages.edit',compact('language'));
+    /**
+     * Show edit page
+     */
+    public function edit(Language $language)
+    {
+        return view('admin.pages.languages.edit', [
+            'language' => $language,
+            'layout'   => $this->getLayout(),
+        ]);
     }
 
-    public function update(Request $request , Language $language){
+    /**
+     * Update language
+     */
+    public function update(Request $request, Language $language)
+    {
+        $validated = $request->validate([
+            'name' => [
+                'required',
+                'string',
+                'max:100',
+            ],
 
-    $data = $request->validate([
-        'name'=>'required|string',
-        'code'=>'required'
-    ]);
+            'code' => [
+                'required',
+                'string',
+                'size:2',
+                Rule::unique('languages')->ignore($language->id),
+            ],
+        ]);
 
-    $language->name = $data['name'];
-    $language->code = $data['code'];
+        $language->update([
+            'name' => trim($validated['name']),
+            'code' => strtolower(trim($validated['code'])),
+        ]);
 
-    $language->save();
+        return redirect()->back()->with(
+            'success',
+            __('common.language_updated')
+        );
+    }
 
-    return redirect()->back()->with('success','your language has been updated');
-}
-// public function setLanguage(Request $request)
-// {
-//     Session::put('lang', $request->language);
-
-//     return response()->json(['success' => true]);
-// }
-
+    /**
+     * Change website language
+     */
 public function changeLanguage(Request $request)
 {
-    session([
-        'lang'=>$request->language
+    $validated = $request->validate([
+        'language' => [
+            'required',
+            Rule::exists('languages', 'code'),
+        ],
     ]);
-    // dd(session('lang'));
+
+    $language = Language::where('code', $validated['language'])->first();
+
+    session([
+        'lang' => $language->code,
+        'language_id' => $language->id,
+    ]);
 
     return redirect()->back();
-}
-
-public function index(){
-
-$languages = Language::all();
-$layout = 'admin.layouts.template';
-  // for author dashboard
-   if(auth()->check() && auth()->user()->role_id == 2){
-        $layout = 'author.layouts.template';
-    }
-
-return view('admin.pages.languages.index', compact('languages', 'layout'));
 }
 }

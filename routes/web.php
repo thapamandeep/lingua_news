@@ -25,10 +25,9 @@ use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\SubscribeController;
 
 use App\Http\Controllers\AboutController;
-<<<<<<< HEAD
+
 use App\Http\Controllers\ContactController;
-=======
->>>>>>> 4c364ed4a909a4be184337979c1de2ccdd96f193
+
 
 
 
@@ -236,10 +235,7 @@ Route::post('/change-password', [AuthController::class, 'changePassword'])
     Route::get('member-edit/{member}',[MembersController::class,'edit'])->name('edit.member');
     Route::post('/update-member/{member}',[MembersController::class,'update'])->name('update.member');
 
-<<<<<<< HEAD
-=======
 
->>>>>>> 4c364ed4a909a4be184337979c1de2ccdd96f193
     //<<-- Notifications-->>
 
 Route::get('/author/notifications', [AuthorController::class, 'notifications'])
@@ -247,22 +243,23 @@ Route::get('/author/notifications', [AuthorController::class, 'notifications'])
 
 
     // abouts===================//
+    
     Route::get('/abouts',[AboutController::class,'abouts'])->name('abouts');
     Route::get('/about-create',[AboutController::class,'create'])->name('about.create')->middleware('admin');
     Route::post('/about-store',[AboutController::class,'store'])->name('about.store')->middleware('admin');
 
 
     // subscribe===================//
+
     Route::post('/subscribe/{member}', [SubscribeController::class, 'subscribe'])
     ->middleware('auth')
     ->name('subscribe');
 
-<<<<<<< HEAD
+
 
     // CONTACTS \\
 
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 
-=======
->>>>>>> 4c364ed4a909a4be184337979c1de2ccdd96f193
+

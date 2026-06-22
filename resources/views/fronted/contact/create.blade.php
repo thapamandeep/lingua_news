@@ -1,157 +1,250 @@
+```blade
 @extends('fronted.layouts.template')
+
 @section('content')
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Contact Us - Lingua News</title>
+<style>
+    .contact-section{
+        background:#f4f6f9;
+        padding:80px 0;
+    }
 
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    .contact-container{
+        max-width:1200px;
+        margin:auto;
+        padding:0 20px;
+        display:grid;
+        grid-template-columns:1fr 1.2fr;
+        gap:40px;
+    }
 
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #f4f6f9;
-            margin: 0;
-            padding: 0;
+    .contact-info{
+        background:#111827;
+        color:white;
+        padding:50px;
+        border-radius:15px;
+    }
+
+    .contact-info h2{
+        font-size:32px;
+        margin-bottom:25px;
+    }
+
+    .contact-info p{
+        color:#d1d5db;
+        line-height:1.8;
+        margin-bottom:20px;
+    }
+
+    .contact-item{
+        margin-bottom:20px;
+        font-size:16px;
+    }
+
+    .contact-form{
+        background:white;
+        padding:50px;
+        border-radius:15px;
+        box-shadow:0 10px 30px rgba(0,0,0,.08);
+    }
+
+    .contact-form h2{
+        margin-bottom:25px;
+        color:#111827;
+    }
+
+    .form-group{
+        margin-bottom:18px;
+    }
+
+    .form-control{
+        width:100%;
+        padding:14px 16px;
+        border:1px solid #d1d5db;
+        border-radius:8px;
+        outline:none;
+        font-size:15px;
+        transition:.3s;
+    }
+
+    .form-control:focus{
+        border-color:#2563eb;
+    }
+
+    textarea.form-control{
+        resize:none;
+    }
+
+    .btn-submit{
+        width:100%;
+        background:#2563eb;
+        color:white;
+        border:none;
+        padding:15px;
+        border-radius:8px;
+        font-size:16px;
+        cursor:pointer;
+        transition:.3s;
+    }
+
+    .btn-submit:hover{
+        background:#1d4ed8;
+    }
+
+    .success-message{
+        background:#dcfce7;
+        color:#166534;
+        padding:15px;
+        border-radius:8px;
+        margin-bottom:20px;
+    }
+
+    .error{
+        color:red;
+        font-size:14px;
+        margin-top:5px;
+    }
+
+    @media(max-width:768px){
+
+        .contact-container{
+            grid-template-columns:1fr;
         }
 
-        .container {
-            max-width: 1100px;
-            margin: 50px auto;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-            padding: 20px;
+        .contact-info,
+        .contact-form{
+            padding:30px;
         }
 
-        .info-box {
-            background: #111827;
-            color: white;
-            padding: 40px;
-            border-radius: 10px;
-        }
+    }
+</style>
 
-        .info-box h2 {
-            margin-bottom: 20px;
-        }
 
-        .info-box p {
-            line-height: 1.7;
-            color: #d1d5db;
-        }
+<section class="contact-section">
 
-        .form-box {
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-        }
+    <div class="contact-container">
 
-        .form-box h2 {
-            margin-bottom: 20px;
-        }
+        <!-- Left Side -->
+        <div class="contact-info">
 
-        input, select, textarea {
-            width: 100%;
-            padding: 12px;
-            margin-bottom: 15px;
-            border: 1px solid #ddd;
-            border-radius: 6px;
-        }
+            <h2>Contact Lingua News</h2>
 
-        button {
-            background: #2563eb;
-            color: white;
-            border: none;
-            padding: 12px 20px;
-            width: 100%;
-            border-radius: 6px;
-            cursor: pointer;
-        }
+            <p>
+                Have questions, business inquiries, or news tips?
+                Feel free to contact us anytime.
+                We usually respond within 24 hours.
+            </p>
 
-        button:hover {
-            background: #1d4ed8;
-        }
-
-        .success {
-            background: #dcfce7;
-            color: #166534;
-            padding: 10px;
-            margin-bottom: 15px;
-            border-radius: 5px;
-        }
-
-        @media(max-width: 768px) {
-            .container {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
-</head>
-
-<body>
-
-<div class="container">
-
-    <!-- LEFT INFO -->
-    <div class="info-box">
-        <h2>Contact Lingua News</h2>
-
-        <p>
-            Have a question, news tip, or business inquiry?<br><br>
-
-            📧 Email: info@linguanews.com<br>
-            📞 Phone: +977-9800000000<br>
-            📍 Kathmandu, Nepal<br><br>
-
-            Our team responds within 24 hours.
-        </p>
-    </div>
-
-    <!-- RIGHT FORM -->
-    <div class="form-box">
-
-        <h2>Send Message</h2>
-
-        @if(session('success'))
-            <div class="success">
-                {{ session('success') }}
+            <div class="contact-item">
+                📧 info@linguanews.com
             </div>
-        @endif
 
-        <form method="POST" action="{{ route('contact.store') }}" enctype="multipart/form-data">
-            @csrf
+            <div class="contact-item">
+                📞 +977-9800000000
+            </div>
 
-            <input type="text" name="name" placeholder="Full Name" required>
+            <div class="contact-item">
+                📍 Kathmandu, Nepal
+            </div>
 
-            <input type="email" name="email" placeholder="Email Address" required>
+        </div>
 
-            <input type="text" name="phone" placeholder="Phone (optional)">
+        <!-- Right Side -->
+        <div class="contact-form">
 
-            <select name="department" required>
-                <option value="general">General Inquiry</option>
-                <option value="editorial">Editorial</option>
-                <option value="advertising">Advertising</option>
-                <option value="technical">Technical Support</option>
-                <option value="report_news">Report News</option>
-            </select>
+            <h2>Send Us a Message</h2>
 
-            <input type="text" name="subject" placeholder="Subject" required>
+            @if(session('success'))
+                <div class="success-message">
+                    {{ session('success') }}
+                </div>
+            @endif
 
-            <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+            <form action="{{ route('contact.store') }}" method="POST" enctype="multipart/form-data">
 
-            <input type="file" name="attachment">
+                @csrf
 
-            <button type="submit">Send Message</button>
-        </form>
+                <div class="form-group">
+                    <input type="text"
+                           class="form-control"
+                           name="name"
+                           value="{{ old('name') }}"
+                           placeholder="Full Name">
+
+                    @error('name')
+                        <div class="error">{{ $message }}</div>
+                    @enderror
+                </div>
+
+
+                <div class="form-group">
+                    <input type="email"
+                           class="form-control"
+                           name="email"
+                           value="{{ old('email') }}"
+                           placeholder="Email Address">
+
+                    @error('email')
+                        <div class="error">{{ $message }}</div>
+                    @enderror
+                </div>
+
+
+                <div class="form-group">
+                    <input type="text"
+                           class="form-control"
+                           name="phone"
+                           value="{{ old('phone') }}"
+                           placeholder="Phone Number">
+                </div>
+
+
+                <div class="form-group">
+                    <select name="department" class="form-control">
+
+                        <option value="general">General Inquiry</option>
+                        <option value="editorial">Editorial</option>
+                        <option value="advertising">Advertising</option>
+                        <option value="technical">Technical Support</option>
+                        <option value="report_news">Report News</option>
+
+                    </select>
+                </div>
+
+
+                <div class="form-group">
+                    <input type="text"
+                           class="form-control"
+                           name="subject"
+                           value="{{ old('subject') }}"
+                           placeholder="Subject">
+                </div>
+
+
+                <div class="form-group">
+                    <textarea name="message"
+                              rows="6"
+                              class="form-control"
+                              placeholder="Write your message...">{{ old('message') }}</textarea>
+                </div>
+
+
+                <div class="form-group">
+                    <input type="file" name="attachment" class="form-control">
+                </div>
+
+
+                <button type="submit" class="btn-submit">
+                    Send Message
+                </button>
+
+            </form>
+
+        </div>
 
     </div>
 
-</div>
-
-</body>
-</html>
+</section>
 
 @endsection
+```
