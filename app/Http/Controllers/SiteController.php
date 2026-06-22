@@ -111,7 +111,7 @@ $logo = $settings['site_logo'] ?? null;
 $siteTitle = $settings['site_title'] ?? '';
 
         return view('fronted.home.index', [
-            'categories'   => Category::all(),
+        'categories' => Category::with('translation')->get(),
             'languages'    => Language::all(),
             'heroNews'     => $news->take(3)->values(),
             'subHeroNews'  => $news->skip(3)->take(2)->values(),
@@ -126,48 +126,44 @@ $siteTitle = $settings['site_title'] ?? '';
     /**
      * Category Page
      */
-    public function categoryPage($slug)
-    {
-        $category = Category::where(
-            'slug',
-            $slug
-        )->firstOrFail();
+   public function categoryPage($slug)
+{
+    $category = Category::with('translation')
+        ->where('slug', $slug)
+        ->firstOrFail();
 
-        $language = $this->getLanguage();
+    $language = $this->getLanguage();
 
-        $news = News::with('translations')
-            ->where('category_id', $category->id)
-            ->where('status', 'approved')
-            ->latest()
-            ->get();
+    $news = News::with('translations')
+        ->where('category_id', $category->id)
+        ->where('status', 'approved')
+        ->latest()
+        ->get();
 
-        $news = $this->applyTranslations(
-            $news,
-            $language
-        );
+    $news = $this->applyTranslations($news, $language);
 
-        $subcategories = Subcategory::where(
-                'category_id',
-                $category->id
-            )
-            ->where('status', 1)
-            ->get();
+    $subcategories = Subcategory::with('translation')
+        ->where('category_id', $category->id)
+        ->where('status', 1)
+        ->get();
 
     $settings = Setting::pluck('value', 'key');
 
-$logo = $settings['site_logo'] ?? null;
-$siteTitle = $settings['site_title'] ?? '';
+    $logo = $settings['site_logo'] ?? null;
+    $siteTitle = $settings['site_title'] ?? '';
 
-        return view(
-            'fronted.news.index',
-            compact(
-                'category',
-                'news',
-                'subcategories','logo','siteTitle','settings'
-            )
-        );
-    }
-
+    return view(
+        'fronted.news.index',
+        compact(
+            'category',
+            'news',
+            'subcategories',
+            'logo',
+            'siteTitle',
+            'settings'
+        )
+    );
+}
 
 
     /**
@@ -181,50 +177,47 @@ $siteTitle = $settings['site_title'] ?? '';
      * Subcategory Page
      */
 
-    public function subcategoryPage($slug)
-    {
-        $subcategory = Subcategory::where(
-            'slug',
-            $slug
-        )->firstOrFail();
+   public function subcategoryPage($slug)
+{
+    $subcategory = Subcategory::with('translation')
+        ->where('slug', $slug)
+        ->firstOrFail();
 
-        $language = $this->getLanguage();
+    $language = $this->getLanguage();
 
-        $news = News::with('translations')
-            ->where(
-                'subcategory_id',
-                $subcategory->id
-            )
-            ->where('status', 'approved')
-            ->latest()
-            ->get();
+    $news = News::with('translations')
+        ->where('subcategory_id', $subcategory->id)
+        ->where('status', 'approved')
+        ->latest()
+        ->get();
 
-        $news = $this->applyTranslations(
-            $news,
-            $language
-        );
+    $news = $this->applyTranslations(
+        $news,
+        $language
+    );
 
-        $subcategories = Subcategory::where(
-                'category_id',
-                $subcategory->category_id
-            )
-            ->where('status', 1)
-            ->get();
+    $subcategories = Subcategory::with('translation')
+        ->where('category_id', $subcategory->category_id)
+        ->where('status', 1)
+        ->get();
 
-     $settings = Setting::pluck('value', 'key');
+    $settings = Setting::pluck('value', 'key');
 
-$logo = $settings['site_logo'] ?? null;
-$siteTitle = $settings['site_title'] ?? '';
+    $logo = $settings['site_logo'] ?? null;
+    $siteTitle = $settings['site_title'] ?? '';
 
-        return view(
-            'fronted.news.subcategoryNews.index',
-            compact(
-                'subcategory',
-                'news',
-                'subcategories','logo','siteTitle','settings'
-            )
-        );
-    }
+    return view(
+        'fronted.news.subcategoryNews.index',
+        compact(
+            'subcategory',
+            'news',
+            'subcategories',
+            'logo',
+            'siteTitle',
+            'settings'
+        )
+    );
+}
 
 
 

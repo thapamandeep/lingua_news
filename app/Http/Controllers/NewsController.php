@@ -348,12 +348,12 @@ public function approve(News $news)
 
 public function reject(News $news)
 {
-    $news->status = 'rejected';
-    $news->approved_by = auth()->id();
-    $news->approved_at = now();
-    $news->save();
+    $news = News::where('status', 'rejected')->get();
 
-    return back()->with('success', 'News rejected');
+       dd($news->first());
+
+
+    return view('editor.news.rejected-news', compact('news'));
 }
 
 public function approveTranslation(NewsTranslation $translation)

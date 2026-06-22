@@ -9,10 +9,9 @@ use App\Models\Subcategory;
 class Category extends Model
 {
     protected $fillable =[
-        'name',
+        
         'slug',
         'status',
-        'description',
     ];
 
   public function news()
@@ -24,4 +23,16 @@ public function subcategories()
 {
     return $this->hasMany(Subcategory::class);
 }
+
+public function translations()
+{
+return $this->hasMany(CategoryTranslation::class);
+}
+
+public function translation()
+{
+    return $this->hasOne(CategoryTranslation::class)
+        ->where('locale', session('lang', 'en'));
+}
+
 }

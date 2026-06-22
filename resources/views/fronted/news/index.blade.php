@@ -4,102 +4,91 @@
 
 <section class="sports-page">
 
-    <div class="sports-container">
+```
+<div class="sports-container">
 
-        <!-- CATEGORY NAV -->
-        <div class="sports-categories">
 
-            <nav class="main-nav">
+    <!-- SUBCATEGORY MENU -->
+    <div class="sports-categories">
+        <nav class="main-nav">
 
-                <a href="{{ route('home.index') }}" class="nav-link active">
-                    Home
+            <a href="{{ route('home.index') }}" class="nav-link active">
+                Home
+            </a>
+
+            @foreach($subcategories as $subcat)
+                <a href="{{ route('subcategory.page', $subcat->slug) }}"
+                   class="nav-link">
+                    {{ $subcat->translation?->name ?? $subcat->slug }}
                 </a>
+            @endforeach
 
-                @foreach($subcategories as $subcat)
-                    <a href="{{ route('subcategory.page', $subcat->slug) }}" class="nav-link">
-                        {{ $subcat->name }}
-                    </a>
-                @endforeach
+        </nav>
+    </div>
 
-            </nav>
+    <!-- CATEGORY NEWS -->
+    @if($news->count())
 
-        </div>
-        
+        @php $first = $news->first(); @endphp
 
-        <!-- HEADER -->
-        <div class="sports-header">
-            
-     
-            
-            <p>Breaking news, live updates, and latest stories.</p>
-        </div>
+        <div class="featured-news">
 
-        <!-- NEWS CHECK -->
-        @if($news->isNotEmpty())
+            <div class="featured-image">
+                <img src="{{ asset('storage/gallery/'.$first->image) }}"
+                     alt="{{ $first->title }}">
+            </div>
 
-            @php
-                $first = $news->first();
-            @endphp
+            <div class="featured-content">
 
-            <!-- FEATURED NEWS -->
-            <div class="featured-news">
+                <h2>{{ $first->title }}</h2>
 
-                <div class="featured-image">
-                    <img src="{{ asset('storage/gallery/' . $first->image) }}" alt="">
-                </div>
+                <p>{{ $first->description }}</p>
 
-                <div class="featured-content">
-
-                    <span class="category">
-                        {{ $category->name }}
-                    </span>
-
-                    <h2>{{ $first->title }}</h2>
-
-                    <p>{{ \Illuminate\Support\Str::limit($first->description, 150) }}</p>
-
-                    <a href="{{route('detail.news',$first->id)}}" class="read-more-btn">Read Full Story</a>
-
-                </div>
+                <a href="{{ route('detail.news',$first->id) }}"
+                   class="read-more-btn">
+                    Read Full Story
+                </a>
 
             </div>
 
-            <!-- NEWS GRID -->
-            <div class="sports-news-grid">
+        </div>
 
-                @foreach($news->slice(1) as $item)
+        <div class="sports-news-grid">
 
-                    <div class="sports-card">
+            @foreach($news->skip(1) as $item)
 
-                        <img src="{{ asset('storage/gallery/' . $item->image) }}" alt="">
+                <div class="sports-card">
 
-                        <div class="sports-content">
+                    <img src="{{ asset('storage/gallery/'.$item->image) }}"
+                         alt="{{ $item->title }}">
 
-                            <span class="category">
-                                {{ $category->name }}
-                            </span>
+                    <div class="sports-content">
 
-                            <h3>{{ $item->title }}</h3>
+                        <h3>{{ $item->title }}</h3>
 
-                            <p> {{ \Illuminate\Support\Str::limit($item->description, 150) }}</p>
+                        <p>{{ $item->description }}</p>
 
-                            <a href="{{route('detail.news',$item->id)}}" class="read-me">Read More</a>
-
-                        </div>
+                        <a href="{{ route('detail.news',$item->id) }}"
+                           class="read-me">
+                            Read More
+                        </a>
 
                     </div>
 
-                @endforeach
+                </div>
 
-            </div>
+            @endforeach
 
-        @else
+        </div>
 
-            <p>No news found in this category.</p>
+    @else
 
-        @endif
+        <p>No news found in this category.</p>
 
-    </div>
+    @endif
+
+</div>
+```
 
 </section>
 

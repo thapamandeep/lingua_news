@@ -68,12 +68,10 @@
 
     <nav class="main-nav">
 
-      @foreach($categories as $category)
-
-    <a href="{{route('category.page',$category->slug) }}" class="nav-link">
-        {{ $category->name }}
+     @foreach($categories as $category)
+    <a href="{{ route('category.page',$category->slug) }}" class="nav-link">
+        {{ $category->translation?->name ?? $category->slug }}
     </a>
-
 @endforeach
 
     </nav>
