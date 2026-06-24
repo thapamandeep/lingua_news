@@ -395,7 +395,7 @@ public function subcategoryTranslationStore(Request $request)
 
     $layout = 'admin.layouts.template';
 
-<<<<<<< HEAD
+
 
 
 
@@ -408,10 +408,10 @@ public function subcategoryTranslationStore(Request $request)
         
 
 
-=======
+
     if(auth()->check() && auth()->user()->role_id == 2){
         $layout = 'author.layouts.template';
->>>>>>> 4696da3a6289a05f279a171f9e5a05b2c4f038cc
+
     }
 
     return view(
@@ -423,4 +423,5 @@ public function subcategoryTranslationStore(Request $request)
 
     
     
+}
 }

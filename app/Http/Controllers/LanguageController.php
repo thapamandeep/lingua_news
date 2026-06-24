@@ -149,6 +149,8 @@ public function changeLanguage(Request $request)
         'language_id' => $language->id,
     ]);
 
+     dd(session()->all());
+     
     return redirect()->back();
 }
 }

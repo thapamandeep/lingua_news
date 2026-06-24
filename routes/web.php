@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\App;
 use App\Http\Controllers\SiteController;
 use App\Http\Controllers\SportsController;
 use App\Http\Controllers\PoliticsController;
@@ -265,4 +266,30 @@ Route::get('/author/notifications', [AuthorController::class, 'notifications'])
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 
+
+
+
+// statics Language change------------------========================
+
+Route::get('/test-lang/{lang}', function ($lang) {
+
+    App::setLocale($lang);
+
+    return __('site.Latest');
+
+});
+
+Route::get('/language/{lang}', function ($lang) {
+
+    if (in_array($lang, ['en', 'ms', 'zh', 'ta'])) {
+
+        session([
+            'lang' => $lang
+        ]);
+
+        app()->setLocale($lang);
+    }
+
+    return redirect()->back();
+})->name('language.switch');
 

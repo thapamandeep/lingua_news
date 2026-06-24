@@ -105,6 +105,12 @@ window.addEventListener('load', function () {
 </script>
 @endif
 
+<script>
+document.getElementById('choose-language').addEventListener('change', function() {
+    window.location.href = '/language/' + this.value;
+});
+</script>
+
 <script src="{{asset('js/sites/heroSlide.js')}}"></script>
 
 <script src="{{asset('js/sites/translate.js')}}"></script>

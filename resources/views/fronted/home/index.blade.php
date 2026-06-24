@@ -2,9 +2,7 @@
 
 @section('content')
 
-Locale: {{ app()->getLocale() }} <br>
-Lang session: {{ session('lang') }} <br>
-Lang ID: {{ session('language_id') }}
+
 
 {{-- ================= HERO SECTION ================= --}}
 <section class="leatest-news">
@@ -12,19 +10,18 @@ Lang ID: {{ session('language_id') }}
 
         {{-- MAIN HERO --}}
         <div class="main-img">
+
+       
+
   @if($heroNews->isNotEmpty())
 
     @php
         $heroItem = $heroNews->first();
-
-        $hero = $heroItem->translations
-            ->where('language_id', session('language_id'))
-            ->first();
     @endphp
 
     <img
         src="{{ asset('storage/gallery/' . $heroItem->image) }}"
-        alt="{{ $hero->title ?? 'News Image' }}"
+        alt="{{ $heroItem->title ?? 'News Image' }}"
         loading="lazy">
 
     <div class="news-time">
@@ -34,7 +31,7 @@ Lang ID: {{ session('language_id') }}
     <div class="main-news-text">
         <a href="{{ route('detail.news', $heroItem->id) }}" class="hero-link">
             <h2 class="hero-title">
-                {{ $hero->title ?? __('app.no_title') }}
+                {{ $heroItem->title ?? __('app.no_title') }}
             </h2>
         </a>
     </div>
@@ -45,43 +42,34 @@ Lang ID: {{ session('language_id') }}
         {{-- SIDE HERO --}}
         <div class="side-img">
 
-            @foreach($subHeroNews as $news)
+         @foreach($subHeroNews as $news)
 
-              @php
-$translation = $news->translations
-    ->where('language_id', session('language_id'))
-    ->first();
-@endphp
+<div class="side-item">
 
-                <div class="side-item">
+    <img
+        src="{{ asset('storage/gallery/' . $news->image) }}"
+        alt="{{ $news->title ?? 'News Image' }}"
+        loading="lazy">
 
-                    <img
-                        src="{{ asset('storage/gallery/' . $news->image) }}"
-                        alt="{{ $translation->title ?? 'News Image' }}"
-                        loading="lazy">
+    <div class="news-time">
+        {{ $news->created_at->format('d M Y') }}
+    </div>
 
-                    <div class="news-time">
-                        {{ $news->created_at->format('d M Y') }}
-                    </div>
+    <div class="news-text">
 
-                    <div class="news-text">
+        <span class="subcategory">
+            {{ optional($news->subcategory)->name ?? __('app.general') }}
+        </span>
 
-                        <span class="subcategory">
-                            {{ optional($news->subcategory)->name ?? __('app.general') }}
-                        </span>
+        <a href="{{ route('detail.news', $news->id) }}" class="link">
+            <h4>{{ $news->title ?? __('app.no_title') }}</h4>
+        </a>
 
-                        <a href="{{ route('detail.news', $news->id) }}" class="link">
-                            <h4>
-                                {{ $translation->title ?? __('app.no_title') }}
-                            </h4>
-                        </a>
+    </div>
 
-                    </div>
+</div>
 
-                </div>
-
-            @endforeach
-
+@endforeach
         </div>
 
     </div>
@@ -95,7 +83,9 @@ $translation = $news->translations
 
         <div class="section-title">
 
-            <h2>{{ __('app.latest_news') }}</h2>
+            <h2>{{ __('site.Latest') }}</h2>
+
+      
 
             <div class="slider-btns">
                 <button class="btns" onclick="slideLeft()">&#8592;</button>
@@ -106,48 +96,40 @@ $translation = $news->translations
 
         <div class="latest-news-grid">
 
-            @foreach($latestNews as $news)
-@php
-$translation = $news->translations
-    ->where('language_id', session('language_id'))
-    ->first();
-@endphp
+@foreach($latestNews as $news)
 
-                <div class="news-card">
+<div class="news-card">
 
-                    <div class="news-image">
+    <div class="news-image">
 
-                        <img
-                            src="{{ asset('storage/gallery/' . $news->image) }}"
-                            alt="{{ $translation->title ?? 'News Image' }}"
-                            loading="lazy">
+        <img
+            src="{{ asset('storage/gallery/' . $news->image) }}"
+            alt="{{ $news->title ?? 'News Image' }}"
+            loading="lazy">
 
-                        <div class="news-time">
-                            {{ $news->created_at->diffForHumans() }}
-                        </div>
+        <div class="news-time">
+            {{ $news->created_at->diffForHumans() }}
+        </div>
 
-                    </div>
+    </div>
 
-                    <div class="news-content">
+    <div class="news-content">
 
-                        <h3>
-                            {{ $translation->title ?? __('app.no_title') }}
-                        </h3>
+        <h3>{{ $news->title ?? __('app.no_title') }}</h3>
 
-                        <p>
-                            {{ \Illuminate\Support\Str::limit($translation->description ?? '',120) }}
-                        </p>
+        <p>
+            {{ \Illuminate\Support\Str::limit($news->description ?? '',120) }}
+        </p>
 
-                        <a href="{{ route('detail.news',$news->id) }}" class="read-more-btn">
-                            {{ __('app.read_more') }}
-                        </a>
+        <a href="{{ route('detail.news',$news->id) }}" class="read-more-btn">
+            {{ __('site.Read More') }}
+        </a>
 
-                    </div>
+    </div>
 
-                </div>
+</div>
 
-            @endforeach
-
+@endforeach
         </div>
 
     </div>
@@ -161,54 +143,45 @@ $translation = $news->translations
     <div class="previous-news-wrapper">
 
         <div class="section-title">
-            <h2>{{ __('app.previous_news') }}</h2>
+            <h2>{{ __('site.Previous') }}</h2>
+            
         </div>
 
         <div class="previous-news-grid">
+@foreach($previousNews as $news)
 
-            @foreach($previousNews as $news)
+<div class="previous-news-card">
 
-                @php
-$translation = $news->translations
-    ->where('language_id', session('language_id'))
-    ->first();
-@endphp
+    <div class="news-img">
 
-                <div class="previous-news-card">
+        <img
+            src="{{ asset('storage/gallery/' . $news->image) }}"
+            alt="{{ $news->title ?? 'News Image' }}"
+            loading="lazy">
 
-                    <div class="news-img">
+    </div>
 
-                        <img
-                            src="{{ asset('storage/gallery/' . $news->image) }}"
-                            alt="{{ $translation->title ?? 'News Image' }}"
-                            loading="lazy">
+    <div class="news-content">
 
-                    </div>
+        <h3>{{ $news->title ?? __('app.no_title') }}</h3>
 
-                    <div class="news-content">
+        <div class="news-time">
+            {{ $news->created_at->format('d M Y') }}
+        </div>
 
-                        <h3>
-                            {{ $translation->title ?? __('app.no_title') }}
-                        </h3>
+        <p>
+            {{ \Illuminate\Support\Str::limit($news->description ?? '',200) }}
+        </p>
 
-                        <div class="news-time">
-                            {{ $news->created_at->format('d M Y') }}
-                        </div>
+        <a href="{{ route('detail.news',$news->id) }}" class="read-more-btn">
+            {{ __('site.Read More') }}
+        </a>
 
-                        <p>
-                            {{ \Illuminate\Support\Str::limit($translation->description ?? '',200) }}
-                        </p>
+    </div>
 
-                        <a href="{{ route('detail.news',$news->id) }}" class="read-more-btn">
-                            {{ __('app.read_more') }}
-                        </a>
+</div>
 
-                    </div>
-
-                </div>
-
-            @endforeach
-
+@endforeach
         </div>
 
     </div>

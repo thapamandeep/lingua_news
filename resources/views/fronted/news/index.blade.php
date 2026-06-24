@@ -46,7 +46,7 @@
 
                 <a href="{{ route('detail.news',$first->id) }}"
                    class="read-more-btn">
-                    Read Full Story
+                    {{__('site.Read More')}}
                 </a>
 
             </div>
@@ -70,7 +70,7 @@
 
                         <a href="{{ route('detail.news',$item->id) }}"
                            class="read-me">
-                            Read More
+                        {{__('site.Read More')}}
                         </a>
 
                     </div>
