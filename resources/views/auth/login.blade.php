@@ -22,14 +22,11 @@
         <div class="hero">
 
             <h1>
-                Stay Updated <br>
-                With Global News
+              {{__('login.H1')}}
             </h1>
 
             <p>
-                Read breaking headlines, politics, sports, technology,
-                business, and worldwide stories in real time with your
-                modern digital newsroom.
+               {{__('login.P')}}
             </p>
 
         </div>

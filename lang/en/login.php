@@ -1,6 +1,11 @@
 <?php 
 
 return [
+    'H1'=>'  Stay Updated 
+                With Global News',
+    'P'=>' Read breaking headlines, politics, sports, technology,
+                business, and worldwide stories in real time with your
+                modern digital newsroom.',            
     'Welcome'=>' Welcome back! Please login to continue.',
     'Email Address'=>'Email Address',
     'Password'=>'Password',
