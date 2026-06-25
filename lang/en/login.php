@@ -9,7 +9,7 @@ return [
     'Forgot Password'=>'Forgot Password',
     'OR'=>'OR',
     'Continue'=>'Continue to Google ',
-    'Do Not'=>'Do not have account',
+    'Do'=>'Do not have account',
     'Sign Up'=>'Sign Up'
 
 

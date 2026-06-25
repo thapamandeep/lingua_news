@@ -33,7 +33,7 @@
         <input
             type="text"
             name="search"
-            placeholder="Search news..."
+           placeholder="{{ __('site.Search') }}"
             value="{{ request('search') }}">
 
         <button type="submit" style="border:none;background:none;cursor:pointer;">

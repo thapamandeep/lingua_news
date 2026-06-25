@@ -9,7 +9,7 @@ return [
     'Forgot Password'=>'Terlupa Kata Laluan',
     'OR'=>'ATAU',
     'Continue'=>'teruskan',
-    'Do Not'=>'Tiada akaun',
+    'Do'=>'Tiada akaun',
     'Sign Up'=>'Daftar'
 
 ];

@@ -9,7 +9,7 @@ return [
     'Forgot Password'=>'忘记密码',
     'OR'=>'或者',
     'Continue'=>'继续',
-    'Do Not'=>'没有账户',
+    'Do'=>'没有账户',
     'Sign Up'=>'报名'
 
 ];

@@ -92,7 +92,7 @@
             </button>
 
             <div class="footer">
-               {{__('login.Do Not ')}}
+               {{__('login.Do')}}
                 <a href="{{ route('register') }}">{{__('login.Sign Up')}}</a>
             </div>
 

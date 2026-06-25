@@ -24,13 +24,11 @@
         <div class="hero">
 
             <h1>
-                Join The World <br>
-                Of Breaking News
+               {{__('register.H1')}}
             </h1>
 
             <p>
-                Create your Lingua News account and get real-time updates
-                on politics, sports, technology, and global events instantly.
+               {{__('register.P')}}
             </p>
 
         </div>
@@ -46,7 +44,7 @@
             <div class="logo">Lingua News</div>
 
             <div class="subtitle">
-                Create your account to continue.
+              {{__('register.Create')}}
             </div>
 
       <form action="{{ route('members.store') }}" method="POST">
@@ -55,7 +53,7 @@
     
 
     <div class="form-group">
-        <label>Email Address</label>
+        <label>  {{__('register.Email')}}</label>
 
         <input
             type="email"
@@ -73,7 +71,7 @@
     </div>
 
     <div class="form-group">
-        <label>Password</label>
+        <label> {{__('register.Password')}}</label>
 
         <input
             type="password"
@@ -90,7 +88,7 @@
     </div>
 
     <div class="form-group">
-        <label>Confirm Password</label>
+        <label>{{__('register.Confirm')}}</label>
 
         <input
             type="password"
@@ -109,29 +107,29 @@
     <div class="options">
         <label>
             <input type="checkbox">
-            I agree to Terms & Privacy Policy
+            {{__('register.Agree')}}
         </label>
     </div>
 
     <button type="submit" class="login-btn">
-        Create Account
+         {{__('register.Create Account')}}
     </button>
 </form>
 
             <div class="divider">
-                OR
+                {{__('register.OR')}}
             </div>
 
             <button class="google-btn">
-                Sign up with Google
+                 {{__('register.Sign UP')}}
             </button>
 
             <div class="footer">
 
-                Already have an account?
+                {{__('register.Alredy')}}
 
                 <a href="{{ route('login') }}">
-                    Login
+                    {{__('register.Login')}}
                 </a>
 
             </div>
