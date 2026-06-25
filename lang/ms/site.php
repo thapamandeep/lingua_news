@@ -5,5 +5,6 @@ return [
     "Previous"=>"Berita Sebelumnya",
     "Read More"=>"Baca Lagi",
     "Sign In"=>"Log Masuk",
-    'Search'=>'Cari berita'
+    'Search'=>'Cari berita',
+    'News'=>'Berita'
 ];
