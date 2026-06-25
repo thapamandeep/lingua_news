@@ -27,6 +27,7 @@ use App\Http\Controllers\SubscribeController;
 use App\Http\Controllers\AboutController;
 
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\Admin\ProfileController;
 
 
 
@@ -264,5 +265,27 @@ Route::get('/author/notifications', [AuthorController::class, 'notifications'])
 
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
+
+Route::prefix('admin')->middleware(['auth'])->group(function () {
+
+    Route::get('/notifications', [NotificationController::class, 'index'])
+        ->name('notifications.index');
+
+    Route::post('/notifications/read/{notification}', [NotificationController::class, 'read'])
+        ->name('notifications.read');
+
+    Route::post('/notifications/read-all', [NotificationController::class, 'readAll'])
+        ->name('notifications.readAll');
+
+        Route::get('/search', [AdminController::class, 'search'])
+        ->name('admin.search');
+
+        Route::get('/profile', [ProfileController::class, 'index'])
+        ->name('profile.index');
+
+    Route::post('/profile/update', [ProfileController::class, 'update'])
+        ->name('profile.update');
+
+});
 
 

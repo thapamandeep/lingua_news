@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="{{ asset('css/admin/form.css') }}">
     <link rel="stylesheet" href="{{ asset('css/admin/table.css') }}">
     <link rel="stylesheet" href="{{ asset('css/admin/settings.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/admin/profile.css') }}">
 </head>
 <body>
 

@@ -1,7 +1,7 @@
 @extends('admin.layouts.template')
 
 @section('content')
-
+<div class="dashboard-wrapper">
 <div class="dashboard-cards">
 
     <div class="card blue">
@@ -157,6 +157,7 @@
     </div>
 
 </div>
+</div>
 
 <script>
 document.addEventListener("DOMContentLoaded", function () {
@@ -239,3 +240,8 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 </script>
 @endsection
+
+
+
+    
+

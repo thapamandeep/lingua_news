@@ -1,0 +1,310 @@
+/* =========================================
+   LINGUA NEWS PROFILE PAGE
+========================================= */
+
+.profile-page{
+    display:grid;
+    grid-template-columns:340px 1fr;
+    gap:30px;
+    margin-top:20px;
+    align-items:start;
+}
+
+/* =========================================
+   CARDS
+========================================= */
+
+.profile-card,
+.profile-form-card,
+.account-info{
+    background:#fff;
+    border-radius:24px;
+    box-shadow:0 10px 30px rgba(0,0,0,.06);
+    transition:.3s;
+}
+
+.profile-form-card,
+.account-info{
+    padding:35px;
+}
+
+.profile-form-card:hover,
+.account-info:hover{
+    transform:translateY(-3px);
+}
+
+/* =========================================
+   PROFILE CARD
+========================================= */
+
+.profile-card{
+    overflow:hidden;
+    padding:0;
+}
+
+.profile-cover{
+    height:120px;
+    background:linear-gradient(
+        135deg,
+        #02132b,
+        #e30817
+    );
+}
+
+.profile-header{
+    text-align:center;
+    padding:0 30px 30px;
+    margin-top:-65px;
+}
+
+.profile-header img{
+    width:130px;
+    height:130px;
+    border-radius:50%;
+    object-fit:cover;
+    border:6px solid #fff;
+    box-shadow:0 10px 25px rgba(0,0,0,.15);
+}
+
+.profile-header h2{
+    margin-top:18px;
+    font-size:26px;
+    color:#02132b;
+    font-weight:700;
+}
+
+.profile-header p{
+    color:#64748b;
+    margin-top:8px;
+}
+
+.role-badge{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    margin-top:18px;
+    padding:10px 20px;
+    background:#eef2ff;
+    color:#4f46e5;
+    border-radius:50px;
+    font-size:13px;
+    font-weight:600;
+}
+
+/* =========================================
+   PROFILE STATS
+========================================= */
+
+.profile-stats{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+    padding:25px;
+}
+
+.stat-box{
+    background:#f8fafc;
+    border-radius:18px;
+    padding:20px;
+    text-align:center;
+    transition:.3s;
+}
+
+.stat-box:hover{
+    background:#02132b;
+    transform:translateY(-3px);
+}
+
+.stat-box h4{
+    font-size:30px;
+    color:#e30817;
+    margin-bottom:5px;
+}
+
+.stat-box span{
+    color:#64748b;
+    font-size:13px;
+}
+
+.stat-box:hover h4,
+.stat-box:hover span{
+    color:#fff;
+}
+
+/* =========================================
+   QUICK ACTIONS
+========================================= */
+
+.quick-actions{
+    padding:25px;
+}
+
+.quick-actions a{
+    display:flex;
+    align-items:center;
+    gap:15px;
+    padding:16px 18px;
+    text-decoration:none;
+    color:#02132b;
+    background:#f8fafc;
+    border-radius:16px;
+    margin-bottom:12px;
+    transition:.3s;
+}
+
+.quick-actions a i{
+    width:40px;
+    height:40px;
+    border-radius:12px;
+    background:#fff;
+    color:#e30817;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.quick-actions a:hover{
+    background:#e30817;
+    color:#fff;
+}
+
+.quick-actions a:hover i{
+    background:#fff;
+}
+
+/* =========================================
+   FORM CARD
+========================================= */
+
+.profile-form-card h3,
+.account-info h3{
+    font-size:24px;
+    color:#02132b;
+    margin-bottom:25px;
+}
+
+.form-group{
+    margin-bottom:25px;
+}
+
+.form-group label{
+    display:block;
+    margin-bottom:10px;
+    color:#374151;
+    font-weight:600;
+}
+
+.form-control{
+    width:100%;
+    height:55px;
+    border:1px solid #e2e8f0;
+    border-radius:16px;
+    background:#fafafa;
+    padding:0 18px;
+    outline:none;
+    transition:.3s;
+    font-size:15px;
+}
+
+.form-control:focus{
+    background:#fff;
+    border-color:#e30817;
+    box-shadow:0 0 0 5px rgba(227,8,23,.1);
+}
+
+/* =========================================
+   BUTTON
+========================================= */
+
+.btn-primary{
+    display:inline-block;
+    background:linear-gradient(
+        135deg,
+        #e30817,
+        #c10613
+    );
+    color:#fff;
+    border:none;
+    padding:15px 28px;
+    border-radius:16px;
+    font-weight:600;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.btn-primary:hover{
+    transform:translateY(-2px);
+    box-shadow:0 10px 25px rgba(227,8,23,.25);
+}
+
+/* =========================================
+   ACCOUNT INFORMATION
+========================================= */
+
+.info-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:18px 0;
+    border-bottom:1px solid #f1f5f9;
+}
+
+.info-row:last-child{
+    border-bottom:none;
+}
+
+.info-row span{
+    color:#94a3b8;
+}
+
+.info-row strong{
+    color:#0f172a;
+    font-weight:600;
+}
+
+.status-active{
+    color:#22c55e !important;
+}
+
+/* =========================================
+   SUCCESS ALERT
+========================================= */
+
+.success-alert{
+    background:#dcfce7;
+    color:#166534;
+    padding:15px;
+    border-radius:15px;
+    margin-bottom:25px;
+    border-left:5px solid #22c55e;
+}
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media(max-width:992px){
+
+    .profile-page{
+        grid-template-columns:1fr;
+    }
+
+}
+
+@media(max-width:768px){
+
+    .profile-form-card,
+    .account-info{
+        padding:25px;
+    }
+
+    .profile-header img{
+        width:100px;
+        height:100px;
+    }
+
+    .profile-stats{
+        grid-template-columns:1fr;
+    }
+
+}

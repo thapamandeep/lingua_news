@@ -4,12 +4,11 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
-use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\App;
-    
 use Illuminate\Support\Facades\View;
-    use App\Models\Category;
-    use App\Models\Language;
+
+use App\Models\Category;
+use App\Models\Language;
+use App\Models\Notification;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -28,18 +27,23 @@ class AppServiceProvider extends ServiceProvider
     {
         Schema::defaultStringLength(191);
 
-{
-    View::composer('*', function ($view) {
+        View::composer('*', function ($view) {
 
-        $categories = Category::where('status', 'active')->get();
+            // Frontend Categories
+            $categories = Category::where('status', 'active')->get();
 
-        $view->with('categories', $categories);
-         $view->with('languages', Language::all());
-    });
-    
+            // Languages
+            $languages = Language::all();
 
+            // Unread Notifications Count
+            $unreadNotifications = Notification::where('is_read', false)->count();
 
-}
+            $view->with([
+                'categories' => $categories,
+                'languages' => $languages,
+                'unreadNotifications' => $unreadNotifications,
+            ]);
 
+        });
     }
 }
