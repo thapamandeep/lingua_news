@@ -24,13 +24,11 @@
         <div class="hero">
 
             <h1>
-                Create A New <br>
-                Password
+                {{__('update-password.H1')}}
             </h1>
 
             <p>
-                Your identity has been verified. Create a strong new
-                password to secure your Lingua News account.
+              {{__('update-password.P')}}
             </p>
 
         </div>
@@ -48,7 +46,7 @@
             </div>
 
             <div class="subtitle">
-                Enter your new password below.
+                {{__('update-password.Enter')}}
             </div>
 
             @if(session('success'))
@@ -67,55 +65,55 @@
     @csrf
 
     <div class="form-group">
-        <label>Email Address</label>
+        <label>{{__('update-password.Email Address')}}</label>
         <input
             type="email"
             name="email"
             class="input-box"
-            placeholder="Enter your email"
+            placeholder="{{__('Enter Email')}}"
             >
     </div>
 
     <div class="form-group">
-        <label>OTP Code</label>
+        <label>{{__('update-password.OTP')}}</label>
         <input
             type="text"
             name="otp"
             class="input-box"
-            placeholder="Enter OTP sent to your email"
+            placeholder="{{__('Enter OTP')}}"
             >
     </div>
 
     <div class="form-group">
-        <label>New Password</label>
+        <label>{{__('update-password.New Password')}}</label>
         <input
             type="password"
             name="password"
             class="input-box"
-            placeholder="Enter new password"
+            placeholder="{{__('update-password.Enter New Password')}}"
             >
     </div>
 
     <div class="form-group">
-        <label>Confirm Password</label>
+        <label>{{__('update-password.Confirm')}}</label>
         <input
             type="password"
             name="password_confirmation"
             class="input-box"
-            placeholder="Confirm new password"
+            placeholder="{{__('update-password.Confirm New Password')}}"
             >
     </div>
 
     <button type="submit" class="login-btn">
-        Update Password
+        {{__('update-password.Update')}}
     </button>
 </form>
             <div class="footer">
 
-                Remember your password?
+               {{__('update-password.Remember')}}
 
                 <a href="{{ route('login') }}">
-                    Login
+                   {{__('update-password.Login')}}
                 </a>
 
             </div>

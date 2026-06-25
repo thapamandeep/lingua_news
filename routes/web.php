@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\App;
 use App\Http\Controllers\SiteController;
 use App\Http\Controllers\SportsController;
 use App\Http\Controllers\PoliticsController;
@@ -288,4 +289,30 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
 
 });
 
+
+
+
+// statics Language change------------------========================
+
+Route::get('/test-lang/{lang}', function ($lang) {
+
+    App::setLocale($lang);
+
+    return __('site.Latest');
+
+});
+
+Route::get('/language/{lang}', function ($lang) {
+
+    if (in_array($lang, ['en', 'ms', 'zh', 'ta'])) {
+
+        session([
+            'lang' => $lang
+        ]);
+
+        app()->setLocale($lang);
+    }
+
+    return redirect()->back();
+})->name('language.switch');
 

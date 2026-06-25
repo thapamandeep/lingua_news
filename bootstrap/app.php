@@ -14,17 +14,23 @@ return Application::configure(basePath: dirname(__DIR__))
         commands: __DIR__.'/../routes/console.php',
         health: '/up',
     )
-   
-            
-    
-->withMiddleware(function ($middleware) {
-    $middleware->append(\App\Http\Middleware\SetLanguageMiddleware::class);
 
-    $middleware->alias([
-              'admin' => \App\Http\Middleware\AdminMiddleware::class,
-              'author' => \App\Http\Middleware\AuthorMiddleware::class,
+    ->withMiddleware(function ($middleware) {
+
+        // Language middleware
+        // $middleware->append(\App\Http\Middleware\LanguageMiddleware::class);
+
+        // Existing middleware
+          $middleware->web(append: [
+        \App\Http\Middleware\SetLanguageMiddleware::class,
     ]);
-})
+
+
+        $middleware->alias([
+            'admin'  => \App\Http\Middleware\AdminMiddleware::class,
+            'author' => \App\Http\Middleware\AuthorMiddleware::class,
+        ]);
+    })
 
     ->withExceptions(function (Exceptions $exceptions): void {
         //

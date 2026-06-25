@@ -11,9 +11,7 @@
             </h2>
 
             <p class="footer-text">
-                Lingua News is a multilingual modern news platform
-                delivering trusted world news, technology, politics,
-                entertainment, sports, and business updates globally.
+           {{__('footer.Description')}}
             </p>
 
             
@@ -42,26 +40,26 @@
         <div class="footer-box">
 
             <h3 class="footer-title">
-                Quick Links
+               {{__('footer.Quick')}}
             </h3>
 
             <ul class="footer-links">
 
                 <li>
-                    <a href="/">Home</a>
+                    <a href="/">  {{__('footer.Home')}}</a>
                 </li>
 
                 <li>
-                    <a href="#">Latest News</a>
+                    <a href="#">{{__('footer.Latest News')}}</a>
                 </li>
 
                
                 <li>
-                    <a href="{{ route('abouts') }}">About Us</a>
+                    <a href="{{ route('abouts') }}">{{__('footer.About Us')}}</a>
                 </li>
 
                 <li>
-                    <a href="{{ route('contact') }}">Contact</a>
+                    <a href="{{ route('contact') }}">{{__('footer.Contact')}}</a>
                 </li>
 
             </ul>
@@ -71,7 +69,7 @@
      <div class="footer-box">
 
     <h3 class="footer-title">
-        Categories
+        {{__('footer.Categories')}}
     </h3>
 
     <ul class="footer-links">
@@ -89,11 +87,11 @@
         <div class="footer-box">
 
             <h3 class="footer-title">
-                Newsletter
+                {{__('footer.Newsletter')}}
             </h3>
 
             <p class="footer-text">
-                Subscribe to get latest news updates directly in your email.
+                {{__('footer.Subscribe')}}
             </p>
 
             @auth
@@ -101,7 +99,7 @@
     @csrf
 
     <button type="submit">
-        Subscribe
+        {{__('footer.Button')}}
     </button>
 </form>
 @endauth

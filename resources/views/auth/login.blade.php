@@ -45,7 +45,7 @@
             <div class="logo">Lingua News</div>
 
             <div class="subtitle">
-                Welcome back! Please login to continue.
+              {{__('login.Welcome')}}
             </div>
 
             @if(session('error'))
@@ -57,12 +57,12 @@
              <form action="{{route('login.store')}}" method="POST" class="login">@csrf
 
                 <div class="form-group">
-                    <label>Email Address</label>
+                    <label>{{__('login.Email Address')}}</label>
                     <input type="email" name="email" class="input-box" placeholder="Enter your email">
                 </div>
 
                 <div class="form-group">
-                    <label>Password</label>
+                    <label>{{__('login.Password')}}</label>
                     <input type="password" name="password" class="input-box" placeholder="Enter your password">
                 </div>
 
@@ -70,30 +70,30 @@
 
                     <label>
                         <input type="checkbox">
-                        Remember me
+                       {{__('login.Remember Me')}}
                     </label>
 
-                    <a href="{{route('forgot.password')}}">Forgot Password?</a>
+                    <a href="{{route('forgot.password')}}">{{__('login.Forgot Password')}}</a>
 
                 </div>
 
                 <button class="login-btn">
-                    Login Account
+                    {{__('login.Login Account')}}
                 </button>
 
             </form>
 
             <div class="divider">
-                OR
+              {{__('login.OR')}}
             </div>
 
             <button class="google-btn">
-                Continue with Google
+               {{__('login.Continue')}}
             </button>
 
             <div class="footer">
-                Don’t have an account?
-                <a href="{{ route('register') }}">Sign Up</a>
+               {{__('login.Do')}}
+                <a href="{{ route('register') }}">{{__('login.Sign Up')}}</a>
             </div>
 
         </div>

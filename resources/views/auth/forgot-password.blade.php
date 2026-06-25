@@ -21,13 +21,11 @@
         <div class="hero">
 
             <h1>
-                Forgot Your <br>
-                Password?
+                {{__('forgot-password.H1')}}
             </h1>
 
             <p>
-                Enter your registered email address and we'll send a
-                verification OTP to help you reset your password securely.
+                {{__('forgot-password.P')}}
             </p>
 
         </div>
@@ -44,7 +42,7 @@
             </div>
 
             <div class="subtitle">
-                Enter your email to receive a password reset OTP.
+                {{__('forgot-password.Enter')}}
             </div>
 
             @if(session('success'))
@@ -63,26 +61,26 @@
                 @csrf
 
                 <div class="form-group">
-                    <label>Email Address</label>
+                    <label>{{__('forgot-password.Email')}}</label>
 
                     <input
                         type="email"
                         name="email"
                         class="input-box"
-                        placeholder="Enter your registered email"
+                        placeholder="{{__('forgot-password.Register email')}}"
                         required>
                 </div>
 
                 <button type="submit" class="login-btn">
-                    Send OTP
+                    {{__('forgot-password.OTP')}}
                 </button>
 
             </form>
 
             <div class="footer">
-                Remember your password?
+                {{__('forgot-password.Remember')}}
                 <a href="{{ route('login') }}">
-                    Back to Login
+                    {{__('forgot-password.Back')}}
                 </a>
             </div>
 

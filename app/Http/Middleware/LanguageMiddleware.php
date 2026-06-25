@@ -11,11 +11,9 @@ use App\Models\Language;
 
 class LanguageMiddleware
 {
-    public function handle(Request $request, Closure $next): Response
+public function handle(Request $request, Closure $next): Response
 {
-    $locale = Session::get('lang', config('app.locale'));
-
-    App::setLocale($locale);
+    App::setLocale('ms');
 
     return $next($request);
 }

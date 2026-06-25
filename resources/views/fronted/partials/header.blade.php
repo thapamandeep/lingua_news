@@ -33,7 +33,7 @@
         <input
             type="text"
             name="search"
-            placeholder="Search news..."
+           placeholder="{{ __('site.Search') }}"
             value="{{ request('search') }}">
 
         <button type="submit" style="border:none;background:none;cursor:pointer;">
@@ -53,7 +53,7 @@
         </a>
     @else
         <a href="{{ route('login') }}">
-            <button>Sign In</button>
+            <button>{{__('site.Sign In')}}</button>
         </a>
     @endif
 </div>
@@ -79,17 +79,14 @@
 </div>
 
     <div class="select-language">
-        <select name="language" id="choose-language">
-            <option value="">Choose language</option>
-     @foreach($languages as $lang)
-            <option value="{{ $lang->code }}"
-                {{ session('lang','en') == $lang->code ? 'selected' : '' }}>
-                {{ $lang->name }}
-            </option>
-        @endforeach
-
-
-        </select>
+<select id="choose-language">
+    @foreach($languages as $lang)
+        <option value="{{ $lang->code }}"
+            {{ session('lang','en') == $lang->code ? 'selected' : '' }}>
+            {{ $lang->name }}
+        </option>
+    @endforeach
+</select>
     </div>
 
   
@@ -100,3 +97,5 @@
 
 
 </header>
+
+
