@@ -14,7 +14,7 @@ class AuthorController extends Controller
   public function dashboard(){
 
    $publishedNews = News::with('translations')
-                        ->where('status', 'published')
+                        ->where('status', 'approved')
                         ->latest()
                         ->get();
 
@@ -36,6 +36,25 @@ class AuthorController extends Controller
     return view('author.pages.pending-review', compact('pendingNews'));
 }
 
+public function category(){
+
+$categories = Category::where('status','active')->get();
+
+return view('author.pages.categories.category-index',compact('categories'));
+}
+public function subcategory($locale = 'en')
+{
+    $subcategories = Subcategory::with([
+        'translations' => function ($query) use ($locale) {
+            $query->where('locale', $locale);
+        }
+    ])->get();
+
+    return view(
+        'author.pages.subcategories.subcategory-index',
+        compact('subcategories')
+    );
+}
 public function articles()
 {
     $articles = News::with(['translations.language'])
@@ -53,5 +72,38 @@ public function articles()
         ->get();
 
     return view('author.pages.notifications', compact('notifications'));
+}
+
+public function profile()
+{
+    return view('author.pages.profiles.profile');
+}
+public function updateProfile(Request $request)
+{
+    $field = $request->field;
+
+    if ($field == 'name') {
+
+        $request->validate([
+            'value' => 'required|string|max:255',
+        ]);
+
+        auth()->user()->update([
+            'name' => $request->value,
+        ]);
+    }
+
+    if ($field == 'email') {
+
+        $request->validate([
+            'value' => 'required|email|unique:users,email,' . auth()->id(),
+        ]);
+
+        auth()->user()->update([
+            'email' => $request->value,
+        ]);
+    }
+
+    return back()->with('success', 'Profile updated successfully.');
 }
 }

@@ -117,7 +117,7 @@
 
             <div class="dropdown-menu">
 
-                <a href="{{ route('category.index') }}">
+                <a href="{{ route('author.category.index') }}">
                     <div class="menu-left">
                         <i class="fa-solid fa-list"></i>
                         <span>All Categories</span>
@@ -148,7 +148,7 @@
 
             <div class="dropdown-menu">
 
-                <a href="{{ route('subcategories.index') }}">
+             <a href="{{ route('author.subcategories.index', app()->getLocale()) }}">
                     <div class="menu-left">
                         <i class="fa-solid fa-list"></i>
                         <span>All Sub Categories</span>

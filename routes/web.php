@@ -112,7 +112,18 @@ Route::get('/author-dashboard', [AuthorController::class, 'dashboard'])
   ->middleware('author');
   Route::get('/author/articles', [AuthorController::class, 'articles'])
     ->name('author.articles');
+  Route::get('/category-index',[AuthorController::class,'category'])->name('author.category.index')->middleware('author');  
+Route::get('/subcategory-index/{locale}', [AuthorController::class, 'subcategory'])
+    ->name('author.subcategories.index')
+    ->middleware('author');
 
+Route::get('/author-profile', [AuthorController::class, 'profile'])
+    ->name('author.profile')
+    ->middleware('author');
+
+Route::post('/author-profile/update', [AuthorController::class, 'updateProfile'])
+    ->name('author.profile.update')
+    ->middleware('author');
 // -------------login-----------------------------//
 
 Route::get('/login' ,[AuthController::class, 'showLogin'])->name('login');
