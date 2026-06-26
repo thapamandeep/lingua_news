@@ -71,7 +71,7 @@ public function articles()
         ->latest()
         ->get();
 
-    return view('author.pages.notifications', compact('notifications'));
+    return view('author.pages.notifications.index', compact('notifications'));
 }
 
 public function profile()

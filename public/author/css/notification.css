@@ -1,0 +1,127 @@
+/* ==========================
+   NOTIFICATIONS PAGE
+========================== */
+
+.notification-wrapper{
+    background:#fff;
+    border-radius:30px;
+    padding:25px;
+    box-shadow:var(--shadow-md);
+}
+
+.notification-wrapper h3{
+    font-size:32px;
+    font-weight:700;
+    margin-bottom:25px;
+    color:var(--text);
+}
+
+.notification-table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+.notification-table thead{
+    background:#f8fafc;
+}
+
+.notification-table th{
+    text-align:left;
+    padding:18px;
+    font-size:15px;
+    font-weight:700;
+    color:var(--text);
+}
+
+.notification-table td{
+    padding:18px;
+    border-bottom:1px solid #e5e7eb;
+    vertical-align:middle;
+}
+
+.notification-table tbody tr{
+    transition:.3s ease;
+}
+
+.notification-table tbody tr:hover{
+    background:#fafafa;
+}
+
+/* Number */
+.notification-id{
+    font-weight:700;
+    color:var(--text);
+}
+
+/* Notification Title */
+.notification-title{
+    font-weight:600;
+    color:var(--text);
+}
+
+/* Message */
+.notification-message{
+    color:var(--text-light);
+    line-height:1.6;
+}
+
+/* Date */
+.notification-date{
+    font-weight:600;
+    color:var(--text);
+}
+
+/* Status Badge */
+.status-badge{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    padding:8px 14px;
+    border-radius:30px;
+    font-size:13px;
+    font-weight:600;
+}
+
+.status-read{
+    background:#dcfce7;
+    color:#15803d;
+}
+
+.status-unread{
+    background:#fee2e2;
+    color:#dc2626;
+}
+
+/* Empty Notification */
+.empty-notification{
+    text-align:center;
+    padding:60px 20px;
+}
+
+.empty-notification i{
+    font-size:60px;
+    color:#d1d5db;
+    margin-bottom:15px;
+}
+
+.empty-notification h4{
+    font-size:22px;
+    margin-bottom:10px;
+}
+
+.empty-notification p{
+    color:var(--text-light);
+}
+
+/* Responsive */
+
+@media(max-width:992px){
+
+    .notification-wrapper{
+        overflow-x:auto;
+    }
+
+    .notification-table{
+        min-width:800px;
+    }
+}

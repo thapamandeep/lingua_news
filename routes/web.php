@@ -117,6 +117,10 @@ Route::get('/subcategory-index/{locale}', [AuthorController::class, 'subcategory
     ->name('author.subcategories.index')
     ->middleware('author');
 
+Route::get('/author-notifications', [AuthorController::class, 'notifications'])
+    ->name('author.notifications')
+    ->middleware('author');    
+
 Route::get('/author-profile', [AuthorController::class, 'profile'])
     ->name('author.profile')
     ->middleware('author');
