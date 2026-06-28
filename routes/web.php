@@ -76,6 +76,11 @@ Route::get('/subcategory-index',[AdminController::class,'subcategoryIndex'])->na
 Route::get('/add-news',[NewsController::class,'news'])->name('news.create');
 Route::post('/store-news',[NewsController::class,'store'])->name('news.store');
 Route::get('/news-index',[NewsController::class,'index'])->name('news.index')->middleware('admin');
+Route::post('/news/{news}/approve', [EditorController::class, 'approve'])
+    ->name('news.approve');
+
+Route::post('/news/{news}/reject', [EditorController::class, 'reject'])
+    ->name('news.reject');
 Route::get('/news-edit/{news}',[NewsController::class,'editNews'])->name('news.edit')->middleware('admin');
 Route::get('/edit-news/{translation}',[NewsController::class,'edit'])->name('translation.edit')->middleware('admin');
 Route::post('/update-news/{news}',[NewsController::class,'updateNews'])->name('news.update')->middleware('admin');

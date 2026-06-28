@@ -1,6 +1,7 @@
 @extends('admin.layouts.template')
 
 @section('content')
+
 <div class="dashboard-wrapper">
 <div class="dashboard-cards">
 

@@ -408,10 +408,9 @@ public function subcategoryTranslationStore(Request $request)
         
 
 
-<<<<<<< HEAD
-=======
+      }
 
->>>>>>> 9778c978072f2475eaeb6296c1e58a9059055a10
+
     if(auth()->check() && auth()->user()->role_id == 2){
         $layout = 'author.layouts.template';
 
@@ -426,8 +425,8 @@ public function subcategoryTranslationStore(Request $request)
 
     
     
-}
-<<<<<<< HEAD
+
+
 
  public function search(Request $request)
     {
@@ -440,6 +439,6 @@ public function subcategoryTranslationStore(Request $request)
         return view('admin.pages.search.index', compact('news', 'search'));
     }
 }
-=======
-}
->>>>>>> 9778c978072f2475eaeb6296c1e58a9059055a10
+
+
+

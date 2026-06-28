@@ -1,310 +1,1015 @@
-/* =========================================
-   LINGUA NEWS PROFILE PAGE
-========================================= */
+/* ==========================================================
+   LINGUA NEWS ADMIN PROFILE
+   PART 2A
+========================================================== */
+
+/*========================
+    GOOGLE FONT
+=========================*/
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+
+/*========================
+      CSS VARIABLES
+=========================*/
+
+:root{
+
+    --primary:#2563eb;
+    --secondary:#4f46e5;
+    --success:#10b981;
+    --danger:#ef4444;
+    --warning:#f59e0b;
+
+    --dark:#1e293b;
+    --gray:#64748b;
+    --light:#f8fafc;
+    --white:#ffffff;
+
+    --shadow:0 12px 35px rgba(0,0,0,.08);
+
+    --radius:18px;
+
+}
+
+
+/*========================
+        RESET
+=========================*/
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+
+    font-family:'Poppins',sans-serif;
+
+    background:#eef3fb;
+
+    color:var(--dark);
+
+    overflow-x:hidden;
+
+}
+
+
+/*========================
+      PAGE
+=========================*/
 
 .profile-page{
-    display:grid;
-    grid-template-columns:340px 1fr;
-    gap:30px;
-    margin-top:20px;
-    align-items:start;
+
+    width:100%;
+
+    min-height:100vh;
+
 }
 
-/* =========================================
-   CARDS
-========================================= */
 
-.profile-card,
-.profile-form-card,
-.account-info{
-    background:#fff;
-    border-radius:24px;
-    box-shadow:0 10px 30px rgba(0,0,0,.06);
-    transition:.3s;
-}
-
-.profile-form-card,
-.account-info{
-    padding:35px;
-}
-
-.profile-form-card:hover,
-.account-info:hover{
-    transform:translateY(-3px);
-}
-
-/* =========================================
-   PROFILE CARD
-========================================= */
-
-.profile-card{
-    overflow:hidden;
-    padding:0;
-}
-
-.profile-cover{
-    height:120px;
-    background:linear-gradient(
-        135deg,
-        #02132b,
-        #e30817
-    );
-}
+/*========================
+      HEADER
+=========================*/
 
 .profile-header{
-    text-align:center;
-    padding:0 30px 30px;
-    margin-top:-65px;
+
+    position:relative;
+
+    width:100%;
+
+    height:340px;
+
+    overflow:hidden;
+
+    background:
+    linear-gradient(135deg,
+    #2563eb 0%,
+    #3b82f6 35%,
+    #4f46e5 100%);
+
 }
 
-.profile-header img{
-    width:130px;
-    height:130px;
+
+.profile-header::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:500px;
+
+    height:500px;
+
     border-radius:50%;
-    object-fit:cover;
-    border:6px solid #fff;
-    box-shadow:0 10px 25px rgba(0,0,0,.15);
+
+    background:rgba(255,255,255,.08);
+
+    right:-150px;
+
+    top:-150px;
+
 }
 
-.profile-header h2{
-    margin-top:18px;
-    font-size:26px;
-    color:#02132b;
+
+.profile-header::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:350px;
+
+    height:350px;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,.05);
+
+    left:-100px;
+
+    bottom:-120px;
+
+}
+
+
+.overlay{
+
+    position:absolute;
+
+    inset:0;
+
+    background:rgba(0,0,0,.15);
+
+}
+
+
+.header-content{
+
+    position:relative;
+
+    z-index:5;
+
+    max-width:1300px;
+
+    margin:auto;
+
+    height:100%;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    padding:40px;
+
+}
+
+
+.header-content h1{
+
+    color:#fff;
+
+    font-size:42px;
+
     font-weight:700;
+
+    margin-bottom:10px;
+
 }
 
-.profile-header p{
-    color:#64748b;
-    margin-top:8px;
+
+.header-content p{
+
+    color:#dbeafe;
+
+    font-size:17px;
+
 }
+
+
+/*========================
+     CONTAINER
+=========================*/
+
+.profile-container{
+
+    width:92%;
+
+    max-width:1350px;
+
+    margin:-120px auto 50px;
+
+    display:grid;
+
+    grid-template-columns:330px 1fr;
+
+    gap:30px;
+
+    position:relative;
+
+    z-index:20;
+
+}
+
+
+/*========================
+     SIDEBAR
+=========================*/
+
+.profile-sidebar{
+
+    position:sticky;
+
+    top:30px;
+
+    align-self:start;
+
+}
+
+
+/*========================
+     PROFILE CARD
+=========================*/
+
+.profile-card{
+
+    background:var(--white);
+
+    border-radius:25px;
+
+    padding:35px;
+
+    box-shadow:var(--shadow);
+
+    text-align:center;
+
+    transition:.3s;
+
+}
+
+
+.profile-card:hover{
+
+    transform:translateY(-5px);
+
+}
+
+
+.profile-image{
+
+    margin-top:-120px;
+
+    margin-bottom:25px;
+
+}
+
+
+.profile-image img{
+
+    width:180px;
+
+    height:180px;
+
+    border-radius:50%;
+
+    object-fit:cover;
+
+    border:8px solid #fff;
+
+    box-shadow:
+
+    0 10px 30px rgba(37,99,235,.30);
+
+}
+
+
+.profile-card h2{
+
+    font-size:28px;
+
+    margin-bottom:8px;
+
+    font-weight:700;
+
+}
+
+
+.profile-card p{
+
+    color:var(--gray);
+
+    margin-bottom:20px;
+
+    font-size:15px;
+
+    word-break:break-word;
+
+}
+
+
+/*========================
+      ROLE BADGE
+=========================*/
 
 .role-badge{
+
     display:inline-flex;
+
     align-items:center;
+
     gap:8px;
-    margin-top:18px;
-    padding:10px 20px;
-    background:#eef2ff;
-    color:#4f46e5;
-    border-radius:50px;
-    font-size:13px;
+
+    background:linear-gradient(135deg,
+    var(--primary),
+    var(--secondary));
+
+    color:#fff;
+
+    padding:10px 22px;
+
+    border-radius:40px;
+
+    font-size:14px;
+
     font-weight:600;
+
 }
 
-/* =========================================
-   PROFILE STATS
-========================================= */
 
-.profile-stats{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:15px;
-    padding:25px;
-}
+.member-since{
 
-.stat-box{
-    background:#f8fafc;
-    border-radius:18px;
-    padding:20px;
-    text-align:center;
-    transition:.3s;
-}
+    margin-top:25px;
 
-.stat-box:hover{
-    background:#02132b;
-    transform:translateY(-3px);
-}
+    padding-top:25px;
 
-.stat-box h4{
-    font-size:30px;
-    color:#e30817;
-    margin-bottom:5px;
-}
+    border-top:1px solid #edf2f7;
 
-.stat-box span{
-    color:#64748b;
-    font-size:13px;
-}
+    color:var(--gray);
 
-.stat-box:hover h4,
-.stat-box:hover span{
-    color:#fff;
-}
-
-/* =========================================
-   QUICK ACTIONS
-========================================= */
-
-.quick-actions{
-    padding:25px;
-}
-
-.quick-actions a{
     display:flex;
-    align-items:center;
-    gap:15px;
-    padding:16px 18px;
-    text-decoration:none;
-    color:#02132b;
-    background:#f8fafc;
-    border-radius:16px;
-    margin-bottom:12px;
-    transition:.3s;
-}
 
-.quick-actions a i{
-    width:40px;
-    height:40px;
-    border-radius:12px;
-    background:#fff;
-    color:#e30817;
-    display:flex;
     justify-content:center;
+
     align-items:center;
+
+    gap:10px;
+
+    font-size:15px;
+
 }
 
-.quick-actions a:hover{
-    background:#e30817;
-    color:#fff;
+
+.member-since i{
+
+    color:var(--primary);
+
 }
 
-.quick-actions a:hover i{
+
+/*========================
+      RIGHT CONTENT
+=========================*/
+
+.profile-content{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:30px;
+
+}
+
+
+/*========================
+      CONTENT CARD
+=========================*/
+
+.content-card{
+
     background:#fff;
+
+    border-radius:22px;
+
+    padding:35px;
+
+    box-shadow:var(--shadow);
+
 }
 
-/* =========================================
-   FORM CARD
-========================================= */
 
-.profile-form-card h3,
-.account-info h3{
-    font-size:24px;
-    color:#02132b;
+.card-title{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    margin-bottom:30px;
+
+}
+
+
+.card-title h2{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    font-size:28px;
+
+    color:var(--dark);
+
+}
+
+
+.card-title i{
+
+    color:var(--primary);
+
+    font-size:25px;
+
+}
+
+/* ==========================================================
+   LINGUA NEWS ADMIN PROFILE
+   PART 2B
+========================================================== */
+
+/*========================
+        ALERTS
+=========================*/
+
+.alert{
+    width:100%;
+    padding:15px 20px;
+    border-radius:12px;
     margin-bottom:25px;
+    font-size:15px;
+    font-weight:500;
+}
+
+.alert.success{
+    background:#dcfce7;
+    color:#166534;
+    border-left:5px solid #16a34a;
+}
+
+.alert.error{
+    background:#fee2e2;
+    color:#991b1b;
+    border-left:5px solid #dc2626;
+}
+
+.alert ul{
+    padding-left:18px;
+}
+
+.alert li{
+    margin:6px 0;
+}
+
+
+/*========================
+      FORM LAYOUT
+=========================*/
+
+.form-layout{
+
+    display:grid;
+    grid-template-columns:260px 1fr;
+    gap:40px;
+    align-items:start;
+
+}
+
+
+/*========================
+      IMAGE UPLOAD
+=========================*/
+
+.image-upload{
+
+    text-align:center;
+
+}
+
+.image-upload img{
+
+    width:180px;
+    height:180px;
+
+    border-radius:50%;
+
+    object-fit:cover;
+
+    border:6px solid #2563eb;
+
+    box-shadow:0 12px 25px rgba(37,99,235,.18);
+
+    margin-bottom:20px;
+
+}
+
+.image-upload input{
+    display:none;
+}
+
+.image-upload label{
+
+    display:inline-block;
+
+    padding:12px 22px;
+
+    background:linear-gradient(135deg,#2563eb,#4f46e5);
+
+    color:#fff;
+
+    border-radius:10px;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+    font-weight:600;
+
+}
+
+.image-upload label:hover{
+
+    transform:translateY(-2px);
+
+    box-shadow:0 8px 20px rgba(37,99,235,.25);
+
+}
+
+
+/*========================
+      PROFILE FORM
+=========================*/
+
+.profile-form{
+
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:22px;
+
 }
 
 .form-group{
-    margin-bottom:25px;
+
+    display:flex;
+
+    flex-direction:column;
+
 }
 
 .form-group label{
-    display:block;
-    margin-bottom:10px;
-    color:#374151;
+
+    margin-bottom:8px;
+
+    color:#475569;
+
     font-weight:600;
+
+    font-size:14px;
+
 }
 
-.form-control{
+.form-group input{
+
     width:100%;
-    height:55px;
-    border:1px solid #e2e8f0;
-    border-radius:16px;
-    background:#fafafa;
-    padding:0 18px;
-    outline:none;
-    transition:.3s;
+
+    padding:15px 18px;
+
+    border:1px solid #dbe4ef;
+
+    border-radius:12px;
+
+    background:#f8fbff;
+
     font-size:15px;
-}
 
-.form-control:focus{
-    background:#fff;
-    border-color:#e30817;
-    box-shadow:0 0 0 5px rgba(227,8,23,.1);
-}
-
-/* =========================================
-   BUTTON
-========================================= */
-
-.btn-primary{
-    display:inline-block;
-    background:linear-gradient(
-        135deg,
-        #e30817,
-        #c10613
-    );
-    color:#fff;
-    border:none;
-    padding:15px 28px;
-    border-radius:16px;
-    font-weight:600;
-    cursor:pointer;
     transition:.3s;
+
 }
 
-.btn-primary:hover{
-    transform:translateY(-2px);
-    box-shadow:0 10px 25px rgba(227,8,23,.25);
+.form-group input:focus{
+
+    outline:none;
+
+    border-color:#2563eb;
+
+    background:#fff;
+
+    box-shadow:0 0 0 4px rgba(37,99,235,.12);
+
 }
 
-/* =========================================
-   ACCOUNT INFORMATION
-========================================= */
+.form-group input[readonly]{
 
-.info-row{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:18px 0;
-    border-bottom:1px solid #f1f5f9;
+    background:#eef2f7;
+
+    cursor:not-allowed;
+
 }
 
-.info-row:last-child{
-    border-bottom:none;
-}
 
-.info-row span{
-    color:#94a3b8;
-}
+/*========================
+      SAVE BUTTON
+=========================*/
 
-.info-row strong{
-    color:#0f172a;
+.save-btn{
+
+    grid-column:1/-1;
+
+    margin-top:10px;
+
+    padding:16px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:linear-gradient(135deg,#2563eb,#4f46e5);
+
+    color:#fff;
+
+    font-size:16px;
+
     font-weight:600;
+
+    cursor:pointer;
+
+    transition:.3s;
+
 }
 
-.status-active{
-    color:#22c55e !important;
+.save-btn:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:0 15px 30px rgba(37,99,235,.25);
+
 }
 
-/* =========================================
-   SUCCESS ALERT
-========================================= */
 
-.success-alert{
-    background:#dcfce7;
-    color:#166534;
-    padding:15px;
-    border-radius:15px;
-    margin-bottom:25px;
-    border-left:5px solid #22c55e;
+/*========================
+      STATISTICS
+=========================*/
+
+.stats-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:22px;
+
 }
 
-/* =========================================
-   RESPONSIVE
-========================================= */
+.stat-card{
 
-@media(max-width:992px){
+    background:#fff;
 
-    .profile-page{
-        grid-template-columns:1fr;
-    }
+    border-radius:20px;
+
+    padding:30px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:20px;
+
+    box-shadow:var(--shadow);
+
+    transition:.3s;
+
+}
+
+.stat-card:hover{
+
+    transform:translateY(-6px);
+
+}
+
+.stat-card .icon{
+
+    width:70px;
+
+    height:70px;
+
+    border-radius:18px;
+
+    background:linear-gradient(135deg,#2563eb,#4f46e5);
+
+    color:#fff;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:28px;
+
+}
+
+.stat-card h2{
+
+    font-size:34px;
+
+    color:#1e293b;
+
+}
+
+.stat-card span{
+
+    color:#64748b;
+
+}
+
+
+/*========================
+      ACTION CARDS
+=========================*/
+
+.action-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:22px;
+
+}
+
+.action-card{
+
+    background:#f8fbff;
+
+    border:1px solid #e5edf8;
+
+    border-radius:18px;
+
+    padding:30px;
+
+    text-decoration:none;
+
+    color:#1e293b;
+
+    transition:.3s;
+
+}
+
+.action-card:hover{
+
+    transform:translateY(-6px);
+
+    border-color:#2563eb;
+
+    box-shadow:0 15px 30px rgba(37,99,235,.15);
+
+}
+
+.action-card i{
+
+    width:60px;
+
+    height:60px;
+
+    border-radius:16px;
+
+    background:linear-gradient(135deg,#2563eb,#4f46e5);
+
+    color:#fff;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:24px;
+
+    margin-bottom:20px;
+
+}
+
+.action-card h3{
+
+    margin-bottom:10px;
+
+    font-size:20px;
+
+}
+
+.action-card p{
+
+    color:#64748b;
+
+    line-height:1.7;
+
+    font-size:15px;
+
+}
+
+
+/*========================
+      SCROLLBAR
+=========================*/
+
+::-webkit-scrollbar{
+
+    width:8px;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:#2563eb;
+
+    border-radius:50px;
+
+}
+
+::-webkit-scrollbar-track{
+
+    background:#eef3fb;
+
+}
+
+
+/*========================
+      RESPONSIVE
+=========================*/
+
+@media(max-width:1200px){
+
+.profile-container{
+
+    grid-template-columns:1fr;
+
+}
+
+.profile-sidebar{
+
+    position:relative;
+
+    top:0;
+
+}
+
+.stats-grid{
+
+    grid-template-columns:repeat(2,1fr);
+
+}
+
+.action-grid{
+
+    grid-template-columns:repeat(2,1fr);
+
+}
+
+}
+
+@media(max-width:900px){
+
+.form-layout{
+
+    grid-template-columns:1fr;
+
+}
+
+.profile-form{
+
+    grid-template-columns:1fr;
+
+}
+
+.image-upload{
+
+    margin-bottom:30px;
+
+}
 
 }
 
 @media(max-width:768px){
 
-    .profile-form-card,
-    .account-info{
-        padding:25px;
-    }
+.header-content h1{
 
-    .profile-header img{
-        width:100px;
-        height:100px;
-    }
+    font-size:32px;
 
-    .profile-stats{
-        grid-template-columns:1fr;
-    }
+}
+
+.header-content p{
+
+    font-size:15px;
+
+}
+
+.profile-container{
+
+    width:95%;
+
+}
+
+.stats-grid{
+
+    grid-template-columns:1fr;
+
+}
+
+.action-grid{
+
+    grid-template-columns:1fr;
+
+}
+
+.content-card{
+
+    padding:25px;
+
+}
+
+.profile-card{
+
+    padding:25px;
+
+}
+
+.profile-image img{
+
+    width:150px;
+
+    height:150px;
+
+}
+
+}
+
+@media(max-width:480px){
+
+.header-content{
+
+    padding:20px;
+
+}
+
+.header-content h1{
+
+    font-size:28px;
+
+}
+
+.card-title h2{
+
+    font-size:22px;
+
+}
+
+.profile-card h2{
+
+    font-size:24px;
+
+}
+
+.stat-card{
+
+    padding:20px;
+
+}
+
+.action-card{
+
+    padding:20px;
+
+}
+
+.stat-card .icon{
+
+    width:60px;
+
+    height:60px;
+
+    font-size:24px;
+
+}
 
 }

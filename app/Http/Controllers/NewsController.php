@@ -37,6 +37,7 @@ return view('admin.pages.news.add-news', compact('categories','subcategories','r
 
 public function store(Request $request)
 {
+     
     $data = $request->validate([
         'slug' => 'required|unique:news,slug',
         'category_id' => 'required|exists:categories,id',
@@ -62,6 +63,7 @@ public function store(Request $request)
     // NEW SYSTEM FIELDS
     $news->author_id = auth()->id();
     $news->image = $imageName;
+
 
     $news->save();
 
