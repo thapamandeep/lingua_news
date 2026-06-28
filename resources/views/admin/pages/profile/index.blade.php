@@ -33,361 +33,266 @@
 
     </header>
 
+<div class="profile-container">
 
-    <div class="profile-container">
+    <aside class="profile-sidebar">
 
-        <!-- ==========================
-             LEFT SIDEBAR
-        =========================== -->
+        <div class="profile-card">
 
-        <aside class="profile-sidebar">
+          <div class="profile-image">
 
-            <div class="profile-card">
+    @if($user->image)
+        <img src="{{ asset('uploads/profile/'.$user->image) }}"
+             id="previewImage">
+    @else
+        <img src="https://i.pravatar.cc/300"
+             id="previewImage">
+    @endif
 
-                <div class="profile-image">
+    <form action="{{ route('profile.update') }}"
+          method="POST"
+          enctype="multipart/form-data">
 
-                    @if($user->image)
-                        <img src="{{ asset('uploads/profile/'.$user->image) }}"
-                             id="previewImage">
-                    @else
-                        <img src="https://i.pravatar.cc/300"
-                             id="previewImage">
-                    @endif
+        @csrf
+
+        <input type="hidden"
+               name="field"
+               value="image">
+
+        <label for="image"
+               class="profile-edit-btn">
+
+            <i class="fa-solid fa-edit"></i>
+
+        </label>
+
+        <input type="file"
+               id="image"
+               name="image"
+               hidden
+               onchange="this.form.submit()">
+
+    </form>
+
+</div>
+
+            <h2>{{ $user->name }}</h2>
+
+            <p>{{ $user->email }}</p>
+
+            <span class="role-badge">
+                <i class="fa-solid fa-user-shield"></i>
+                {{ $user->role->name ?? 'Administrator' }}
+            </span>
+
+            <div class="member-since">
+                <i class="fa-solid fa-calendar-days"></i>
+                Joined {{ $user->created_at->format('d M Y') }}
+            </div>
+
+        </div>
+
+    </aside>
+
+    <main class="profile-content">
+
+        <section class="content-card">
+
+            <div class="card-title">
+                <h2>
+                    <i class="fa-solid fa-user-pen"></i>
+                    Profile Information
+                </h2>
+            </div>
+
+            @if(session('success'))
+                <div class="alert success">
+                    {{ session('success') }}
+                </div>
+            @endif
+
+            @if($errors->any())
+                <div class="alert error">
+                    <ul>
+                        @foreach($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
+            <div class="details-grid">
+
+                <div class="detail-item">
+
+                    <div class="detail-header">
+
+                        <label>Full Name</label>
+
+                        <a href="javascript:void(0)"
+                           class="edit-icon"
+                           onclick="openModal('name')">
+
+                            <i class="fa-solid fa-pen"></i>
+
+                        </a>
+
+                    </div>
+
+                    <p>{{ $user->name }}</p>
 
                 </div>
 
-                <h2>{{ $user->name }}</h2>
+                <div class="detail-item">
 
-                <p>{{ $user->email }}</p>
+                    <div class="detail-header">
 
-                <span class="role-badge">
+                        <label>Email Address</label>
 
-                    <i class="fa-solid fa-user-shield"></i>
+                        <a href="javascript:void(0)"
+                           class="edit-icon"
+                           onclick="openModal('email')">
 
-                    {{ $user->role->name ?? 'Administrator' }}
+                            <i class="fa-solid fa-pen"></i>
 
-                </span>
+                        </a>
 
-                <div class="member-since">
+                    </div>
 
-                    <i class="fa-solid fa-calendar-days"></i>
+                    <p>{{ $user->email }}</p>
 
-                    Joined
+                </div>
 
-                    {{ $user->created_at->format('d M Y') }}
+                <div class="detail-item">
+
+                    <label>Role</label>
+
+                    <p>{{ $user->role->name ?? 'Administrator' }}</p>
+
+                </div>
+
+                <div class="detail-item">
+
+                    <label>Member Since</label>
+
+                    <p>{{ $user->created_at->format('d M Y') }}</p>
 
                 </div>
 
             </div>
 
-        </aside>
+        </section>
 
+        <section class="stats-grid">
 
+            <div class="stat-card">
 
-
-
-        <!-- ==========================
-             MAIN CONTENT
-        =========================== -->
-
-        <main class="profile-content">
-
-
-            <!-- EDIT PROFILE -->
-
-            <section class="content-card">
-
-                <div class="card-title">
-
-                    <h2>
-
-                        <i class="fa-solid fa-user-pen"></i>
-
-                        Edit Profile
-
-                    </h2>
-
+                <div class="icon">
+                    <i class="fa-solid fa-newspaper"></i>
                 </div>
 
-                @if(session('success'))
-
-                    <div class="alert success">
-
-                        {{ session('success') }}
-
-                    </div>
-
-                @endif
-
-                @if($errors->any())
-
-                    <div class="alert error">
-
-                        <ul>
-
-                            @foreach($errors->all() as $error)
-
-                                <li>{{ $error }}</li>
-
-                            @endforeach
-
-                        </ul>
-
-                    </div>
-
-                @endif
-
-
-                <form action="{{ route('profile.update') }}"
-                      method="POST"
-                      enctype="multipart/form-data">
-
-                    @csrf
-
-                    @method('PUT')
-
-
-                    <div class="form-layout">
-
-
-                        <div class="image-upload">
-
-                            @if($user->image)
-
-                                <img src="{{ asset('uploads/profile/'.$user->image) }}"
-                                     id="imagePreview">
-
-                            @else
-
-                                <img src="https://i.pravatar.cc/250"
-                                     id="imagePreview">
-
-                            @endif
-
-
-                            <label for="image">
-
-                                <i class="fa-solid fa-camera"></i>
-
-                                Change Photo
-
-                            </label>
-
-                            <input type="file"
-                                   id="image"
-                                   name="image">
-
-                        </div>
-
-
-
-
-                        <div class="profile-form">
-
-                            <div class="form-group">
-
-                                <label>Full Name</label>
-
-                                <input type="text"
-                                       name="name"
-                                       value="{{ old('name',$user->name) }}">
-
-                            </div>
-
-                            <div class="form-group">
-
-                                <label>Email Address</label>
-
-                                <input type="email"
-                                       name="email"
-                                       value="{{ old('email',$user->email) }}">
-
-                            </div>
-
-                            <div class="form-group">
-
-                                <label>Role</label>
-
-                                <input type="text"
-                                       readonly
-                                       value="{{ $user->role->name ?? 'Administrator' }}">
-
-                            </div>
-
-                            <div class="form-group">
-
-                                <label>Member Since</label>
-
-                                <input type="text"
-                                       readonly
-                                       value="{{ $user->created_at->format('d F Y') }}">
-
-                            </div>
-
-                            <button type="submit"
-                                    class="save-btn">
-
-                                <i class="fa-solid fa-floppy-disk"></i>
-
-                                Save Changes
-
-                            </button>
-
-                        </div>
-
-                    </div>
-
-                </form>
-
-            </section>
-
-
-
-
-            <!-- STATISTICS -->
-
-            <section class="stats-grid">
-
-                <div class="stat-card">
-
-                    <div class="icon">
-
-                        <i class="fa-solid fa-newspaper"></i>
-
-                    </div>
-
-                    <div>
-
-                        <h2>{{ $totalNews ?? 0 }}</h2>
-
-                        <span>Total News</span>
-
-                    </div>
-
+                <div>
+                    <h2>{{ $totalNews }}</h2>
+                    <span>Total News</span>
                 </div>
 
-                <div class="stat-card">
+            </div>
 
-                    <div class="icon">
+            <div class="stat-card">
 
-                        <i class="fa-solid fa-folder"></i>
-
-                    </div>
-
-                    <div>
-
-                        <h2>{{ $totalCategories ?? 0 }}</h2>
-
-                        <span>Categories</span>
-
-                    </div>
-
+                <div class="icon">
+                    <i class="fa-solid fa-folder"></i>
                 </div>
 
-                <div class="stat-card">
-
-                    <div class="icon">
-
-                        <i class="fa-solid fa-bell"></i>
-
-                    </div>
-
-                    <div>
-
-                        <h2>{{ $unreadNotifications ?? 0 }}</h2>
-
-                        <span>Notifications</span>
-
-                    </div>
-
+                <div>
+                    <h2>{{ $totalCategories }}</h2>
+                    <span>Categories</span>
                 </div>
 
-            </section>
+            </div>
 
+        </section>
 
+    </main>
 
+</div>
 
-            <!-- QUICK ACTIONS -->
+<!-- Modal -->
 
-            <section class="content-card">
+<div class="profile-modal" id="profileModal">
 
-                <div class="card-title">
+    <div class="modal-content">
 
-                    <h2>
+        <button type="button"
+                class="close-modal"
+                onclick="closeModal()">
 
-                        <i class="fa-solid fa-bolt"></i>
+            <i class="fa-solid fa-xmark"></i>
 
-                        Quick Actions
+        </button>
 
-                    </h2>
+        <h2 id="modalTitle">Update Profile</h2>
 
-                </div>
+        <form method="POST"
+              action="{{ route('profile.update') }}">
 
-                <div class="action-grid">
+            @csrf
+           
 
-                    <a href="{{ route('news.index') }}"
-                       class="action-card">
+            <input type="hidden"
+                   name="field"
+                   id="field">
 
-                        <i class="fa-solid fa-newspaper"></i>
+            <div class="form-group">
 
-                        <h3>Manage News</h3>
+                <input type="text"
+                       name="value"
+                       id="modalInput"
+                       required>
 
-                        <p>Create, edit and publish articles.</p>
+            </div>
 
-                    </a>
+            <button type="submit"
+                    class="save-btn">
 
-                    <a href="{{ route('notifications.index') }}"
-                       class="action-card">
+                Update
 
-                        <i class="fa-solid fa-bell"></i>
+            </button>
 
-                        <h3>Notifications</h3>
-
-                        <p>View all latest alerts.</p>
-
-                    </a>
-
-                    <a href="#"
-                       class="action-card">
-
-                        <i class="fa-solid fa-gear"></i>
-
-                        <h3>Settings</h3>
-
-                        <p>Manage account preferences.</p>
-
-                    </a>
-
-                </div>
-
-            </section>
-
-
-        </main>
+        </form>
 
     </div>
 
 </div>
-
 <script>
 
-document.getElementById('image').onchange=function(e){
+const userName = @json($user->name);
+const userEmail = @json($user->email);
 
-    const reader=new FileReader();
+function openModal(type)
+{
+    document.getElementById('profileModal').style.display = 'flex';
 
-    reader.onload=function(){
+    document.getElementById('field').value = type;
 
-        document.getElementById('imagePreview').src=reader.result;
-
-        document.getElementById('previewImage').src=reader.result;
-
+    if(type === 'name')
+    {
+        document.getElementById('modalTitle').innerText = 'Update Full Name';
+        document.getElementById('modalInput').value = userName;
     }
 
-    reader.readAsDataURL(e.target.files[0]);
+    if(type === 'email')
+    {
+        document.getElementById('modalTitle').innerText = 'Update Email Address';
+        document.getElementById('modalInput').value = userEmail;
+    }
+}
 
+function closeModal()
+{
+    document.getElementById('profileModal').style.display = 'none';
 }
 
 </script>
-
 </body>
 </html>

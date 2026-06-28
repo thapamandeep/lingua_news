@@ -59,23 +59,22 @@
     <h2>Latest News</h2>
 
     @forelse($latestNews as $news)
+<div class="latest-item">
 
-        <div class="latest-item">
+    <img src="{{ asset('storage/gallery/' . $news->news->image) }}"
+         alt="{{ $news->title }}">
 
-            <img src="{{ asset('storage/gallery/' . $news->news->image) }}"
-                 alt="{{ $news->title }}">
+    <div class="latest-content">
 
-            <div class="latest-content">
+        <h4>{{ $news->title }}</h4>
 
-                <h4>{{ $news->title }}</h4>
+        <p>
+            Published • {{ $news->created_at->diffForHumans() }}
+        </p>
 
-                <p>
-                    Published • {{ $news->created_at->diffForHumans() }}
-                </p>
+    </div>
 
-            </div>
-
-        </div>
+</div>
 
     @empty
 
@@ -118,7 +117,7 @@
 
     <td>
         <span class="badge purple-bg">
-            {{ $news->category->name ?? 'No Category' }}
+            {{ $news->category->translation->name ?? 'No Category' }}
         </span>
     </td>
     
@@ -163,8 +162,8 @@
 <script>
 document.addEventListener("DOMContentLoaded", function () {
 
-    const labels = @json($newsByMonth->pluck('month'));
-    const data = @json($newsByMonth->pluck('total'));
+    const labels = @json($newsByDay->pluck('month'));
+    const data = @json($newsByDay->pluck('total'));
 
     const canvas = document.getElementById('newsChart');
 
@@ -203,9 +202,14 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 </script>
 
+
+
 <script>
 const categoryLabels = @json($categoryData->pluck('name'));
 const categoryCounts = @json($categoryData->pluck('news_count'));
+
+const labels = @json($newsByDay->pluck('day'));
+const data = @json($newsByDay->pluck('total'));
 </script>
 <script>
 document.addEventListener("DOMContentLoaded", function () {

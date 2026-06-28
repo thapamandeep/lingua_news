@@ -1,145 +1,169 @@
-/* TABLE WRAPPER */
-.table-container {
-    padding: 20px;
-    background: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+/* =========================
+   TABLE CONTAINER
+========================= */
+.table-container{
+    padding:20px;
+    background:#fff;
+    border-radius:12px;
+    box-shadow:0 4px 12px rgba(0,0,0,.08);
 }
 
-/* HEADER */
-.table-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 15px;
+.table-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
 }
 
-.table-header h1 {
-    font-size: 22px;
-    font-weight: 600;
-    color: #333;
+.table-header h1{
+    font-size:24px;
+    font-weight:700;
+    color:#1f2937;
 }
 
-/* TABLE */
-.table {
-    width: 100%;
-    border-collapse: collapse;
-    overflow: hidden;
-    border-radius: 10px;
+/* =========================
+   TABLE
+========================= */
+.table{
+    width:100%;
+    border-collapse:collapse;
 }
 
-.table thead {
-    background: #111827;
-    color: #fff;
+.table thead{
+    background:#0f172a;
+    color:#fff;
 }
 
-.table th, .table td {
-    padding: 12px 15px;
-    text-align: left;
-    border-bottom: 1px solid #eee;
+.table th,
+.table td{
+    padding:15px;
+    border-bottom:1px solid #e5e7eb;
+    text-align:left;
 }
 
-.table tbody tr:hover {
-    background: #f9fafb;
+.table tbody tr:hover{
+    background:#f8fafc;
 }
 
-/* BADGES */
-.badge {
-    padding: 5px 10px;
-    border-radius: 20px;
-    font-size: 12px;
-    color: #fff;
-}
-
-.badge-success {
-    background: #22c55e;
-}
-
-.badge-danger {
-    background: #ef4444;
-}
+/* =========================
+   IMAGE
+========================= */
 .news-img{
-    height: 60px;
-    width: 80px;
+    width:80px;
+    height:60px;
+    object-fit:cover;
+    border-radius:8px;
 }
 
-/* BUTTONS */
-.btn {
-    display: inline-block;
-    padding: 6px 12px;
-    border-radius: 6px;
-    font-size: 13px;
-    text-decoration: none;
-    border: none;
-    cursor: pointer;
-    transition: 0.3s;
+/* =========================
+   STATUS
+========================= */
+.status{
+    display:inline-block;
+    padding:7px 15px;
+    border-radius:30px;
+    font-size:12px;
+    font-weight:600;
 }
 
-/* Button colors */
-.btn-primary {
-    background: #2563eb;
-    color: #fff;
+.status.approved{
+    background:#dcfce7;
+    color:#166534;
 }
 
-.btn-primary:hover {
-    background: #1d4ed8;
+.status.pending{
+    background:#fef3c7;
+    color:#92400e;
 }
 
-.btn-info {
-    background: #0ea5e9;
-    color: #fff;
+.status.rejected{
+    background:#fee2e2;
+    color:#991b1b;
 }
 
-.btn-info:hover {
-    background: #0284c7;
+/* =========================
+   BUTTONS
+========================= */
+.btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    padding:8px 15px;
+    border:none;
+    border-radius:8px;
+    text-decoration:none;
+    color:#fff;
+    font-size:13px;
+    font-weight:600;
+    cursor:pointer;
+    transition:.3s;
 }
 
-.btn-warning {
-    background: #f59e0b;
-    color: #fff;
+/* Add Button */
+.btn-primary{
+    background:#2563eb;
 }
 
-.btn-warning:hover {
-    background: #d97706;
+.btn-primary:hover{
+    background:#1d4ed8;
 }
 
-.btn-danger {
-    background: #ef4444;
-    color: #fff;
+/* View Button */
+.action-buttons .btn-info{
+    background:#06b6d4 !important;
 }
 
-.btn-danger:hover {
-    background: #dc2626;
+.action-buttons .btn-info:hover{
+    background:#0891b2 !important;
 }
 
-.btn-sm {
-    padding: 5px 10px;
-    font-size: 12px;
+/* Edit Button */
+.action-buttons .btn-warning{
+    background:#f59e0b !important;
 }
 
-/* ALERTS */
-.alert {
-    padding: 10px 15px;
-    margin-bottom: 15px;
-    border-radius: 6px;
+.action-buttons .btn-warning:hover{
+    background:#d97706 !important;
 }
 
-.alert-success {
-    background: #dcfce7;
-    color: #166534;
+/* Delete Button */
+.action-buttons .btn-danger{
+    background:#ef4444 !important;
 }
 
-.alert-danger {
-    background: #fee2e2;
-    color: #991b1b;
+.action-buttons .btn-danger:hover{
+    background:#dc2626 !important;
 }
+
+/* =========================
+   ACTIONS
+========================= */
 .action-buttons{
     display:flex;
     gap:8px;
     align-items:center;
-    flex-wrap:nowrap;
+    flex-wrap:wrap;
 }
 
 .delete-form{
     margin:0;
+}
+
+/* =========================
+   ALERTS
+========================= */
+.alert{
+    padding:12px 15px;
+    border-radius:8px;
+    margin-bottom:15px;
+}
+
+.alert-success{
+    background:#dcfce7;
+    color:#166534;
+}
+
+.alert-danger{
+    background:#fee2e2;
+    color:#991b1b;
 }
