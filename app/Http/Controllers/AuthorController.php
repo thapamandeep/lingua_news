@@ -19,9 +19,21 @@ class AuthorController extends Controller
                         ->get();
 
     $categories = Category::all();
-    $subcategories = Subcategory::all();                    
+    $subcategories = Subcategory::all();  
+    
+      // Dashboard counts
+    $totalArticles = News::count();
 
-  return view('author.dashboard',compact('publishedNews','categories','subcategories')); 
+    $publishedCount = News::where('status', 'approved')->count();
+
+    $pendingCount = News::where('status', 'pending')->count();
+
+    $totalViews = News::sum('views');
+
+  return view('author.dashboard',compact('publishedNews','categories','subcategories', 'totalArticles',
+            'publishedCount',
+            'pendingCount',
+            'totalViews')); 
   }
 
  public function pendingReview()

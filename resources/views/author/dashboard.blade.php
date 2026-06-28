@@ -16,7 +16,7 @@
             <div>
 
                 <p>Total Articles</p>
-                <h3>48</h3>
+                <h3>{{ $totalArticles }}</h3>
 
             </div>
 
@@ -37,7 +37,7 @@
             <div>
 
                 <p>Published</p>
-                <h3>31</h3>
+             <h3>{{ $publishedCount }}</h3>
 
             </div>
 
@@ -58,7 +58,7 @@
             <div>
 
                 <p>Pending Review</p>
-                <h3>9</h3>
+          <h3>{{ $pendingCount }}</h3>
 
             </div>
 
@@ -79,7 +79,7 @@
             <div>
 
                 <p>Total Views</p>
-                <h3>12.4K</h3>
+               <h3>{{ number_format($totalViews) }}</h3>
 
             </div>
 

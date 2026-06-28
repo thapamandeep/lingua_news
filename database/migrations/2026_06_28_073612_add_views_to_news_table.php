@@ -11,9 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('notifications', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+        Schema::table('news', function (Blueprint $table) {
+           $table->unsignedBigInteger('views')->default(0)->after('updated_at');
         });
     }
 
@@ -22,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('notifications');
+        Schema::table('news', function (Blueprint $table) {
+              $table->dropColumn('views');
+        });
     }
 };

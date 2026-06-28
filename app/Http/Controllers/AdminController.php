@@ -23,6 +23,8 @@ class AdminController extends Controller
     $totalUsers = Role::count();
     $totalCategories = Category::count();
 
+      $totalViews = News::sum('views');
+
 $newsByMonth = NewsTranslation::whereNotNull('created_at')
     ->selectRaw('MONTH(created_at) as month, COUNT(*) as total')
     ->groupByRaw('MONTH(created_at)')
@@ -47,7 +49,7 @@ $newsByMonth = NewsTranslation::whereNotNull('created_at')
     
 
 
-    return view('admin.pages.dashboard', compact('totalNews','totalUsers','totalCategories', 
+    return view('admin.pages.dashboard', compact('totalNews','totalUsers','totalCategories',   'totalViews',
      'newsByMonth','latestNews','recentNews','categoryData'));
     }
 
