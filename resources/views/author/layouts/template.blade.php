@@ -23,6 +23,9 @@
     <link rel="stylesheet" href="{{ asset('css/admin/form.css') }}">
     <link rel="stylesheet" href="{{ asset('author/css/index.css') }}">
     <link rel="stylesheet" href="{{ asset('author/css/settings.css') }}">
+    <link rel="stylesheet" href="{{ asset('author/css/profile.css') }}">
+    <link rel="stylesheet" href="{{ asset('author/css/edit-profile.css') }}">
+    <link rel="stylesheet" href="{{ asset('author/css/notification.css') }}">
 
     {{-- EXTRA PAGE CSS --}}
     @stack('styles')
@@ -36,22 +39,13 @@
     {{-- SIDEBAR --}}
     @include('author.partials.sidebar')
 
-    {{-- MAIN --}}
+    {{-- MAIN CONTENT --}}
     <main class="main-content">
 
-        {{-- MOBILE TOPBAR --}}
-        <header class="mobile-header">
+        {{-- HEADER --}}
+        @include('author.partials.header')
 
-            <button class="menu-toggle" id="menuToggle">
-
-                <i class="fa-solid fa-bars"></i>
-
-            </button>
-
-            <h2>Lingua News</h2>
-
-        </header>
-
+        {{-- PAGE CONTENT --}}
         @yield('content')
 
     </main>
@@ -66,6 +60,8 @@
 
 {{-- EXTRA PAGE JS --}}
 @stack('scripts')
+
+<script src="{{ asset('author/js/profile-update.js') }}"></script>
 
 </body>
 </html>

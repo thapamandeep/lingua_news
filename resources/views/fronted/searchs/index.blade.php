@@ -5,7 +5,7 @@
 <section class="search-news-page">
     <div class="container">
 
-        <h2 class="search-title">Search Results</h2>
+        
 
         @forelse($news as $item)
 
@@ -23,7 +23,7 @@
                 <div class="search-news-content">
 
                     <span class="category">
-                        {{ $item->category->name ?? 'News' }}
+                     {{ $item->category->translation->name ?? 'News' }}
                     </span>
 
                     <h3>
@@ -40,7 +40,7 @@
 
                     <a href="{{ route('detail.news', $item->id) }}"
                        class="read-more-btn">
-                        Read More
+                       {{__('site.Read More')}}
                     </a>
 
                 </div>

@@ -1,6 +1,11 @@
 <?php 
 
 return [
+    'H1'=>'Kekal Kemas Kini 
+                Dengan Berita Global',
+      'P'=>'Baca tajuk utama, politik, sukan, teknologi,
+                perniagaan, dan cerita di seluruh dunia dalam masa nyata dengan anda
+                bilik berita digital moden.',            
     'Welcome'=>'Selamat kembali! Sila log masuk untuk meneruskan.',
     'Email Address'=>'Alamat E-mel',
     'Password'=>'Kata laluan',

@@ -9,5 +9,6 @@ return [
     'Contact'=>'Contact',
     'Categories'=>'Categories',
     'Newsletter'=>'Newsletter',
-    'Subscribe'=>'Subscribe to get latest news updates directly in your email.'
+    'Subscribe'=>'Subscribe to get latest news updates directly in your email.',
+    'Button'=>'Subscribe'
 ];

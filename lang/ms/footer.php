@@ -10,5 +10,6 @@ return [
     'Contact'=>'Kenalan',
     'Categories'=>'Kategori',
     'Newsletter'=>'Surat berita',
-    'Subscribe'=>'Langgan untuk mendapatkan kemas kini berita terkini terus dalam e-mel anda.'
+    'Subscribe'=>'Langgan untuk mendapatkan kemas kini berita terkini terus dalam e-mel anda.',
+    'Button'=>'Langgan'
 ];

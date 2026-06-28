@@ -38,7 +38,7 @@
     <div class="card purple">
         <div>
             <h3>Total Views</h3>
-            <h1>125,678</h1>
+            <h1>{{ number_format($totalViews) }}</h1>
             <p>+15% this month</p>
         </div>
 

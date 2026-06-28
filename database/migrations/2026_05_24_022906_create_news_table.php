@@ -44,6 +44,10 @@ return new class extends Migration
     ->constrained('users')
     ->nullOnDelete();
 
+     
+ $table->unsignedBigInteger('views')->default(0)->after('updated_at');
+         
+
 $table->timestamp('approved_at')
     ->nullable();
 
@@ -54,5 +58,8 @@ $table->timestamp('approved_at')
     public function down(): void
     {
         Schema::dropIfExists('news');
+       $table->dropColumn('views');
+         
+        
     }
 };

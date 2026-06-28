@@ -57,9 +57,7 @@
 
     <div class="news-text">
 
-        <span class="subcategory">
-            {{ optional($news->subcategory)->name ?? __('app.general') }}
-        </span>
+       
 
         <a href="{{ route('detail.news', $news->id) }}" class="link">
             <h4>{{ $news->title ?? __('app.no_title') }}</h4>

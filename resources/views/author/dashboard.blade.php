@@ -4,40 +4,7 @@
 
 @section('content')
 
-{{-- TOPBAR --}}
-<section class="topbar">
 
-    <div class="topbar-left">
-
-        <h2>Welcome Back 👋</h2>
-        <p>Manage your articles and publishing workflow professionally.</p>
-
-    </div>
-
-    <div class="topbar-right">
-
-        {{-- SEARCH --}}
-        <div class="search-box">
-
-            <i class="fa-solid fa-magnifying-glass"></i>
-
-            <input type="text"
-                   placeholder="Search articles...">
-
-        </div>
-
-        {{-- BUTTON --}}
-        <a href="{{ route('news.create') }}"
-           class="create-btn">
-
-            <i class="fa-solid fa-plus"></i>
-            Create News
-
-        </a>
-
-    </div>
-
-</section>
 
 {{-- STATS --}}
 <section class="stats-grid">
@@ -49,7 +16,7 @@
             <div>
 
                 <p>Total Articles</p>
-                <h3>48</h3>
+                <h3>{{ $totalArticles }}</h3>
 
             </div>
 
@@ -70,7 +37,7 @@
             <div>
 
                 <p>Published</p>
-                <h3>31</h3>
+             <h3>{{ $publishedCount }}</h3>
 
             </div>
 
@@ -91,7 +58,7 @@
             <div>
 
                 <p>Pending Review</p>
-                <h3>9</h3>
+          <h3>{{ $pendingCount }}</h3>
 
             </div>
 
@@ -112,7 +79,7 @@
             <div>
 
                 <p>Total Views</p>
-                <h3>12.4K</h3>
+               <h3>{{ number_format($totalViews) }}</h3>
 
             </div>
 
@@ -171,7 +138,7 @@
 
             <ul>
                 @foreach($categories as $category)
-                    <li>{{ $category->name }}</li>
+                    <li>{{ $category->translation->name }}</li>
                 @endforeach
             </ul>
         </div>
@@ -181,7 +148,7 @@
 
             <ul>
                 @foreach($subcategories as $sub)
-                    <li>{{ $sub->name }}</li>
+                    <li>{{ $sub->translation->name }}</li>
                 @endforeach
             </ul>
         </div>

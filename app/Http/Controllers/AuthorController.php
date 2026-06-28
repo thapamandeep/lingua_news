@@ -14,14 +14,26 @@ class AuthorController extends Controller
   public function dashboard(){
 
    $publishedNews = News::with('translations')
-                        ->where('status', 'published')
+                        ->where('status', 'approved')
                         ->latest()
                         ->get();
 
     $categories = Category::all();
-    $subcategories = Subcategory::all();                    
+    $subcategories = Subcategory::all();  
+    
+      // Dashboard counts
+    $totalArticles = News::count();
 
-  return view('author.dashboard',compact('publishedNews','categories','subcategories')); 
+    $publishedCount = News::where('status', 'approved')->count();
+
+    $pendingCount = News::where('status', 'pending')->count();
+
+    $totalViews = News::sum('views');
+
+  return view('author.dashboard',compact('publishedNews','categories','subcategories', 'totalArticles',
+            'publishedCount',
+            'pendingCount',
+            'totalViews')); 
   }
 
  public function pendingReview()
@@ -36,6 +48,25 @@ class AuthorController extends Controller
     return view('author.pages.pending-review', compact('pendingNews'));
 }
 
+public function category(){
+
+$categories = Category::where('status','active')->get();
+
+return view('author.pages.categories.category-index',compact('categories'));
+}
+public function subcategory($locale = 'en')
+{
+    $subcategories = Subcategory::with([
+        'translations' => function ($query) use ($locale) {
+            $query->where('locale', $locale);
+        }
+    ])->get();
+
+    return view(
+        'author.pages.subcategories.subcategory-index',
+        compact('subcategories')
+    );
+}
 public function articles()
 {
     $articles = News::with(['translations.language'])
@@ -52,6 +83,39 @@ public function articles()
         ->latest()
         ->get();
 
-    return view('author.pages.notifications', compact('notifications'));
+    return view('author.pages.notifications.index', compact('notifications'));
+}
+
+public function profile()
+{
+    return view('author.pages.profiles.profile');
+}
+public function updateProfile(Request $request)
+{
+    $field = $request->field;
+
+    if ($field == 'name') {
+
+        $request->validate([
+            'value' => 'required|string|max:255',
+        ]);
+
+        auth()->user()->update([
+            'name' => $request->value,
+        ]);
+    }
+
+    if ($field == 'email') {
+
+        $request->validate([
+            'value' => 'required|email|unique:users,email,' . auth()->id(),
+        ]);
+
+        auth()->user()->update([
+            'email' => $request->value,
+        ]);
+    }
+
+    return back()->with('success', 'Profile updated successfully.');
 }
 }

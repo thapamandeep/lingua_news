@@ -390,7 +390,10 @@ public function rejectTranslation(NewsTranslation $translation)
 
 public function search(Request $request)
 {
-    $query = News::with(['translations', 'category']);
+$query = News::with([
+    'translations',
+    'category.translation'
+]);
     
    $logo = Setting::where('key', 'site_logo')->first();
      $siteTitle = Setting::where('key', 'site_title')->value('value');

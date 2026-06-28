@@ -21,7 +21,7 @@
           
 
             <span class="category">
-                {{ $news->category->name ?? 'News' }}
+                {{ $news->category->translation->name ?? 'News' }}
             </span>
 
        <h1>
