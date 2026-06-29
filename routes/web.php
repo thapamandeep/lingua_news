@@ -29,6 +29,7 @@ use App\Http\Controllers\AboutController;
 
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\Admin\ProfileController;
+use App\Http\Controllers\Admin\MediaController;
 
 
 
@@ -306,6 +307,23 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
 
     Route::post('/profile/update', [ProfileController::class, 'update'])
         ->name('profile.update');
+
+        Route::get('/media', [MediaController::class, 'index'])
+        ->name('media.index');
+        Route::get('/media/create', [MediaController::class, 'create'])
+        ->name('media.create');
+        Route::post('/media', [MediaController::class, 'store'])
+        ->name('media.store');
+        Route::get('/media/{medium}', [MediaController::class, 'show'])
+        ->name('media.show');
+        Route::get('/media/{medium}/edit', [MediaController::class, 'edit'])
+        ->name('media.edit');
+        Route::put('/media/{medium}', [MediaController::class, 'update'])
+        ->name('media.update');
+        Route::delete('/media/{medium}', [MediaController::class, 'destroy'])
+        ->name('media.destroy');
+
+
 
 });
 

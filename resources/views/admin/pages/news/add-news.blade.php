@@ -45,7 +45,7 @@
                 <option value="">Select Category</option>
                 @foreach($categories as $category)
                     <option value="{{ $category->id }}">
-                        {{ $category->translation->name }}
+                        {{ $category->translation->name ?? 'No Translation' }}
                     </option>
                 @endforeach
             </select>
@@ -58,7 +58,7 @@
                 <option value="">Select Subcategory</option>
                 @foreach($subcategories as $subcategory)
                     <option value="{{ $subcategory->id }}">
-                        {{ $subcategory->translation->name}}
+                        {{ $subcategory->translation->name ?? 'No Translation'}}
                     </option>
                 @endforeach
             </select>

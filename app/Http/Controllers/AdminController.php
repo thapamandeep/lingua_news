@@ -396,28 +396,11 @@ public function subcategoryTranslationStore(Request $request)
     ])->get();
 
     $layout = 'admin.layouts.template';
-
-
-
-
-
       // for author dashboard
    
       if(auth()->check() && auth()->user()->role_id == 2){
         $layout = 'author.layouts.template';
-
-
-        
-
-
-<<<<<<< HEAD
       }
-
-
-=======
-
-
->>>>>>> ffb1427144f57fbadc09f6bb8dc83b54cbd81e65
     if(auth()->check() && auth()->user()->role_id == 2){
         $layout = 'author.layouts.template';
 
@@ -432,11 +415,9 @@ public function subcategoryTranslationStore(Request $request)
 
     
     
-<<<<<<< HEAD
 
-=======
-}
->>>>>>> ffb1427144f57fbadc09f6bb8dc83b54cbd81e65
+
+
 
 
  public function search(Request $request)

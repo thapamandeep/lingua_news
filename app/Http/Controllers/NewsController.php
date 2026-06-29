@@ -29,6 +29,7 @@ $roles = Role::all();
         $layout = 'author.layouts.template';
     }
 
+   
 return view('admin.pages.news.add-news', compact('categories','subcategories','roles','layout'));
 }
   

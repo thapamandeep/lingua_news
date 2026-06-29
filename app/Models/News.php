@@ -8,6 +8,7 @@ use App\Models\Role;
 use App\Models\Subcategory;
 use App\Models\NewsTranslation;
 use App\Models\User;
+use App\Models\Media;
 
 class News extends Model
 {
@@ -46,5 +47,40 @@ class News extends Model
     public function author()
 {
     return $this->belongsTo(User::class, 'author_id');
+}
+
+/**
+ * A news article can have many media files.
+ */
+public function media()
+{
+    return $this->hasMany(Media::class);
+}
+
+/**
+ * Get the featured image.
+ */
+public function featuredMedia()
+{
+    return $this->hasOne(Media::class)
+                ->where('is_featured', true);
+}
+
+/**
+ * Gallery images only.
+ */
+public function galleryMedia()
+{
+    return $this->hasMany(Media::class)
+                ->where('media_type', 'gallery');
+}
+
+/**
+ * Active media only.
+ */
+public function activeMedia()
+{
+    return $this->hasMany(Media::class)
+                ->where('status', 'active');
 }
 }
