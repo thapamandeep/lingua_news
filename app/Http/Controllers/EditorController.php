@@ -12,21 +12,34 @@ class EditorController extends Controller
     /* -----------------------------
         DASHBOARD
     ------------------------------*/
-    public function dashboard()
-    {
-        $totalNews = News::count();
+  public function dashboard()
+{
+    $totalNews = News::count();
 
-        $pendingNews = News::where('status', 'pending')->count();
-        $approvedNews = News::where('status', 'approved')->count();
-        $rejectedNews = News::where('status', 'rejected')->count();
+    $pendingNews = News::where('status', 'pending')->count();
 
-        return view('editor.dashboard', compact(
-            'totalNews',
-            'pendingNews',
-            'approvedNews',
-            'rejectedNews'
-        ));
-    }
+    $approvedNews = News::where('status', 'approved')->count();
+
+    $rejectedNews = News::where('status', 'rejected')->count();
+
+    $recentPendingNews = News::with([
+        'translations',
+        'author',
+        'category.translation'
+    ])
+    ->where('status', 'pending')
+    ->latest()
+    ->take(10)
+    ->get();
+
+    return view('editor.dashboard', compact(
+        'totalNews',
+        'pendingNews',
+        'approvedNews',
+        'rejectedNews',
+        'recentPendingNews'
+    ));
+}
 
     /* -----------------------------
         PENDING NEWS

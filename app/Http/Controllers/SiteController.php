@@ -261,48 +261,41 @@ $siteTitle = $settings['site_title'] ?? '';
 
 
     
-    public function detail($id)
-    {
-        $language = $this->getLanguage();
+   public function detail($id)
+{
+    $language = $this->getLanguage();
 
+    $news = News::with([
+            'translations',
+            'category',
+            'subcategory'
+        ])
+        ->where('status', 'approved')
+        ->findOrFail($id);
 
+    // Increase view count
+    $news->increment('views');
 
+    $news = $this->applySingleTranslation(
+        $news,
+        $language
+    );
 
-        $news = News::with([
-                'translations',
-                'category',
-                'subcategory'
-            ])
-            ->where('status', 'approved')
-            ->findOrFail($id);
+    $settings = Setting::pluck('value', 'key');
 
-        $news = $this->applySingleTranslation(
-            $news,
-            $language,
-        );
+    $logo = $settings['site_logo'] ?? null;
+    $siteTitle = $settings['site_title'] ?? '';
 
-      $settings = Setting::pluck('value', 'key');
-
-$logo = $settings['site_logo'] ?? null;
-$siteTitle = $settings['site_title'] ?? '';
-
-        return view(
-            'fronted.news.detail',
-            compact(
-                'news',
-                'language','logo','siteTitle','settings'
-            )
-        );
-
-    
-
-    $news = News::with(['translations', 'category'])->findOrFail($id);
-
-    $translation = $news->translations
-        ->where('language_id', $language->id)
-        ->first();
-
-    return view('fronted.news.detail', compact('news','translation','language'));
+    return view(
+        'fronted.news.detail',
+        compact(
+            'news',
+            'language',
+            'logo',
+            'siteTitle',
+            'settings'
+        )
+    );
 }
     // public function detail($id)
     // {

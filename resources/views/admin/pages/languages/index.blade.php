@@ -8,7 +8,7 @@
 
         <div class="table-header">
             <h1>Languages</h1>
-            <a href="{{ route('get.languages.create') }}" class="btn btn-primary">
+            <a href="{{ route('languages.create') }}" class="btn btn-primary">
                 + Add Language
             </a>
         </div>

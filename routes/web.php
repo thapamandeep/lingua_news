@@ -126,6 +126,8 @@ Route::get('/author-notifications', [AuthorController::class, 'notifications'])
     ->name('author.notifications')
     ->middleware('author');    
 
+    Route::get('author-language-index',[AuthorController::class,'languages'])->name('author.languages.index');
+
 Route::get('/author-profile', [AuthorController::class, 'profile'])
     ->name('author.profile')
     ->middleware('author');
@@ -251,6 +253,11 @@ Route::post('/change-password', [AuthController::class, 'changePassword'])
     ->name('change.password');
 
     Route::post('/update-password',[AuthController::class,'updatePassword'])->name('update.password');
+   
+    Route::get(
+    '/author/search-articles',
+    [AuthorController::class, 'searchArticles']
+)->name('author.search.articles');
 
 
 
@@ -306,6 +313,8 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
 
     Route::post('/profile/update', [ProfileController::class, 'update'])
         ->name('profile.update');
+
+        
 
 });
 
