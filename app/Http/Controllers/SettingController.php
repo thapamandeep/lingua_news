@@ -10,15 +10,14 @@ use Illuminate\Support\Facades\Mail;
 
 class SettingController extends Controller
 {
-<<<<<<< HEAD
+
     /*
     |--------------------------------------------------------------------------
     | Helper Method
     |--------------------------------------------------------------------------
     */
 
-=======
->>>>>>> 4c364ed4a909a4be184337979c1de2ccdd96f193
+
     private function saveSetting($key, $value)
     {
         Setting::updateOrCreate(
@@ -49,7 +48,6 @@ class SettingController extends Controller
 
     public function storeGeneral(Request $request)
     {
-<<<<<<< HEAD
         $settings = [
             'site_title',
             'tagline',
@@ -62,14 +60,14 @@ class SettingController extends Controller
         foreach ($settings as $setting) {
             $this->saveSetting($setting, $request->$setting);
         }
-=======
+
         $this->saveSetting('site_title', $request->site_title);
         $this->saveSetting('tagline', $request->tagline);
         $this->saveSetting('email', $request->email);
         $this->saveSetting('phone', $request->phone);
         $this->saveSetting('description', $request->description);
         $this->saveSetting('timezone', $request->timezone);
->>>>>>> 4c364ed4a909a4be184337979c1de2ccdd96f193
+
 
         if ($request->hasFile('logo')) {
             $path = $this->uploadFile(
@@ -244,7 +242,7 @@ class SettingController extends Controller
         );
     }
 
-<<<<<<< HEAD
+
     /*
     |--------------------------------------------------------------------------
     | TEST EMAIL
@@ -286,12 +284,13 @@ class SettingController extends Controller
             'success',
             'Test email sent successfully.'
         );
-=======
-    public function sendTestEmail(Request $request)
-    {
-        // your existing code
->>>>>>> 4c364ed4a909a4be184337979c1de2ccdd96f193
     }
+
+    // public function sendTestEmail(Request $request)
+    // {
+    //     // your existing code
+
+    // }
 
     /*
     |--------------------------------------------------------------------------

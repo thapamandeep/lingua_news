@@ -25,15 +25,15 @@ class AdminController extends Controller
 
       $totalViews = News::sum('views');
 
-$newsByMonth = NewsTranslation::whereNotNull('created_at')
-    ->selectRaw('MONTH(created_at) as month, COUNT(*) as total')
-    ->groupByRaw('MONTH(created_at)')
-    ->orderByRaw('MONTH(created_at)')
+$newsByDay = News::selectRaw('DATE(created_at) as day, COUNT(*) as total')
+    ->groupBy('day')
+    ->orderBy('day')
+    ->take(7)
     ->get();
 
-   $latestNews = NewsTranslation::with('news')
+  $latestNews = NewsTranslation::with('news')
     ->whereHas('news', function ($query) {
-        $query->where('status', 'published');
+        $query->where('status', 'approved');
     })
     ->latest()
     ->take(3)
@@ -50,7 +50,7 @@ $newsByMonth = NewsTranslation::whereNotNull('created_at')
 
 
     return view('admin.pages.dashboard', compact('totalNews','totalUsers','totalCategories',   'totalViews',
-     'newsByMonth','latestNews','recentNews','categoryData'));
+     'newsByDay','latestNews','recentNews','categoryData'));
     }
 
     // ---------------------------------------users---------------------------------//
@@ -400,7 +400,21 @@ public function subcategoryTranslationStore(Request $request)
    
       if(auth()->check() && auth()->user()->role_id == 2){
         $layout = 'author.layouts.template';
+<<<<<<< HEAD
       }
+=======
+
+
+        
+
+
+     }
+
+
+
+
+
+>>>>>>> 0fec19374e618ce641a2408f31a9970f58d4b140
     if(auth()->check() && auth()->user()->role_id == 2){
         $layout = 'author.layouts.template';
 
@@ -412,6 +426,7 @@ public function subcategoryTranslationStore(Request $request)
     );
 }
 
+<<<<<<< HEAD
 
     
     
@@ -420,6 +435,8 @@ public function subcategoryTranslationStore(Request $request)
 
 
 
+=======
+>>>>>>> 0fec19374e618ce641a2408f31a9970f58d4b140
  public function search(Request $request)
     {
         $search = $request->search;
@@ -430,7 +447,17 @@ public function subcategoryTranslationStore(Request $request)
 
         return view('admin.pages.search.index', compact('news', 'search'));
     }
+
+    
+    
+
+
+
 }
+
+
+
+
 
 
 

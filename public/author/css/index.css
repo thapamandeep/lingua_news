@@ -243,3 +243,41 @@
 
     color:var(--text-light);
 }
+/* STATUS BADGES */
+
+.status{
+    display:inline-block;
+    padding:6px 14px;
+    border-radius:30px;
+    font-size:13px;
+    font-weight:600;
+    text-align:center;
+}
+
+/* Pending */
+.status.pending{
+    background:#fff7ed;
+    color:#ea580c;
+    border:1px solid #fdba74;
+}
+
+/* Approved */
+.status.approved{
+    background:#dcfce7;
+    color:#15803d;
+    border:1px solid #86efac;
+}
+
+/* Rejected */
+.status.rejected{
+    background:#fee2e2;
+    color:#dc2626;
+    border:1px solid #fca5a5;
+}
+
+/* Unknown */
+.status.unknown{
+    background:#f3f4f6;
+    color:#6b7280;
+    border:1px solid #d1d5db;
+}

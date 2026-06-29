@@ -37,7 +37,7 @@
         {{-- Admin Profile --}}
    <div class="admin-profile">
 
-    <img src="{{ asset('uploads/admin.jpg') }}" alt="Admin">
+  <img src="{{ asset('uploads/profile/'.auth()->user()->image) }}" alt="Admin">
 
     <div class="profile-info">
         <h4>Admin</h4>

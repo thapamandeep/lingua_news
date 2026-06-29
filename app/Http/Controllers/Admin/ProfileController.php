@@ -21,24 +21,53 @@ class ProfileController extends Controller
         'totalCategories'
     ));
 }
+public function update(Request $request)
+{
+    $user = Auth::user();
 
-    public function update(Request $request)
-    {
-        $user = Auth::user();
+    if ($request->field == 'name') {
 
         $request->validate([
-            'name'  => 'required|max:255',
-            'email' => 'required|email|max:255',
+            'value' => 'required|string|max:255',
         ]);
 
         $user->update([
-            'name'  => $request->name,
-            'email' => $request->email,
+            'name' => $request->value,
+        ]);
+    }
+
+    if ($request->field == 'email') {
+
+        $request->validate([
+            'value' => 'required|email|max:255|unique:users,email,' . $user->id,
         ]);
 
-        return back()->with(
-            'success',
-            'Profile updated successfully.'
-        );
+        $user->update([
+            'email' => $request->value,
+        ]);
     }
+
+    if ($request->field == 'image') {
+
+        $request->validate([
+            'image' => 'required|image|mimes:jpg,jpeg,png,webp|max:2048',
+        ]);
+
+        $fileName = time() . '.' . $request->image->extension();
+
+        $request->image->move(
+            public_path('uploads/profile'),
+            $fileName
+        );
+
+        $user->update([
+            'image' => $fileName
+        ]);
+    }
+
+    return back()->with(
+        'success',
+        'Profile updated successfully.'
+    );
+}
 }

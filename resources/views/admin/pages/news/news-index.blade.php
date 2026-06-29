@@ -4,109 +4,140 @@
 
 <section class="users-table-section">
 
-    <div class="table-container">
+```
+<div class="table-container">
 
-        <div class="table-header">
-            <h1>All News</h1>
-            <a href="{{ route('category.create') }}" class="btn btn-primary">
-                + Add category
-            </a>
+    <div class="table-header">
+
+        <h1>All News</h1>
+
+        <a href="{{ route('category.create') }}"
+           class="btn btn-primary">
+            + Add Category
+        </a>
+
+    </div>
+
+    @if(session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
         </div>
+    @endif
 
-        {{-- SUCCESS MESSAGE --}}
-        @if(session('success'))
-            <div class="alert alert-success">
-                {{ session('success') }}
-            </div>
-        @endif
+    <table class="table">
 
-        <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Image</th>
+                <th>Category</th>
+                <th>SubCategory</th>
+                <th>Author</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
 
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Image</th>
-                    <th>Category ID</th>
-                    <th>SubCategory ID</th>
-                    <th>Role ID</th>
-                    <th>Status</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
+        <tbody>
 
-            <tbody>
+            @forelse($news as $item)
 
-                @foreach($news as $news)
-                <tr>
+            <tr>
 
-                    <td>{{$loop->iteration  }}</td>
+                <td>{{ $loop->iteration }}</td>
 
-                    <td>
-                        <img  class="news-img" src="{{asset('storage/gallery/'.$news->image)}}" alt="news-image">
-                    </td>
+                <td>
+                    <img
+                        class="news-img"
+                        src="{{ asset('storage/gallery/'.$item->image) }}"
+                        alt="News Image">
+                </td>
 
-                    <td>{{ $news->category_id }}</td>
+                <td>
+                    {{ $item->category_id }}
+                </td>
 
+                <td>
+                    {{ $item->subcategory_id }}
+                </td>
 
-                    <td>{{ $news->subcategory_id }}</td>
+                <td>
+                    {{ $item->author->name ?? 'N/A' }}
+                </td>
 
-                    <td>  {{ $news->role_id}}</td>
-                    <td> {{$news->status}}</td>         
+                <td>
 
-              <td>
+                    @if($item->status == 'approved')
+                        <span class="status approved">
+                            Approved
+                        </span>
 
-    <div class="action-buttons">
+                    @elseif($item->status == 'rejected')
+                        <span class="status rejected">
+                            Rejected
+                        </span>
 
-        <!-- VIEW -->
-        <a href="#" class="btn btn-info btn-sm">
-            View
-        </a>
+                    @else
+                        <span class="status pending">
+                            Pending
+                        </span>
+                    @endif
 
-        <!-- EDIT -->
-        <a href="{{route('news.edit',$news->id)}}" class="btn btn-warning btn-sm">
-            Edit
-        </a>
+                </td>
 
-        <!-- DELETE -->
-        <form action="{{route('news.delete',$news->id)}}" method="POST" class="delete-form">
+                <td>
 
-            @csrf
-            @method('DELETE')
+                    <div class="action-buttons">
 
-            <button type="submit"
-                    class="btn btn-danger btn-sm"
-                    onclick="return confirm('Are you sure?')">
-                Delete
-            </button>
+                        <a href="#"
+                           class="btn btn-info">
+                            View
+                        </a>
 
-        </form>
+                        <a href="{{ route('news.edit',$item->id) }}"
+                           class="btn btn-warning">
+                            Edit
+                        </a>
 
-        @if($news->status !== 'approved')
-<form action="{{ route('news.approve', $news->id) }}" method="POST">
-    @csrf
-    <button class="btn btn-success">Approve</button>
-</form>
-@endif
+                        <form action="{{ route('news.delete',$item->id) }}"
+                              method="POST"
+                              class="delete-form">
 
-@if($news->status !== 'rejected')
-<form action="{{ route('news.reject', $news->id) }}" method="POST">
-    @csrf
-    <button class="btn btn-danger">Reject</button>
-</form>
-@endif
+                            @csrf
+                            @method('DELETE')
 
-    </div>
+                            <button type="submit"
+                                    class="btn btn-danger"
+                                    onclick="return confirm('Are you sure you want to delete this news?')">
+                                Delete
+                            </button>
 
-</td>
+                        </form>
 
-                </tr>
-                @endforeach
+                    </div>
 
-            </tbody>
+                </td>
 
-        </table>
+            </tr>
 
-    </div>
+            @empty
+
+            <tr>
+
+                <td colspan="7" style="text-align:center;">
+                    No News Found
+                </td>
+
+            </tr>
+
+            @endforelse
+
+        </tbody>
+
+    </table>
+
+</div>
+```
 
 </section>
 

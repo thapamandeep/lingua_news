@@ -16,7 +16,7 @@
                     <th>Status</th>
                     <th>Language</th>
                     <th>Created</th>
-                    <th>Actions</th>
+                    
                 </tr>
             </thead>
 
@@ -51,13 +51,7 @@
 
                         <td>{{ $article->created_at->format('d M Y') }}</td>
 
-                        <td class="actions">
-
-                            <a href="{{ route('news.edit', $article->id) }}" class="btn edit">
-                                Edit
-                            </a>
-
-                        </td>
+                      
 
                     </tr>
 
