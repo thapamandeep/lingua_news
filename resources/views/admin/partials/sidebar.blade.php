@@ -156,14 +156,14 @@
             <ul class="dropdown-menu">
 
                 <li>
-                    <a href="#">
+                    <a href="{{ route('media.create') }}">
                         <i class="fa-solid fa-plus"></i>
-                        Media Index
+                        Add Media 
                     </a>
                 </li>
 
                 <li>
-                    <a href="#">
+                    <a href="{{ route('media.index') }}">
                         <i class="fa-solid fa-table"></i>
                         Media Table
                     </a>

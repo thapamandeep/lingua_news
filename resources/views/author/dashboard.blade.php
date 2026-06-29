@@ -138,8 +138,8 @@
 
             <ul>
                 @foreach($categories as $category)
-                    <li>{{ $category->translation->name }}</li>
-                @endforeach
+    <li>{{ $category->translation?->name ?? 'No Translation' }}</li>
+@endforeach
             </ul>
         </div>
 
@@ -148,8 +148,8 @@
 
             <ul>
                 @foreach($subcategories as $sub)
-                    <li>{{ $sub->translation->name }}</li>
-                @endforeach
+    <li>{{ $sub->translation?->name ?? 'No Translation' }}</li>
+@endforeach
             </ul>
         </div>
 
