@@ -276,6 +276,8 @@ $siteTitle = $settings['site_title'] ?? '';
             ->where('status', 'approved')
             ->findOrFail($id);
 
+            $news->increment('views');
+
         $news = $this->applySingleTranslation(
             $news,
             $language,

@@ -400,21 +400,21 @@ public function subcategoryTranslationStore(Request $request)
    
       if(auth()->check() && auth()->user()->role_id == 2){
         $layout = 'author.layouts.template';
-<<<<<<< HEAD
+
       }
-=======
+
 
 
         
 
 
-     }
+     
 
 
 
 
 
->>>>>>> 0fec19374e618ce641a2408f31a9970f58d4b140
+
     if(auth()->check() && auth()->user()->role_id == 2){
         $layout = 'author.layouts.template';
 
@@ -426,7 +426,7 @@ public function subcategoryTranslationStore(Request $request)
     );
 }
 
-<<<<<<< HEAD
+
 
     
     
@@ -435,8 +435,7 @@ public function subcategoryTranslationStore(Request $request)
 
 
 
-=======
->>>>>>> 0fec19374e618ce641a2408f31a9970f58d4b140
+
  public function search(Request $request)
     {
         $search = $request->search;
