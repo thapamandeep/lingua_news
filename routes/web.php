@@ -315,9 +315,9 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
     Route::post('/profile/update', [ProfileController::class, 'update'])
         ->name('profile.update');
 
-<<<<<<< HEAD
+
         
-=======
+
         Route::get('/media', [MediaController::class, 'index'])
         ->name('media.index');
         Route::get('/media/create', [MediaController::class, 'create'])
@@ -334,7 +334,7 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
         ->name('media.destroy');
 
 
->>>>>>> 37a8f1c539bf2b9cfd34f25e3105b090d3dc632b
+
 
 });
 

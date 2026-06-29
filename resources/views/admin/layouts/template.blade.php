@@ -12,6 +12,9 @@
     <link rel="stylesheet" href="{{ asset('css/admin/table.css') }}">
     <link rel="stylesheet" href="{{ asset('css/admin/settings.css') }}">
     <link rel="stylesheet" href="{{ asset('css/admin/profile.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/admin/search.css') }}">
+
+    <link rel="icon" type="image/png" href="{{ asset('storage/settings/1781169202.png') }}">
 </head>
 <body>
 
