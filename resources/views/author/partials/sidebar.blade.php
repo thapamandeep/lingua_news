@@ -179,7 +179,7 @@
 
             <div class="dropdown-menu">
 
-                <a href="{{ route('languages.index') }}">
+                <a href="{{ route('author.languages.index') }}">
                     <div class="menu-left">
                         <i class="fa-solid fa-list"></i>
                         <span>All Languages</span>

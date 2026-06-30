@@ -26,6 +26,7 @@
     <link rel="stylesheet" href="{{ asset('author/css/profile.css') }}">
     <link rel="stylesheet" href="{{ asset('author/css/edit-profile.css') }}">
     <link rel="stylesheet" href="{{ asset('author/css/notification.css') }}">
+    <link rel="stylesheet" href="{{ asset('author/css/search.css') }}">
 
     {{-- EXTRA PAGE CSS --}}
     @stack('styles')

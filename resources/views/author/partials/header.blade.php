@@ -15,10 +15,17 @@
 
     <div class="header-right">
 
-        <div class="header-search">
-            <i class="fa-solid fa-magnifying-glass"></i>
-            <input type="text" placeholder="Search articles...">
-        </div>
+        <form action="{{ route('author.search.articles') }}" method="GET" class="header-search">
+
+    <i class="fa-solid fa-magnifying-glass"></i>
+
+    <input
+        type="text"
+        name="search"
+        value="{{ request('search') }}"
+        placeholder="Search your articles...">
+
+</form>
 
         <a href="{{ route('author.notifications') }}" class="header-icon">
             <i class="fa-solid fa-bell"></i>

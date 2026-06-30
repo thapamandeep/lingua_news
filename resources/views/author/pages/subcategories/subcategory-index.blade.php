@@ -41,10 +41,10 @@
 
                     <td>{{ $loop->iteration }}</td>
 
-                    <td>{{ $subcategory->name }}</td>
+                    <td>{{ $subcategory->translation->name }}</td>
 
                     <td>
-                        {{ $subcategory->category->name ?? 'No Category' }}
+                        {{ $subcategory->category->translation->name ?? 'No Category' }}
                     </td>
 
                     <td>{{ $subcategory->slug }}</td>

@@ -11,6 +11,7 @@ use App\Models\News;
 use App\Models\Language;
 use App\Models\Category;
 use App\Models\Subcategory;
+use App\Models\Member;
 use App\Models\NewsTranslation;
 use App\Models\CategoryTranslation;
 use App\Models\SubcategoryTranslation;
@@ -24,6 +25,7 @@ class AdminController extends Controller
     $totalCategories = Category::count();
 
       $totalViews = News::sum('views');
+        $totalSubscribers = Member::count();
 
 $newsByDay = News::selectRaw('DATE(created_at) as day, COUNT(*) as total')
     ->groupBy('day')
@@ -50,8 +52,10 @@ $newsByDay = News::selectRaw('DATE(created_at) as day, COUNT(*) as total')
 
 
     return view('admin.pages.dashboard', compact('totalNews','totalUsers','totalCategories',   'totalViews',
-     'newsByDay','latestNews','recentNews','categoryData'));
+     'newsByDay','latestNews','recentNews','categoryData','totalSubscribers'));
     }
+
+    
 
     // ---------------------------------------users---------------------------------//
 

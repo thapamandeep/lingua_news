@@ -41,7 +41,7 @@
                     <td>{{ $loop->iteration }}</td>
 
 
-                    <td>{{ $category->slug }}</td>
+                    <td>{{ $category->translation->name}}</td>
 
                     <td>{{ $category->created_at->format('d M Y') }}</td>
 

@@ -8,6 +8,8 @@ use App\Models\NewsTranslation;
 use App\Models\Category;
 use App\Models\Subcategory;
 use App\Models\Notification;
+use App\Models\Language;
+
 
 class AuthorController extends Controller
 {
@@ -67,6 +69,13 @@ public function subcategory($locale = 'en')
         compact('subcategories')
     );
 }
+public function languages()
+{
+    $languages = Language::all();
+
+    return view('author.pages.languages.languages-index', compact('languages'));
+}
+
 public function articles()
 {
     $articles = News::with(['translations.language'])
@@ -117,5 +126,29 @@ public function updateProfile(Request $request)
     }
 
     return back()->with('success', 'Profile updated successfully.');
+}
+
+public function searchArticles(Request $request)
+{
+    $search = trim($request->search);
+
+    $news = News::with([
+            'translations',
+            'category.translation'
+        ])
+        ->where('author_id', auth()->id())
+        ->when($search, function ($query) use ($search) {
+            $query->whereHas('translations', function ($q) use ($search) {
+                $q->where('title', 'like', "%{$search}%")
+                  ->orWhere('description', 'like', "%{$search}%");
+            });
+        })
+        ->latest()
+        ->paginate(10);
+
+    return view(
+        'author.pages.searches.search-articles',
+        compact('news')
+    );
 }
 }
