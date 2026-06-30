@@ -28,6 +28,9 @@
     <link rel="stylesheet" href="{{ asset('author/css/notification.css') }}">
     <link rel="stylesheet" href="{{ asset('author/css/search.css') }}">
 
+    
+    <link rel="icon" type="image/png" href="{{ asset('storage/settings/1781169202.png') }}">
+
     {{-- EXTRA PAGE CSS --}}
     @stack('styles')
 

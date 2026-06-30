@@ -392,7 +392,7 @@ public function subcategoryTranslationStore(Request $request)
         ->with('success', 'Subcategory translation created successfully.');
 }
 
- public function subcategoryIndex()
+public function subcategoryIndex()
 {
     $subcategories = Subcategory::with([
         'category.translation',
@@ -400,10 +400,11 @@ public function subcategoryTranslationStore(Request $request)
     ])->get();
 
     $layout = 'admin.layouts.template';
-      // for author dashboard
-   
-      if(auth()->check() && auth()->user()->role_id == 2){
+
+    // For author dashboard
+    if (auth()->check() && auth()->user()->role_id == 2) {
         $layout = 'author.layouts.template';
+
 
       }
 
@@ -422,41 +423,93 @@ public function subcategoryTranslationStore(Request $request)
     if(auth()->check() && auth()->user()->role_id == 2){
         $layout = 'author.layouts.template';
 
+
     }
 
     return view(
         'admin.pages.subcategories.subcatTable',
-        compact('subcategories', 'layout')
+        compact(
+            'subcategories',
+            'layout'
+        )
     );
 }
 
 
 
-    
-    
-
-
-
-
-
-
- public function search(Request $request)
-    {
-        $search = $request->search;
-
-        $news = News::whereHas('translations', function ($query) use ($search) {
-            $query->where('title', 'LIKE', "%{$search}%");
-        })->latest()->paginate(10);
-
-        return view('admin.pages.search.index', compact('news', 'search'));
-    }
 
     
     
 
 
 
+
+
+
+
+    
+    
+
+public function search(Request $request)
+{
+    $search = trim($request->search);
+
+  $news = News::with([
+    'translations',
+    'category.translation'
+])
+->whereHas('translations', function ($q) use ($search) {
+    $q->where('title', 'like', "%{$search}%")
+      ->orWhere('description', 'like', "%{$search}%");
+})
+->latest()
+->paginate(10);
+
+
+    $categories = Category::with('translation')
+        ->whereHas('translation', function ($q) use ($search) {
+            $q->where('name', 'like', "%{$search}%");
+        })
+        ->get();
+
+    $users = User::with('role')
+        ->where(function ($q) use ($search) {
+            $q->where('name', 'like', "%{$search}%")
+              ->orWhere('username', 'like', "%{$search}%")
+              ->orWhere('email', 'like', "%{$search}%");
+        })
+        ->get();
+
+    return view(
+        'admin.pages.search.index',
+        compact(
+            'search',
+            'news',
+            'categories',
+            'users'
+        )
+    );
 }
+}
+
+
+
+    
+    
+
+
+
+
+
+
+
+
+    
+    
+
+
+
+
 
 
 

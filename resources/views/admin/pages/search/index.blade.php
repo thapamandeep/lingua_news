@@ -2,48 +2,94 @@
 
 @section('content')
 
-<div class="table-container">
+<div class="search-wrapper">
 
-    <h2>Search Results for "{{ $search }}"</h2>
+    <div class="search-banner">
 
-    <table>
+        <h1>Search Results</h1>
 
-        <thead>
-            <tr>
-                <th>Title</th>
-                <th>Date</th>
-            </tr>
-        </thead>
+        <p>
+            Showing results for
+            <span>"{{ $search }}"</span>
+        </p>
 
-        <tbody>
+    </div>
 
-        @forelse($news as $item)
+    @if($news->count())
 
-            <tr>
-                <td>
-                    {{ optional($item->translations->first())->title }}
-                </td>
+        <div class="news-list">
 
-                <td>
-                    {{ $item->created_at->format('d M Y') }}
-                </td>
-            </tr>
+            @foreach($news as $item)
 
-        @empty
+                <div class="news-item">
 
-            <tr>
-                <td colspan="2">
-                    No results found.
-                </td>
-            </tr>
+                    <div class="news-left">
 
-        @endforelse
+                        <div class="news-number">
+                            {{ $loop->iteration }}
+                        </div>
 
-        </tbody>
+                    </div>
 
-    </table>
+                    <div class="news-content">
 
-    {{ $news->links() }}
+                        <h2>
+                            {{ optional($item->translations->first())->title ?? 'No Title' }}
+                        </h2>
+
+                        <div class="news-meta">
+
+                            <span>
+                                <i class="fa-solid fa-folder"></i>
+                                {{ $item->category->translation->name ?? 'No Category' }}
+                            </span>
+
+                            <span>
+                                <i class="fa-solid fa-calendar"></i>
+                                {{ $item->created_at->format('d M Y') }}
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                    <div class="news-status">
+
+                        @if($item->status == 'approved')
+                            <span class="approved">Approved</span>
+
+                        @elseif($item->status == 'pending')
+                            <span class="pending">Pending</span>
+
+                        @else
+                            <span class="rejected">Rejected</span>
+                        @endif
+
+                    </div>
+
+                </div>
+
+            @endforeach
+
+        </div>
+
+        <div class="pagination-wrapper">
+            {{ $news->appends(request()->query())->links() }}
+        </div>
+
+    @else
+
+        <div class="empty-box">
+
+            <i class="fa-solid fa-magnifying-glass"></i>
+
+            <h2>No Results Found</h2>
+
+            <p>No articles matched "{{ $search }}"</p>
+
+        </div>
+
+    @endif
 
 </div>
 

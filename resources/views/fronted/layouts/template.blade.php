@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Document</title>
+    <title>Lingua News</title>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
@@ -21,6 +21,9 @@
     <link rel="stylesheet" href="{{ asset('css/sites/profile.css') }}">
     <link rel="stylesheet" href="{{ asset('css/sites/profile-edit.css') }}">
     <link rel="stylesheet" href="{{ asset('css/sites/abouts.css') }}">
+
+    
+    <link rel="icon" type="image/png" href="{{ asset('storage/settings/1781169202.png') }}">
 
     <!-- css -->
      <style>
