@@ -491,6 +491,15 @@ body{
     padding:25px;
     box-shadow:0 10px 25px rgba(0,0,0,.06);
 }
+.category-chart{
+    height: 450px !important;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.category-chart canvas{
+    max-height: 320px !important;
+}
 
 .section-title{
     margin-bottom:20px;

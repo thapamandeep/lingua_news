@@ -39,10 +39,10 @@ class News extends Model
         return $this->belongsTo(Subcategory::class);
     }
 
-    public function translations()
-    {
-        return $this->hasMany(NewsTranslation::class);
-    }
+public function translations()
+{
+    return $this->hasMany(NewsTranslation::class, 'news_id');
+}
 
     public function author()
 {

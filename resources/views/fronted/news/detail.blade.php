@@ -31,8 +31,15 @@
                 {{ $news->created_at->format('F d, Y') }}
             </div>
 
-          <div class="description">
-    {!! $news->content !!}
+     <div class="description">
+    @php
+        $sentences = explode('.', $news->content);
+        $chunks = array_chunk($sentences, 3);
+    @endphp
+
+    @foreach($chunks as $chunk)
+        <p>{{ implode('.', $chunk) }}.</p>
+    @endforeach
 </div>
         </div>
 
