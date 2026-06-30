@@ -46,7 +46,15 @@ $newsByDay = News::selectRaw('DATE(created_at) as day, COUNT(*) as total')
     ->take(10)
     ->get();
 
-    $categoryData = Category::withCount('news')->get();
+  $categoryData = Category::with(['translation'])
+    ->withCount('news')
+    ->get()
+    ->map(function ($category) {
+        return [
+            'name' => $category->translation->name ?? 'Unknown',
+            'news_count' => $category->news_count,
+        ];
+    });
 
     
 

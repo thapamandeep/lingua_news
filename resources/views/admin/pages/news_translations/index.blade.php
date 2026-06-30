@@ -46,39 +46,41 @@
 
                     <td>{{ $news->language_id }}</td>
 
-                    <td><p class="text-secondary mb-0"
-       style="max-width:250px; word-wrap:break-word;">
-        {{ \Illuminate\Support\Str::words($news->title, 6, '...') }}
-    </p></td>
-                    <td><p class="text-secondary mb-0"
-       style="max-width:250px; word-wrap:break-word;">
-        {{ \Illuminate\Support\Str::words($news->description, 12, '...') }}
-    </p></td>
+      <td>
+    <p class="text-secondary mb-0" style="max-width:250px; word-wrap:break-word;">
+        {{ \Illuminate\Support\Str::words($news->title ?? 'No Title', 10, '...') }}
+    </p>
+</td>
 
-                    <td><p class="text-secondary mb-0"
-       style="max-width:250px; word-wrap:break-word;">
-        {{ \Illuminate\Support\Str::words($news->content, 15, '...') }}
-    </p></td>
+<td>
+    <p class="text-secondary mb-0 text-truncate-custom">
+        {{ \Illuminate\Support\Str::words($news->description ?? 'No Description', 8, '...') }}
+    </p>
+</td>
+
+<td>
+    <p class="text-secondary mb-0 text-truncate-custom">
+        {{ \Illuminate\Support\Str::words($news->content ?? 'No Content', 10, '...') }}
+    </p>
+</td>
 
                     
 
-              <td>
+           
+
+   <td class="action-column">
 
     <div class="action-buttons">
 
-        <!-- VIEW -->
-        <a href="#" class="btn btn-info btn-sm">
-            View
-        </a>
+        <a href="#" class="btn btn-info btn-sm">View</a>
 
-        <!-- EDIT -->
-        <a href="{{route('news.edit',$news->id)}}" class="btn btn-warning btn-sm">
+        <a href="{{ route('news.edit',$news->id) }}" class="btn btn-warning btn-sm">
             Edit
         </a>
 
-        <!-- DELETE -->
-        <form action="{{route('news.delete',$news->id)}}" method="POST" class="delete-form">
-
+        <form action="{{ route('news.delete',$news->id) }}"
+              method="POST"
+              class="delete-form">
             @csrf
             @method('DELETE')
 
@@ -87,7 +89,6 @@
                     onclick="return confirm('Are you sure?')">
                 Delete
             </button>
-
         </form>
 
     </div>

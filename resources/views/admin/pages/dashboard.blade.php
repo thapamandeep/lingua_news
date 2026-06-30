@@ -113,8 +113,8 @@
 @forelse($recentNews as $news)
 
 <tr>
-  <td>
-    {{ optional($news->translations->first())->title ?? 'No Title' }}
+ <td>
+{{ optional($news->translations->where('language_id', 1)->first())->title ?? 'No Title' }}
 </td>
 
     <td>

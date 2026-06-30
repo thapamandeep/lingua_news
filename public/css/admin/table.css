@@ -167,3 +167,22 @@
     background:#fee2e2;
     color:#991b1b;
 }
+.action-column{
+    min-width: 250px;
+    white-space: nowrap;
+}
+
+.action-buttons{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: nowrap;
+}
+
+.action-buttons .delete-form{
+    margin: 0;
+}
+
+.action-buttons .btn{
+    white-space: nowrap;
+}

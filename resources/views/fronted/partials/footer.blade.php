@@ -76,7 +76,7 @@
         @foreach($categories as $category)
             <li>
                 <a href="{{ route('category.page', $category->slug) }}">
-                    {{ $category->name }}
+                    {{ $category->translation->name }}
                 </a>
             </li>
         @endforeach

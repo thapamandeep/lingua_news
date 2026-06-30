@@ -45,8 +45,24 @@
     margin-bottom: 15px;
 }
 
-.description{
+/* .description{
     font-size: 18px;
     line-height: 1.8;
     color: #333;
+} */
+
+.description{
+    line-height: 1.9;
+    font-size: 17px;
+    color: #333;
+}
+
+.description p{
+    margin-bottom: 15px;
+    line-height: 1.8;
+}
+
+.description br{
+    display: block;
+    margin-bottom: 10px;
 }
