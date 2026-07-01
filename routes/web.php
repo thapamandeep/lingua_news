@@ -30,6 +30,7 @@ use App\Http\Controllers\AboutController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\MediaController;
+use App\Http\Controllers\GoogleController;
 
 
 
@@ -337,6 +338,13 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
 
 
 });
+
+
+
+Route::get('/auth/google', [GoogleController::class, 'redirect'])
+    ->name('google.login');
+
+Route::get('/auth/google/callback', [GoogleController::class, 'callback']);
 
 
 

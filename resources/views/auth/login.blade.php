@@ -84,9 +84,11 @@
               {{__('login.OR')}}
             </div>
 
-            <button class="google-btn">
-               {{__('login.Continue')}}
-            </button>
+           <a href="{{ route('google.login') }}">
+    <button type="button" class="google-btn">
+        {{ __('login.Continue') }}
+    </button>
+</a>
 
             <div class="footer">
                {{__('login.Do')}}
