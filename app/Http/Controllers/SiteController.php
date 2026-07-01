@@ -283,8 +283,17 @@ $siteTitle = $settings['site_title'] ?? '';
 
     $settings = Setting::pluck('value', 'key');
 
+
+            $news->increment('views');
+
+        $news = $this->applySingleTranslation(
+            $news,
+            $language,
+        );
+
     $logo = $settings['site_logo'] ?? null;
     $siteTitle = $settings['site_title'] ?? '';
+
 
     return view(
         'fronted.news.detail',

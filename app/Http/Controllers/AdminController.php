@@ -412,6 +412,26 @@ public function subcategoryIndex()
     // For author dashboard
     if (auth()->check() && auth()->user()->role_id == 2) {
         $layout = 'author.layouts.template';
+
+
+      }
+
+
+
+        
+
+
+     
+
+
+
+
+
+
+    if(auth()->check() && auth()->user()->role_id == 2){
+        $layout = 'author.layouts.template';
+
+
     }
 
     return view(
@@ -422,6 +442,21 @@ public function subcategoryIndex()
         )
     );
 }
+
+
+
+
+    
+    
+
+
+
+
+
+
+
+    
+    
 
 public function search(Request $request)
 {
@@ -437,6 +472,7 @@ public function search(Request $request)
 })
 ->latest()
 ->paginate(10);
+
 
     $categories = Category::with('translation')
         ->whereHas('translation', function ($q) use ($search) {

@@ -47,7 +47,7 @@
                 @foreach($categories as $category)
                     <option value="{{ $category->id }}"
                         {{ $news->category_id == $category->id ? 'selected' : '' }}>
-                        {{ $category->name }}
+                        {{ $category->translation->name }}
                     </option>
                 @endforeach
             </select>
@@ -61,7 +61,7 @@
                 @foreach($subcategories as $subcategory)
                     <option value="{{ $subcategory->id }}"
                         {{ $news->subcategory_id == $subcategory->id ? 'selected' : '' }}>
-                        {{ $subcategory->name }}
+                        {{ $subcategory->translation->name }}
                     </option>
                 @endforeach
             </select>
