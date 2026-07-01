@@ -10,7 +10,7 @@
 
      
          <div class="logo">
-              <img src="{{ asset($logo) }}" alt="logo">
+             <img src="{{ asset($logo) }}" alt="logo">
         </div>
 
 
@@ -47,15 +47,15 @@
 
 
    <div class="signin">
-    @if(Auth::check())
-        <a href="{{ route('member.profile', Auth::user()->id) }}">
-            <i class="fa fa-user user-icon"></i>
-        </a>
-    @else
-        <a href="{{ route('login') }}">
-            <button>{{__('site.Sign In')}}</button>
-        </a>
-    @endif
+  @if(Auth::guard('member')->check())
+    <a href="{{ route('member.profile', Auth::guard('member')->user()->id) }}">
+        <i class="fa fa-user user-icon"></i>
+    </a>
+@else
+    <a href="{{ route('login') }}">
+        <button>{{ __('site.Sign In') }}</button>
+    </a>
+@endif
 </div>
 
     </div>

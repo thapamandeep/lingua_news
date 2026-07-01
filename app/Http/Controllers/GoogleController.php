@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Member;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 use Laravel\Socialite\Facades\Socialite;
 
 use App\Http\Controllers\Controller;
@@ -14,32 +17,23 @@ class GoogleController extends Controller
         return Socialite::driver('google')->redirect();
     }
 
-     public function callback()
-    {
-        try {
+public function callback()
+{
+    $googleUser = Socialite::driver('google')
+        ->stateless()
+        ->user();
 
-            $googleUser = Socialite::driver('google')->user();
+    $member = Member::firstOrCreate(
+        ['email' => $googleUser->email],
+        [
+            'name' => $googleUser->name,
+            'password' => bcrypt(Str::random(16)),
+        ]
+    );
 
-            $user = User::where('email', $googleUser->email)->first();
+    Auth::guard('member')->login($member);
 
-            if (!$user) {
-
-                $user = User::create([
-                    'name' => $googleUser->name,
-                    'email' => $googleUser->email,
-                    'password' => bcrypt(Str::random(16)),
-                ]);
-            }
-
-            Auth::login($user);
-
-            return redirect()->route('home');
-
-        } catch (\Exception $e) {
-
-            return redirect()->route('login')
-                ->with('error', 'Google login failed.');
-        }
-    }
+    return redirect()->route('home.index');
+}
 }
 

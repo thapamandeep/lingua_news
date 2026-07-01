@@ -94,15 +94,15 @@
                 {{__('footer.Subscribe')}}
             </p>
 
-            @auth
-<form action="{{ route('subscribe', auth()->user()->id) }}" method="POST" class="footer-form">
+ @if(Auth::guard('member')->check())
+<form action="{{ route('subscribe', Auth::guard('member')->user()->id) }}" method="POST" class="footer-form">
     @csrf
 
     <button type="submit">
-        {{__('footer.Button')}}
+        {{ __('footer.Button') }}
     </button>
 </form>
-@endauth
+@endif
 
         </div>
 

@@ -62,7 +62,7 @@ public function login(Request $request)
 
     if ($member && Hash::check($credentials['password'], $member->password)) {
 
-        Auth::login($member);
+         Auth::guard('member')->login($member);
 
         $request->session()->regenerate();
 
@@ -74,11 +74,14 @@ public function login(Request $request)
     return redirect()->back();
 }
 
-public function logout(){
+public function logout()
+{
+    Auth::guard('member')->logout();
 
-Auth::logout();
+    session()->invalidate();
+    session()->regenerateToken();
 
-return redirect()->route('login');
+    return redirect()->route('login');
 }
 
 public function forgotPassword(){

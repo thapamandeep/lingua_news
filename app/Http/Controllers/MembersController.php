@@ -29,7 +29,8 @@ class MembersController extends Controller
 
 public function profile(Member $member){
 
-   $logo = Setting::where('key', 'site_logo')->first();
+   $logo = Setting::where('key', 'site_logo')->value('value');
+   
    $siteTitle = Setting::where('key', 'site_title')->value('value');
    $settings = Setting::pluck('value', 'key');
 
@@ -39,7 +40,11 @@ return view('fronted.profiles.details', compact('member','logo','siteTitle','set
 
 public function edit(Member $member){
 
-return view('fronted.profiles.edit', compact('member'));
+$logo = Setting::where('key', 'site_logo')->value('value');
+ $siteTitle = Setting::where('key', 'site_title')->value('value');
+   $settings = Setting::pluck('value', 'key');
+
+return view('fronted.profiles.edit', compact('member','logo','siteTitle','settings'));
 }
 public function update(Request $request, Member $member)
 {
